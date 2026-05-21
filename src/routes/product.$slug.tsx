@@ -32,7 +32,8 @@ export const Route = createFileRoute("/product/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const loaderData = Route.useLoaderData() as ReturnType<typeof getProduct> extends infer P ? { product: NonNullable<ReturnType<typeof getProduct>> } : never;
+  const { product } = loaderData;
   const cat = categories.find((c) => c.slug === product.category);
   const related = getProductsByCategory(product.category).filter((p) => p.id !== product.id).slice(0, 4);
 
