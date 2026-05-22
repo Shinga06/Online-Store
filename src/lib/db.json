@@ -281,6 +281,7 @@
       "name": "Nitrile Coated Gloves",
       "category": "gloves",
       "price": 49,
+      "stock": 18,
       "description": "Seamless knit glove with nitrile palm for grip in oily conditions.",
       "features": [
         "EN 388 4.1.2.1",
@@ -295,15 +296,16 @@
         "11"
       ],
       "colors": [
-        "Grey/Black"
+        "Grey/Black",
+        "Red"
       ],
-      "stock": 18,
-      "newArrival": false,
-      "outOfStock": false,
       "images": [
-        "/images/products/nitrile-coated-gloves_1.jpg",
-        "/images/products/nitrile-coated-gloves_2.jpg"
-      ]
+        "https://i1-c.pinimg.com/1200x/66/b9/77/66b977d592ee19ec821ac828ee321060.jpg",
+        "https://i1-c.pinimg.com/736x/1c/c4/55/1cc4552f3a63214aae46f7964d04f068.jpg"
+      ],
+      "featured": false,
+      "newArrival": false,
+      "outOfStock": false
     },
     {
       "id": "p10",

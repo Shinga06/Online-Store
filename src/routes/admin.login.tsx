@@ -61,9 +61,9 @@ function AdminLoginPage() {
       
       {/* Front-Store Link */}
       <div className="absolute top-6 left-6 z-10">
-        <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors">
+        <a href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors">
           <ArrowLeft size={14} /> Back to Storefront
-        </Link>
+        </a>
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
