@@ -1,12 +1,15 @@
+import { useState } from "react";
+
 type Props = {
   name: string;
   category: string;
   className?: string;
+  src?: string;
 };
 
 // Deterministic gradient + initials placeholder image for products.
 // Industrial palette: navy → steel grey, with a hi-vis accent stripe.
-export function ProductImage({ name, category, className }: Props) {
+export function ProductImage({ name, category, className, src }: Props) {
   const initials = name
     .split(" ")
     .filter(Boolean)
@@ -17,6 +20,22 @@ export function ProductImage({ name, category, className }: Props) {
   // Pick a subtle hue rotation from category to differentiate cards
   const hash = [...category].reduce((a, c) => a + c.charCodeAt(0), 0);
   const angle = (hash % 30) + 135;
+
+  const [hasError, setHasError] = useState(false);
+
+  // If a real image src is provided and it hasn't errored out, render it
+  if (src && src.trim() && !hasError) {
+    return (
+      <div className={`relative w-full h-full bg-slate-50 flex items-center justify-center overflow-hidden ${className ?? ""}`}>
+        <img
+          src={src.trim()}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={() => setHasError(true)}
+        />
+      </div>
+    );
+  }
 
   return (
     <div

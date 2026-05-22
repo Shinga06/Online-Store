@@ -40,6 +40,7 @@
       "name": "Steel Toe Safety Boot",
       "category": "safety-footwear",
       "price": 1199,
+      "stock": 15,
       "description": "Full-grain leather safety boot with steel toe-cap, oil-resistant sole and padded ankle collar.",
       "features": [
         "200J steel toe",
@@ -58,18 +59,16 @@
         "13"
       ],
       "colors": [
-        "Black",
-        "Brown"
+        "Black"
+      ],
+      "images": [
+        "https://i1-c.pinimg.com/1200x/e6/5d/03/e65d038efd45992a1c9a4c50f3f7880f.jpg",
+        "https://i1-c.pinimg.com/1200x/8d/f2/ee/8df2ee2089b5d6325c7e9fc0a8aaa5fa.jpg"
       ],
       "badge": "Top Rated",
       "featured": true,
-      "stock": 15,
       "newArrival": true,
-      "outOfStock": false,
-      "images": [
-        "/images/products/steel-toe-safety-boot_1.jpg",
-        "/images/products/steel-toe-safety-boot_2.jpg"
-      ]
+      "outOfStock": false
     },
     {
       "id": "p4",

@@ -85,12 +85,12 @@ function ProductPage() {
         {/* Image */}
         <div>
           <div className="aspect-square rounded-md overflow-hidden border border-border bg-white p-2">
-            <ProductImage name={product.name} category={product.category} />
+            <ProductImage name={product.name} category={product.category} src={product.images?.[0]} />
           </div>
           <div className="grid grid-cols-4 gap-2 mt-2">
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="aspect-square rounded-sm overflow-hidden border border-border opacity-80 bg-white p-1">
-                <ProductImage name={product.name} category={product.category} />
+                <ProductImage name={product.name} category={product.category} src={product.images?.[i] || product.images?.[0]} />
               </div>
             ))}
           </div>

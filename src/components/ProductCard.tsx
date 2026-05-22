@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group block bg-card border border-border rounded-md overflow-hidden hover:border-primary/60 hover:shadow-lg transition-all"
     >
       <div className="aspect-square relative">
-        <ProductImage name={product.name} category={product.category} />
+        <ProductImage name={product.name} category={product.category} src={(product as any).images?.[0]} />
         {product.badge && (
           <span className="absolute top-3 right-3 bg-[var(--hi-vis)] text-black text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-sm">
             {product.badge}

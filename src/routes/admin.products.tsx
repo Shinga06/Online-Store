@@ -62,6 +62,8 @@ function AdminProducts() {
   const [formBadge, setFormBadge] = useState("");
   const [formFeatured, setFormFeatured] = useState(false);
   const [formNewArrival, setFormNewArrival] = useState(false);
+  const [formImage1, setFormImage1] = useState("");
+  const [formImage2, setFormImage2] = useState("");
 
   // Helper States for features input
   const [featureInput, setFeatureInput] = useState("");
@@ -84,6 +86,8 @@ function AdminProducts() {
     setFormBadge("");
     setFormFeatured(false);
     setFormNewArrival(true);
+    setFormImage1("");
+    setFormImage2("");
     setIsDrawerOpen(true);
   };
 
@@ -105,6 +109,8 @@ function AdminProducts() {
     setFormBadge(product.badge || "");
     setFormFeatured(!!product.featured);
     setFormNewArrival(!!product.newArrival);
+    setFormImage1(product.images?.[0] || "");
+    setFormImage2(product.images?.[1] || "");
     setIsDrawerOpen(true);
   };
 
@@ -119,6 +125,16 @@ function AdminProducts() {
 
     try {
       const generatedId = editProduct ? editProduct.id : `p-${Date.now()}`;
+      
+      const imagesToSave: string[] = [];
+      if (formImage1.trim()) imagesToSave.push(formImage1.trim());
+      if (formImage2.trim()) imagesToSave.push(formImage2.trim());
+      
+      if (imagesToSave.length === 0) {
+        const slug = formName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        imagesToSave.push(`/images/products/${slug}_1.jpg`);
+      }
+
       const saved = await db.saveProduct({
         id: generatedId,
         name: formName.trim(),
@@ -133,7 +149,7 @@ function AdminProducts() {
         badge: formBadge.trim() || undefined,
         featured: formFeatured,
         newArrival: formNewArrival,
-        images: editProduct?.images || [`/images/products/${formName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}_1.jpg`],
+        images: imagesToSave,
       });
 
       toast.success(editProduct ? "Product updated successfully!" : "Product created successfully!", {
@@ -451,6 +467,42 @@ function AdminProducts() {
                   placeholder="Explain fabric material, EN standards, durability specs..."
                   className="mt-1 w-full p-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary resize-y"
                 />
+              </div>
+
+              {/* Product Images (URLs) */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Primary Image URL</label>
+                  <input
+                    type="text"
+                    value={formImage1}
+                    onChange={(e) => setFormImage1(e.target.value)}
+                    placeholder="e.g. https://images.unsplash.com/... or /images/products/..."
+                    className="mt-1 w-full h-10 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                  <p className="text-[10px] text-muted-foreground mt-1">If blank, defaults to auto-generated path.</p>
+                  {formImage1.trim() && (
+                    <div className="mt-2 relative h-20 w-20 border border-border rounded-sm overflow-hidden bg-muted">
+                      <img src={formImage1.trim()} alt="Primary preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Secondary Image URL (Optional)</label>
+                  <input
+                    type="text"
+                    value={formImage2}
+                    onChange={(e) => setFormImage2(e.target.value)}
+                    placeholder="e.g. https://images.unsplash.com/... or /images/products/..."
+                    className="mt-1 w-full h-10 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                  <p className="text-[10px] text-muted-foreground mt-1">Additional angle or packaging view.</p>
+                  {formImage2.trim() && (
+                    <div className="mt-2 relative h-20 w-20 border border-border rounded-sm overflow-hidden bg-muted">
+                      <img src={formImage2.trim()} alt="Secondary preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Sizes Multi-Select */}

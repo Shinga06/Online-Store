@@ -20,6 +20,7 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items, setQty, remove, subtotal, clear, count } = useCart();
+  const { products } = useDb();
   const [stage, setStage] = useState<"cart" | "checkout" | "done">("cart");
   const [orderId, setOrderId] = useState("");
   const shipping = subtotal > 1500 || subtotal === 0 ? 0 : 120;
@@ -68,10 +69,11 @@ function CartPage() {
             <div className="border border-border rounded-md divide-y divide-border">
               {items.map((item) => {
                 const k = itemKey(item);
+                const dbProd = products.find((p) => p.id === item.productId);
                 return (
                   <div key={k} className="p-4 flex gap-4">
                     <div className="h-24 w-24 shrink-0 rounded-sm overflow-hidden border border-border">
-                      <ProductImage name={item.name} category="cart" />
+                      <ProductImage name={item.name} category="cart" src={dbProd?.images?.[0]} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <Link to="/product/$slug" params={{ slug: item.slug }} className="font-semibold hover:text-primary line-clamp-2">
