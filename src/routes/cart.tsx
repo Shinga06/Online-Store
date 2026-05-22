@@ -127,12 +127,12 @@ function CartPage() {
           </div>
           <div className="text-xs text-muted-foreground mt-1">VAT included · ZAR</div>
           {stage === "cart" ? (
-            <button
-              onClick={() => setStage("checkout")}
-              className="mt-6 w-full h-12 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition cursor-pointer"
+            <Link
+              to="/checkout"
+              className="mt-6 w-full h-12 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition cursor-pointer flex items-center justify-center"
             >
               Proceed to checkout
-            </button>
+            </Link>
           ) : (
             <button
               form="checkout-form"

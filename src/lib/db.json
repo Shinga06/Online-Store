@@ -40,7 +40,7 @@
       "name": "Steel Toe Safety Boot",
       "category": "safety-footwear",
       "price": 1199,
-      "stock": 15,
+      "stock": 13,
       "description": "Full-grain leather safety boot with steel toe-cap, oil-resistant sole and padded ankle collar.",
       "features": [
         "200J steel toe",
@@ -731,6 +731,28 @@
   ],
   "orders": [
     {
+      "customerName": "Bongumusa Shinga",
+      "customerEmail": "bshinga81@gmail.com",
+      "customerPhone": "+27722655614",
+      "deliveryAddress": "526 Moleko Road, Lamontville, Lamontville, KwaZulu-Natal, 4027",
+      "paymentMethod": "Pay Now",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Steel Toe Safety Boot",
+          "qty": 2,
+          "price": 1199,
+          "size": "6",
+          "color": "Black"
+        }
+      ],
+      "status": "Processing",
+      "isQuote": false,
+      "id": "ORD-9088",
+      "total": 2398,
+      "date": "2026-05-22T02:11:35.040Z"
+    },
+    {
       "id": "ORD-9481",
       "customerName": "Thabo Mokoena",
       "customerEmail": "thabo.mokoena@builders-za.com",
@@ -835,6 +857,15 @@
       "ordersCount": 0,
       "totalSpent": 0,
       "dateRegistered": "2026-05-20T10:15:00Z"
+    },
+    {
+      "id": "c5",
+      "name": "Bongumusa Shinga",
+      "email": "bshinga81@gmail.com",
+      "phone": "+27722655614",
+      "ordersCount": 1,
+      "totalSpent": 2398,
+      "dateRegistered": "2026-05-22T02:11:35.040Z"
     }
   ],
   "admins": [

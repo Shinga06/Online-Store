@@ -67,6 +67,8 @@ export function SiteHeader() {
           <Link to="/shop" className="text-white/80 hover:text-white">Shop</Link>
           <Link to="/about" className="text-white/80 hover:text-white">About</Link>
           <Link to="/contact" className="text-white/80 hover:text-white">Contact</Link>
+          <Link to="/track" className="text-white/80 hover:text-white">Track Order</Link>
+          <Link to="/account" className="text-white/80 hover:text-white">My Account</Link>
         </nav>
 
         <Link to="/cart" className="relative ml-auto md:ml-2 p-2" aria-label="Cart">
@@ -119,6 +121,8 @@ export function SiteHeader() {
               <Link to="/shop" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">Shop</Link>
               <Link to="/about" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">About</Link>
               <Link to="/contact" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">Contact</Link>
+              <Link to="/track" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">Track Order</Link>
+              <Link to="/account" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">My Account</Link>
               <Link to="/admin" onClick={() => setOpen(false)} className="py-2 border-b border-white/10 text-[var(--hi-vis)] font-semibold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--hi-vis)] animate-pulse"></span>
                 Admin Portal

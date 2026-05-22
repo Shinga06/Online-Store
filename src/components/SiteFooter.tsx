@@ -29,11 +29,13 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Company</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Company & Support</div>
           <ul className="space-y-2 text-sm text-white/80">
             <li><Link to="/about" className="hover:text-[var(--hi-vis)]">About us</Link></li>
             <li><Link to="/contact" className="hover:text-[var(--hi-vis)]">Contact</Link></li>
             <li><Link to="/shop" className="hover:text-[var(--hi-vis)]">All products</Link></li>
+            <li><Link to="/track" className="hover:text-[var(--hi-vis)]">Track Order</Link></li>
+            <li><Link to="/account" className="hover:text-[var(--hi-vis)]">My Account</Link></li>
             <li><Link to="/admin" className="hover:text-[var(--hi-vis)] font-semibold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hi-vis)] animate-pulse"></span>Admin Portal</Link></li>
           </ul>
         </div>

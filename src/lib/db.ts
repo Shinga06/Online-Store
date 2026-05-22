@@ -27,9 +27,36 @@ export type DBOrder = {
     color: string;
   }[];
   total: number;
-  status: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
+  status: 
+    | "Pending Payment" 
+    | "Payment Confirmed" 
+    | "Processing" 
+    | "Packed" 
+    | "Shipped" 
+    | "Out for Delivery" 
+    | "Delivered" 
+    | "Cancelled"
+    | "Pending"; // backward compatibility
   date: string;
+  paymentMethod?: "Pay Now" | "Pay on Invoice" | "Request Quote";
+  companyName?: string;
+  vatNumber?: string;
+  poNumber?: string;
+  brandingReqs?: string;
+  urgencyDate?: string;
+  isQuote?: boolean;
+  lastUpdated?: string;
+  expectedDelivery?: string;
+  courierName?: string;
+  trackingNumber?: string;
+  notificationLogs?: {
+    channel: "WhatsApp" | "Email" | "SMS";
+    trigger: string;
+    timestamp: string;
+    message: string;
+  }[];
 };
+
 
 export type DBCustomer = {
   id: string;
@@ -259,6 +286,65 @@ export const saveDbFn = createServerFn({ method: "POST" })
     return { success: true };
   });
 
+function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
+  if (!order.notificationLogs) {
+    order.notificationLogs = [];
+  }
+  const timestamp = new Date().toISOString();
+  const id = order.id;
+  const name = order.customerName;
+  const courier = order.courierName || "The Courier Guy";
+  const trackNum = order.trackingNumber || "TCG-MOCK-12345";
+  const deliveryDate = order.expectedDelivery 
+    ? new Date(order.expectedDelivery).toLocaleDateString("en-ZA", { year: "numeric", month: "long", day: "numeric" }) 
+    : "within 2-3 business days";
+
+  // Helper to push a log
+  const addLog = (channel: "WhatsApp" | "Email" | "SMS", message: string) => {
+    order.notificationLogs!.push({
+      channel,
+      trigger: `Status: ${status}`,
+      timestamp,
+      message,
+    });
+  };
+
+  switch (status) {
+    case "Pending Payment":
+      addLog("Email", `Hi ${name},\n\nYour SafeGear order ${id} has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR ${order.total.toFixed(2)}\nPayment Method: ${order.paymentMethod || "EFT Invoice"}\n\nPlease settle payment using your invoice details and email POP to accounts@safegear.co.za.`);
+      addLog("SMS", `SafeGear: Order ${id} placed successfully. Awaiting payment of ZAR ${order.total.toFixed(2)}. Check your email for tax invoice instructions.`);
+      break;
+    case "Payment Confirmed":
+      addLog("WhatsApp", `*SafeGear PPE Order Confirmed!* 🛡️\n\nHi ${name}, thank you for your payment for order *${id}*.\n\n💰 *Total:* ZAR ${order.total.toFixed(2)}\n📦 *Status:* SABS warehouse inventory has been allocated.\n\nWe will update you as soon as the dispatch team packages your gear!`);
+      addLog("Email", `Hi ${name},\n\nWe have successfully received and verified your payment for order ${id}.\n\nYour order has been moved to our warehouse queue for packaging and quality checks.\n\nSafeGear Operations Desk.`);
+      break;
+    case "Processing":
+      addLog("WhatsApp", `*SafeGear Packing Queue* 📦\n\nHi ${name}, order *${id}* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!`);
+      addLog("Email", `Hi ${name},\n\nYour order ${id} is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing SafeGear.`);
+      break;
+    case "Packed":
+      addLog("SMS", `SafeGear: Order ${id} has been carefully packaged and sealed under SABS guidelines. Ready for courier collection!`);
+      addLog("Email", `Hi ${name},\n\nExcellent news! Your order ${id} has been fully packaged and is ready at our dispatch bays. Courier pick up has been scheduled.\n\nYour safety is our priority.\nSafeGear Logistics.`);
+      break;
+    case "Shipped":
+      addLog("WhatsApp", `*SafeGear Shipment Dispatched!* 🚚\n\nHi ${name}, your safety package *${id}* is on its way!\n\n🚛 *Courier:* ${courier}\n🎫 *Tracking No:* ${trackNum}\n📅 *Expected Delivery:* ${deliveryDate}\n\nTrack your parcel here: https://thecourierguy.net/tracking/?t=${trackNum}`);
+      addLog("SMS", `SafeGear: Order ${id} shipped via ${courier}. Tracking No: ${trackNum}. Expected arrival: ${deliveryDate}.`);
+      addLog("Email", `Dear ${name},\n\nWe are pleased to inform you that your order ${id} has been dispatched.\n\nCourier: ${courier}\nTracking Number: ${trackNum}\nExpected Arrival: ${deliveryDate}\n\nTrack your shipment live at the courier page: https://thecourierguy.net/tracking/?t=${trackNum}\n\nSafeGear Dispatch.`);
+      break;
+    case "Out for Delivery":
+      addLog("WhatsApp", `*SafeGear Delivery Alert!* 🔔\n\nHi ${name}, your order *${id}* is out for delivery today with *${courier}*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!`);
+      addLog("SMS", `SafeGear: Order ${id} is out for delivery today with ${courier}. Have a great day!`);
+      break;
+    case "Delivered":
+      addLog("WhatsApp", `*SafeGear Order Delivered!* 🎉\n\nHi ${name}, your SABS protective garments *${id}* have been successfully delivered!\n\nWe hope you are fully satisfied with your workwear. Need bulk orders or additional gear? Visit safegear.co.za.\n\nStay Safe, Stay Productive!`);
+      addLog("Email", `Dear ${name},\n\nWe have received confirmation that your order ${id} was successfully delivered.\n\nThank you for trusting SafeGear PPE & Workwear South Africa as your professional safety partner.\n\nWarm regards,\nSafeGear Customer Care.`);
+      break;
+    case "Cancelled":
+      addLog("Email", `Dear ${name},\n\nYour order ${id} has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at trade@safegear.co.za.\n\nSafeGear Support.`);
+      break;
+  }
+}
+
 // Client API Wrapper (reactive state management with local backup sync)
 let clientCachedData: DBData | null = null;
 const listeners = new Set<() => void>();
@@ -412,11 +498,25 @@ export const db = {
     return data.customers;
   },
 
-  async updateOrderStatus(id: string, status: DBOrder["status"]) {
+  async updateOrderStatus(
+    id: string, 
+    status: DBOrder["status"],
+    courierName?: string,
+    trackingNumber?: string,
+    expectedDelivery?: string
+  ) {
     const data = await this.load();
     const order = data.orders.find((o) => o.id === id);
     if (order) {
       order.status = status;
+      order.lastUpdated = new Date().toISOString();
+      if (courierName !== undefined) order.courierName = courierName;
+      if (trackingNumber !== undefined) order.trackingNumber = trackingNumber;
+      if (expectedDelivery !== undefined) order.expectedDelivery = expectedDelivery;
+      
+      // Generate notification logs
+      generateNotificationLogs(order, status);
+      
       await this.save(data);
     }
     return order;
@@ -425,9 +525,11 @@ export const db = {
   async placeOrder(orderData: Omit<DBOrder, "id" | "date" | "total">) {
     const data = await this.load();
     
-    // Create invoice ID
+    // Create invoice or RFQ ID based on payment type
+    const isRFQ = orderData.isQuote || orderData.paymentMethod === "Request Quote";
+    const prefix = isRFQ ? "RFQ" : "ORD";
     const nextNum = Math.floor(Math.random() * 9000) + 1000;
-    const id = `ORD-${nextNum}`;
+    const id = `${prefix}-${nextNum}`;
     
     // Calculate total
     let total = 0;
@@ -444,12 +546,30 @@ export const db = {
       }
     }
     
+    // Paid orders immediately enter 'Processing' status, quotes and invoice terms start as 'Pending'
+    const status = orderData.paymentMethod === "Pay Now" ? "Processing" : (orderData.status || "Pending");
+    
     const newOrder: DBOrder = {
       ...orderData,
+      status,
       id,
       total,
       date: new Date().toISOString(),
+      lastUpdated: new Date().toISOString(),
+      notificationLogs: [],
     };
+
+    // Seed notification logs sequentially to build a logical tracking timeline history
+    if (orderData.paymentMethod === "Pay Now") {
+      generateNotificationLogs(newOrder, "Pending Payment");
+      generateNotificationLogs(newOrder, "Payment Confirmed");
+      generateNotificationLogs(newOrder, "Processing");
+    } else if (orderData.paymentMethod === "Pay on Invoice") {
+      generateNotificationLogs(newOrder, "Pending Payment");
+    } else {
+      // Request Quote
+      generateNotificationLogs(newOrder, "Pending Payment");
+    }
     
     data.orders.unshift(newOrder);
 

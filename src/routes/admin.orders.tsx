@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDb } from "@/hooks/use-db";
 import { db, type DBOrder } from "@/lib/db";
 import { formatZAR } from "@/lib/catalog";
@@ -25,12 +25,60 @@ function AdminOrders() {
   const { orders } = useDb();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
 
   // Selected Order for detail view
   const [selectedOrder, setSelectedOrder] = useState<DBOrder | null>(null);
   
   // Selected Order for Invoice view
   const [invoiceOrder, setInvoiceOrder] = useState<DBOrder | null>(null);
+
+  // Logistics Dispatch Setup Form States
+  const [courierName, setCourierName] = useState("");
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [expectedDelivery, setExpectedDelivery] = useState("");
+
+  useEffect(() => {
+    if (selectedOrder) {
+      setCourierName(selectedOrder.courierName || "");
+      setTrackingNumber(selectedOrder.trackingNumber || "");
+      setExpectedDelivery(selectedOrder.expectedDelivery ? selectedOrder.expectedDelivery.split("T")[0] : "");
+    } else {
+      setCourierName("");
+      setTrackingNumber("");
+      setExpectedDelivery("");
+    }
+  }, [selectedOrder]);
+
+  const handleLogisticsSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedOrder) return;
+
+    try {
+      const updated = await db.updateOrderStatus(
+        selectedOrder.id,
+        selectedOrder.status,
+        courierName.trim() || undefined,
+        trackingNumber.trim() || undefined,
+        expectedDelivery ? new Date(expectedDelivery).toISOString() : undefined
+      );
+
+      if (updated) {
+        toast.success("Logistics dispatch settings updated!", {
+          description: `Courier: ${courierName || "None"} · Tracking: ${trackingNumber || "None"}`
+        });
+        setSelectedOrder({
+          ...selectedOrder,
+          courierName: courierName.trim() || undefined,
+          trackingNumber: trackingNumber.trim() || undefined,
+          expectedDelivery: expectedDelivery ? new Date(expectedDelivery).toISOString() : undefined
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update logistics dispatch settings.");
+    }
+  };
 
   const handleStatusChange = async (id: string, newStatus: DBOrder["status"]) => {
     try {
@@ -54,17 +102,30 @@ function AdminOrders() {
       case "Delivered":
         classes = "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20";
         break;
+      case "Out for Delivery":
+        classes = "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border-cyan-500/20";
+        break;
       case "Shipped":
         classes = "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20";
         break;
+      case "Packed":
+        classes = "bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20";
+        break;
       case "Processing":
         classes = "bg-amber-500/10 text-amber-700 dark:text-amber-450 border-amber-500/20";
+        break;
+      case "Payment Confirmed":
+        classes = "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20";
+        break;
+      case "Pending Payment":
+      case "Pending":
+        classes = "bg-yellow-500/10 text-yellow-700 dark:text-yellow-450 border-yellow-500/20";
         break;
       case "Cancelled":
         classes = "bg-destructive/10 text-destructive border-destructive/20";
         break;
       default:
-        classes = "bg-yellow-500/10 text-yellow-700 dark:text-yellow-450 border-yellow-500/20";
+        classes = "bg-slate-500/10 text-slate-700 dark:text-slate-400 border-slate-500/20";
     }
 
     return (
@@ -85,7 +146,15 @@ function AdminOrders() {
       o.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       o.customerEmail.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || o.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    
+    const isRFQ = o.isQuote || o.id.startsWith("RFQ");
+    const matchesType = 
+      typeFilter === "all" ||
+      (typeFilter === "quotes" && isRFQ) ||
+      (typeFilter === "b2b" && !isRFQ && o.paymentMethod === "Pay on Invoice") ||
+      (typeFilter === "paynow" && !isRFQ && o.paymentMethod === "Pay Now");
+      
+    return matchesSearch && matchesStatus && matchesType;
   });
 
   return (
@@ -99,7 +168,7 @@ function AdminOrders() {
       </div>
 
       {/* 2. Filters & Searches */}
-      <div className="bg-card border border-border p-4 rounded-md shadow-xs grid grid-cols-1 sm:grid-cols-3 gap-4 print:hidden">
+      <div className="bg-card border border-border p-4 rounded-md shadow-xs grid grid-cols-1 sm:grid-cols-4 gap-4 print:hidden">
         {/* Search */}
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -129,6 +198,21 @@ function AdminOrders() {
           </select>
         </div>
 
+        {/* Order Type / Payment Method Filter */}
+        <div className="relative">
+          <Filter size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <select
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+            className="w-full h-10 pl-9 pr-3 bg-background border border-input rounded-sm text-sm focus:outline-none focus:border-primary appearance-none cursor-pointer"
+          >
+            <option value="all">All Order Types</option>
+            <option value="paynow">Pay Now (Card/EFT)</option>
+            <option value="b2b">B2B Invoice Accounts</option>
+            <option value="quotes">Wholesale Quotes (RFQ)</option>
+          </select>
+        </div>
+
         {/* Dynamic statistics */}
         <div className="flex items-center justify-end text-xs text-muted-foreground font-semibold px-2">
           Tracking {filteredOrders.length} customer purchases
@@ -146,6 +230,7 @@ function AdminOrders() {
                 <th className="px-6 py-3.5 font-semibold">Date Registered</th>
                 <th className="px-6 py-3.5 font-semibold text-center">Items</th>
                 <th className="px-6 py-3.5 font-semibold">Amount (ZAR)</th>
+                <th className="px-6 py-3.5 font-semibold">Method / Type</th>
                 <th className="px-6 py-3.5 font-semibold">Status</th>
                 <th className="px-6 py-3.5 font-semibold text-right">Actions</th>
               </tr>
@@ -153,7 +238,7 @@ function AdminOrders() {
             <tbody className="divide-y divide-border text-sm">
               {filteredOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-muted-foreground">
+                  <td colSpan={8} className="py-12 text-center text-muted-foreground">
                     No orders registered matching filters.
                   </td>
                 </tr>
@@ -179,16 +264,35 @@ function AdminOrders() {
                     </td>
                     <td className="px-6 py-4 font-bold text-foreground">{formatZAR(o.total)}</td>
                     <td className="px-6 py-4">
+                      {o.isQuote || o.id.startsWith("RFQ") ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 border bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20 rounded-sm uppercase tracking-wider">
+                          Quote RFQ
+                        </span>
+                      ) : o.paymentMethod === "Pay on Invoice" ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 border bg-slate-550/10 text-slate-650 dark:text-slate-400 border-slate-500/20 rounded-sm uppercase tracking-wider">
+                          B2B Invoice
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 border bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20 rounded-sm uppercase tracking-wider">
+                          Pay Now Card
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4">
                       <select
                         value={o.status}
                         onChange={(e) => handleStatusChange(o.id, e.target.value as DBOrder["status"])}
                         className="h-8 text-xs border border-input rounded-sm bg-background px-1.5 focus:outline-none focus:ring-1 focus:ring-primary font-semibold text-foreground cursor-pointer"
                       >
-                        <option value="Pending">Pending</option>
+                        <option value="Pending Payment">Pending Payment</option>
+                        <option value="Payment Confirmed">Payment Confirmed</option>
                         <option value="Processing">Processing</option>
+                        <option value="Packed">Packed</option>
                         <option value="Shipped">Shipped</option>
+                        <option value="Out for Delivery">Out for Delivery</option>
                         <option value="Delivered">Delivered</option>
                         <option value="Cancelled">Cancelled</option>
+                        <option value="Pending">Pending (Legacy)</option>
                       </select>
                     </td>
                     <td className="px-6 py-4 text-right space-x-1.5 whitespace-nowrap">
@@ -244,11 +348,15 @@ function AdminOrders() {
                   onChange={(e) => handleStatusChange(selectedOrder.id, e.target.value as DBOrder["status"])}
                   className="h-10 border border-input rounded-sm bg-background px-3 font-bold text-foreground cursor-pointer focus:ring-1 focus:ring-primary"
                 >
-                  <option value="Pending">Pending</option>
+                  <option value="Pending Payment">Pending Payment</option>
+                  <option value="Payment Confirmed">Payment Confirmed</option>
                   <option value="Processing">Processing</option>
+                  <option value="Packed">Packed</option>
                   <option value="Shipped">Shipped</option>
+                  <option value="Out for Delivery">Out for Delivery</option>
                   <option value="Delivered">Delivered</option>
                   <option value="Cancelled">Cancelled</option>
+                  <option value="Pending">Pending (Legacy)</option>
                 </select>
               </div>
 
@@ -286,6 +394,130 @@ function AdminOrders() {
                 </h4>
                 <p className="font-semibold text-foreground leading-relaxed">{selectedOrder.deliveryAddress}</p>
               </div>
+
+              {/* Logistics Dispatch Setup Form Card */}
+              <div className="border border-border rounded-md p-4 bg-card space-y-4">
+                <h4 className="font-bold text-xs uppercase tracking-wider text-muted-foreground border-b border-border pb-2 flex items-center gap-1.5">
+                  <Truck size={14} className="text-primary dark:text-[var(--hi-vis)]" /> Logistics Dispatch Setup
+                </h4>
+                
+                <form onSubmit={handleLogisticsSubmit} className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                        Courier Partner
+                      </label>
+                      <select
+                        value={courierName}
+                        onChange={(e) => setCourierName(e.target.value)}
+                        className="w-full h-9 border border-input rounded-sm bg-background px-2 text-slate-800 dark:text-slate-100 font-semibold cursor-pointer focus:outline-none focus:border-primary"
+                      >
+                        <option value="">Select Courier...</option>
+                        <option value="The Courier Guy">The Courier Guy (Recommended)</option>
+                        <option value="Courier IT">Courier IT</option>
+                        <option value="RAM Hand-to-Hand">RAM Hand-to-Hand</option>
+                        <option value="Dawn Wing">Dawn Wing</option>
+                        <option value="DHL South Africa">DHL South Africa</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                        Tracking / Reference No.
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. TCG-9481-205"
+                        value={trackingNumber}
+                        onChange={(e) => setTrackingNumber(e.target.value)}
+                        className="w-full h-9 border border-input rounded-sm bg-background px-2.5 text-slate-850 dark:text-slate-100 font-mono focus:outline-none focus:border-primary"
+                      />
+                    </div>
+
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">
+                        Expected Delivery Date
+                      </label>
+                      <input
+                        type="date"
+                        value={expectedDelivery}
+                        onChange={(e) => setExpectedDelivery(e.target.value)}
+                        className="w-full h-9 border border-input rounded-sm bg-background px-2.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-primary"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      className="w-full bg-slate-900 hover:brightness-110 text-white dark:bg-white dark:text-slate-950 font-bold text-xs h-9 rounded-sm transition cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      Update Logistics & Dispatch Alerts
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* Grid B2B or Quote Info */}
+              {(selectedOrder.companyName || selectedOrder.vatNumber || selectedOrder.poNumber) && (
+                <div className="border border-indigo-500/20 rounded-md p-4 space-y-3 bg-indigo-50/5 dark:bg-indigo-950/5 animate-slide-in">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-indigo-650 dark:text-indigo-400 border-b border-indigo-100 dark:border-indigo-900 pb-2">
+                    B2B Profile & PO Billing
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {selectedOrder.companyName && (
+                      <div className="col-span-2">
+                        <span className="text-xs text-indigo-400 font-semibold">Company Registered Name</span>
+                        <div className="font-bold text-slate-800 dark:text-slate-200 mt-0.5">{selectedOrder.companyName}</div>
+                      </div>
+                    )}
+                    {selectedOrder.vatNumber && (
+                      <div>
+                        <span className="text-xs text-slate-400 font-semibold">VAT Registration No.</span>
+                        <div className="font-semibold text-foreground mt-0.5">{selectedOrder.vatNumber}</div>
+                      </div>
+                    )}
+                    {selectedOrder.poNumber && (
+                      <div>
+                        <span className="text-xs text-slate-400 font-semibold">Purchase Order (PO)</span>
+                        <div className="font-bold text-indigo-650 dark:text-indigo-400 font-mono mt-0.5">{selectedOrder.poNumber}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {(selectedOrder.isQuote || selectedOrder.brandingReqs || selectedOrder.urgencyDate || selectedOrder.quoteNotes) && (
+                <div className="border border-amber-500/20 rounded-md p-4 space-y-3 bg-amber-50/5 dark:bg-amber-950/5 animate-slide-in">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-amber-655 dark:text-amber-450 border-b border-amber-100 dark:border-amber-900 pb-2">
+                    Bulk PPE Specs & Branding
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {selectedOrder.brandingReqs && (
+                      <div>
+                        <span className="text-xs text-slate-400 font-semibold">Uniform Branding specs</span>
+                        <div className="font-bold text-amber-650 mt-0.5">{selectedOrder.brandingReqs}</div>
+                      </div>
+                    )}
+                    {selectedOrder.urgencyDate && (
+                      <div>
+                        <span className="text-xs text-slate-400 font-semibold">Delivery Deadline</span>
+                        <div className="font-semibold text-foreground mt-0.5">
+                          {new Date(selectedOrder.urgencyDate).toLocaleDateString("en-ZA")}
+                        </div>
+                      </div>
+                    )}
+                    {selectedOrder.quoteNotes && (
+                      <div className="col-span-2">
+                        <span className="text-xs text-slate-400 font-semibold">Scope and Wholesale notes</span>
+                        <div className="p-2.5 bg-background border border-slate-200 rounded-sm mt-1 text-xs text-slate-650 leading-relaxed italic">
+                          "{selectedOrder.quoteNotes}"
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Grid 4: Items purchases */}
               <div className="border border-border rounded-md p-4 bg-card">
@@ -339,7 +571,9 @@ function AdminOrders() {
           <div className="relative w-full max-w-4xl bg-white text-slate-900 border rounded-md shadow-2xl p-8 md:p-12 flex flex-col gap-6 print:border-none print:shadow-none print:rounded-none">
             {/* Top Navigation Panel (Hidden on Print) */}
             <div className="flex justify-between items-center border-b pb-4 print:hidden">
-              <span className="font-bold text-xs uppercase tracking-wider text-slate-500">VAT Registered Tax Invoice</span>
+              <span className="font-bold text-xs uppercase tracking-wider text-slate-500">
+                {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "VAT Quotation Draft" : "VAT Registered Tax Invoice"}
+              </span>
               <div className="flex gap-2">
                 <button
                   onClick={handlePrintInvoice}
@@ -374,9 +608,11 @@ function AdminOrders() {
                 </div>
 
                 <div className="text-right">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-800 uppercase">TAX INVOICE</h2>
+                  <h2 className="text-2xl font-bold tracking-tight text-slate-800 uppercase">
+                    {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "PRO-FORMA QUOTE" : "TAX INVOICE"}
+                  </h2>
                   <div className="text-xs text-slate-500 mt-2 space-y-0.5 leading-normal">
-                    <p><strong>Invoice No:</strong> {invoiceOrder.id}</p>
+                    <p><strong>{invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "Quotation Reference" : "Invoice No"}:</strong> {invoiceOrder.id}</p>
                     <p><strong>Date Issued:</strong> {new Date(invoiceOrder.date).toLocaleDateString("en-ZA")}</p>
                     <p><strong>Fulfillment:</strong> {invoiceOrder.status}</p>
                     <p><strong>Currency:</strong> ZAR (Rand)</p>
@@ -389,7 +625,13 @@ function AdminOrders() {
                 <div>
                   <span className="text-[10px] uppercase font-bold text-slate-400">Billed Recipient</span>
                   <div className="font-bold text-sm text-slate-800 mt-1">{invoiceOrder.customerName}</div>
-                  <div className="text-xs text-slate-500 mt-1 space-y-0.5 leading-normal">
+                  {invoiceOrder.companyName && (
+                    <div className="font-bold text-xs text-indigo-750 mt-0.5">{invoiceOrder.companyName}</div>
+                  )}
+                  {invoiceOrder.vatNumber && (
+                    <div className="text-[10px] text-slate-500 mt-0.5">VAT Reg: {invoiceOrder.vatNumber}</div>
+                  )}
+                  <div className="text-xs text-slate-500 mt-1.5 space-y-0.5 leading-normal">
                     <p>Email: {invoiceOrder.customerEmail}</p>
                     <p>Phone: {invoiceOrder.customerPhone}</p>
                   </div>
@@ -398,6 +640,9 @@ function AdminOrders() {
                 <div>
                   <span className="text-[10px] uppercase font-bold text-slate-400">Delivery Address</span>
                   <p className="text-xs text-slate-700 mt-1 leading-relaxed">{invoiceOrder.deliveryAddress}</p>
+                  {invoiceOrder.poNumber && (
+                    <p className="text-xs text-indigo-700 font-mono mt-3"><strong>PO Number:</strong> {invoiceOrder.poNumber}</p>
+                  )}
                 </div>
               </div>
 
@@ -428,6 +673,15 @@ function AdminOrders() {
                 </table>
               </div>
 
+              {/* Quote branding notes */}
+              {(invoiceOrder.brandingReqs || invoiceOrder.quoteNotes) && (
+                <div className="border border-dashed p-4 rounded bg-slate-50 text-xs text-slate-700 space-y-2 mt-4">
+                  <h4 className="font-bold uppercase tracking-wider text-[10px] text-slate-500">Quotation Specifications</h4>
+                  {invoiceOrder.brandingReqs && <p><strong>Branding Option:</strong> {invoiceOrder.brandingReqs}</p>}
+                  {invoiceOrder.quoteNotes && <p><strong>Custom Requirements:</strong> "{invoiceOrder.quoteNotes}"</p>}
+                </div>
+              )}
+
               {/* Totals math breakdowns */}
               <div className="border-t pt-6 flex justify-end">
                 <div className="w-80 space-y-2 text-xs">
@@ -440,7 +694,9 @@ function AdminOrders() {
                     <span>{formatZAR(invoiceOrder.total - (invoiceOrder.total / 1.15))}</span>
                   </div>
                   <div className="border-t pt-2 flex justify-between text-sm font-bold text-slate-800">
-                    <span>Invoice Total (Incl. VAT)</span>
+                    <span>
+                      {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "Quotation Total (Incl. VAT)" : "Invoice Total (Incl. VAT)"}
+                    </span>
                     <span className="text-base text-slate-900">{formatZAR(invoiceOrder.total)}</span>
                   </div>
                 </div>
@@ -448,9 +704,15 @@ function AdminOrders() {
 
               {/* Invoice footer remarks */}
               <div className="border-t pt-6 text-[10px] text-slate-400 leading-normal text-center">
-                <p className="font-semibold text-slate-500">Thank you for your business!</p>
+                <p className="font-semibold text-slate-500">
+                  {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "Thank you for requesting a wholesale quote!" : "Thank you for your business!"}
+                </p>
                 <p className="mt-1">All items conform to South African SABS PPE requirements. Goods remain property of SafeGear until fully settled.</p>
-                <p className="mt-0.5">Payment Terms: Direct EFT within 7 days of invoice issue date. Bank: FNB, Branch Code: 250655, Account: 62013948194</p>
+                <p className="mt-0.5">
+                  {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") 
+                    ? "Remarks: This quotation draft reserves stock for 5 business days. Contact bulk desks to finalise pricing discounts." 
+                    : "Payment Terms: Direct EFT within 7 days of invoice issue date. Bank: FNB, Branch Code: 250655, Account: 62013948194"}
+                </p>
               </div>
             </div>
           </div>
