@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { categories, products, searchProducts } from "@/lib/catalog";
+import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
 import { SlidersHorizontal, X } from "lucide-react";
 
@@ -28,9 +28,21 @@ function ShopPage() {
   const { category, q } = Route.useSearch();
   const [sort, setSort] = useState<Sort>("featured");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const { products, categories } = useDb();
+
+  const searchProductsLocal = (itemsList: typeof products, queryStr: string) => {
+    const s = queryStr.toLowerCase().trim();
+    if (!s) return itemsList;
+    return itemsList.filter(
+      (p) =>
+        p.name.toLowerCase().includes(s) ||
+        p.description.toLowerCase().includes(s) ||
+        p.category.toLowerCase().includes(s),
+    );
+  };
 
   const list = useMemo(() => {
-    let items = q ? searchProducts(q) : products;
+    let items = q ? searchProductsLocal(products, q) : products;
     if (category) items = items.filter((p) => p.category === category);
     switch (sort) {
       case "price-asc": items = [...items].sort((a, b) => a.price - b.price); break;
@@ -40,7 +52,7 @@ function ShopPage() {
         items = [...items].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
     }
     return items;
-  }, [category, q, sort]);
+  }, [products, category, q, sort]);
 
   const activeCat = categories.find((c) => c.slug === category);
 
@@ -131,6 +143,7 @@ function FilterList({
   currentQ: string;
   onPick?: () => void;
 }) {
+  const { categories } = useDb();
   return (
     <div>
       <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">Categories</div>

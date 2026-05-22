@@ -1,0 +1,853 @@
+{
+  "products": [
+    {
+      "id": "p2",
+      "slug": "hi-vis-orange-bomber-jacket",
+      "name": "Hi-Vis Orange Bomber Jacket",
+      "category": "hi-vis",
+      "price": 899,
+      "description": "EN ISO 20471 certified hi-vis bomber with reflective tape, fleece lining and storm cuffs.",
+      "features": [
+        "EN ISO 20471 Class 3",
+        "Reflective tape",
+        "Fleece-lined body",
+        "Waterproof outer shell"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Hi-Vis Orange",
+        "Hi-Vis Yellow"
+      ],
+      "featured": true,
+      "stock": 14,
+      "newArrival": true,
+      "outOfStock": false,
+      "images": [
+        "/images/products/hi-vis-orange-bomber-jacket_1.jpg",
+        "/images/products/hi-vis-orange-bomber-jacket_2.jpg"
+      ]
+    },
+    {
+      "id": "p3",
+      "slug": "steel-toe-safety-boot",
+      "name": "Steel Toe Safety Boot",
+      "category": "safety-footwear",
+      "price": 1199,
+      "description": "Full-grain leather safety boot with steel toe-cap, oil-resistant sole and padded ankle collar.",
+      "features": [
+        "200J steel toe",
+        "Anti-slip sole",
+        "Heat-resistant up to 300°C",
+        "SABS approved"
+      ],
+      "sizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "colors": [
+        "Black",
+        "Brown"
+      ],
+      "badge": "Top Rated",
+      "featured": true,
+      "stock": 15,
+      "newArrival": true,
+      "outOfStock": false,
+      "images": [
+        "/images/products/steel-toe-safety-boot_1.jpg",
+        "/images/products/steel-toe-safety-boot_2.jpg"
+      ]
+    },
+    {
+      "id": "p4",
+      "slug": "premium-chef-jacket",
+      "name": "Premium Chef Jacket",
+      "category": "chef-wear",
+      "price": 459,
+      "description": "Crisp white chef jacket with knotted cloth buttons and a vented back panel.",
+      "features": [
+        "220gsm cotton blend",
+        "Vented back",
+        "Thermometer pocket"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "White",
+        "Black"
+      ],
+      "featured": true,
+      "stock": 2,
+      "newArrival": true,
+      "outOfStock": false,
+      "images": [
+        "/images/products/premium-chef-jacket_1.jpg",
+        "/images/products/premium-chef-jacket_2.jpg"
+      ]
+    },
+    {
+      "id": "p5",
+      "slug": "executive-corporate-shirt",
+      "name": "Executive Corporate Shirt",
+      "category": "shirts",
+      "price": 329,
+      "description": "Easy-care long-sleeve corporate shirt with a tailored fit.",
+      "features": [
+        "Easy-iron poly-cotton",
+        "Tailored fit",
+        "Reinforced collar"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "White",
+        "Sky Blue",
+        "Charcoal"
+      ],
+      "stock": 6,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/executive-corporate-shirt_1.jpg",
+        "/images/products/executive-corporate-shirt_2.jpg"
+      ]
+    },
+    {
+      "id": "p6",
+      "slug": "cargo-work-trouser",
+      "name": "Cargo Work Trouser",
+      "category": "trousers",
+      "price": 389,
+      "description": "Hard-wearing cargo trouser with knee-pad pockets and gusseted crotch.",
+      "features": [
+        "260gsm fabric",
+        "Knee-pad pockets",
+        "Bartack reinforcement"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Navy",
+        "Khaki",
+        "Black"
+      ],
+      "stock": 12,
+      "discountPrice": 331,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/cargo-work-trouser_1.jpg",
+        "/images/products/cargo-work-trouser_2.jpg"
+      ]
+    },
+    {
+      "id": "p7",
+      "slug": "performance-golfer-shirt",
+      "name": "Performance Golfer Shirt",
+      "category": "golfers",
+      "price": 279,
+      "description": "Moisture-wicking golfer in premium pique knit.",
+      "features": [
+        "180gsm dri-fit",
+        "UPF 30+",
+        "Three-button placket"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Navy",
+        "White",
+        "Charcoal",
+        "Red"
+      ],
+      "featured": true,
+      "stock": 21,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/performance-golfer-shirt_1.jpg",
+        "/images/products/performance-golfer-shirt_2.jpg"
+      ]
+    },
+    {
+      "id": "p8",
+      "slug": "heavy-duty-pvc-rain-suit",
+      "name": "Heavy Duty PVC Rain Suit",
+      "category": "rain-suits",
+      "price": 369,
+      "description": "Two-piece PVC rain suit with welded seams and storm flap.",
+      "features": [
+        "100% waterproof",
+        "Welded seams",
+        "Hooded jacket"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Yellow",
+        "Navy"
+      ],
+      "stock": 4,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/heavy-duty-pvc-rain-suit_1.jpg",
+        "/images/products/heavy-duty-pvc-rain-suit_2.jpg"
+      ]
+    },
+    {
+      "id": "p9",
+      "slug": "nitrile-coated-gloves",
+      "name": "Nitrile Coated Gloves",
+      "category": "gloves",
+      "price": 49,
+      "description": "Seamless knit glove with nitrile palm for grip in oily conditions.",
+      "features": [
+        "EN 388 4.1.2.1",
+        "Breathable back",
+        "Snug fit"
+      ],
+      "sizes": [
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "colors": [
+        "Grey/Black"
+      ],
+      "stock": 13,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/nitrile-coated-gloves_1.jpg",
+        "/images/products/nitrile-coated-gloves_2.jpg"
+      ]
+    },
+    {
+      "id": "p10",
+      "slug": "ffp2-face-mask-20pk",
+      "name": "FFP2 Face Mask (20pk)",
+      "category": "face-protection",
+      "price": 219,
+      "description": "Filtering half-mask offering ≥94% filtration efficiency.",
+      "features": [
+        "FFP2 / N95 grade",
+        "Adjustable nose clip",
+        "20 per box"
+      ],
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "White"
+      ],
+      "stock": 5,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/ffp2-face-mask-20pk_1.jpg",
+        "/images/products/ffp2-face-mask-20pk_2.jpg"
+      ]
+    },
+    {
+      "id": "p11",
+      "slug": "disposable-coverall-type-5-6",
+      "name": "Disposable Coverall Type 5/6",
+      "category": "coveralls",
+      "price": 159,
+      "description": "Lightweight non-woven coverall offering protection against dust and light liquid splash.",
+      "features": [
+        "Type 5/6 certified",
+        "Elastic cuffs & hood",
+        "Anti-static"
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ],
+      "colors": [
+        "White"
+      ],
+      "stock": 22,
+      "discountPrice": 135,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/disposable-coverall-type-5-6_1.jpg",
+        "/images/products/disposable-coverall-type-5-6_2.jpg"
+      ]
+    },
+    {
+      "id": "p12",
+      "slug": "security-tactical-shirt",
+      "name": "Security Tactical Shirt",
+      "category": "security-wear",
+      "price": 349,
+      "description": "Short-sleeve tactical shirt with epaulettes and pen pockets.",
+      "features": [
+        "Ripstop fabric",
+        "Epaulettes",
+        "Hidden side vents"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Black",
+        "Navy"
+      ],
+      "stock": 7,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/security-tactical-shirt_1.jpg",
+        "/images/products/security-tactical-shirt_2.jpg"
+      ]
+    },
+    {
+      "id": "p13",
+      "slug": "black-pvc-gumboot",
+      "name": "Black PVC Gumboot",
+      "category": "gumboots",
+      "price": 289,
+      "description": "Waterproof PVC gumboot with anti-slip tread.",
+      "features": [
+        "100% waterproof",
+        "Steel toe option",
+        "Oil resistant sole"
+      ],
+      "sizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "colors": [
+        "Black"
+      ],
+      "stock": 13,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/black-pvc-gumboot_1.jpg",
+        "/images/products/black-pvc-gumboot_2.jpg"
+      ]
+    },
+    {
+      "id": "p14",
+      "slug": "ladies-safety-trainer",
+      "name": "Ladies Safety Trainer",
+      "category": "ladies-footwear",
+      "price": 999,
+      "description": "Lightweight safety trainer with composite toe, sized for women.",
+      "features": [
+        "Composite toe-cap",
+        "Memory foam insole",
+        "ASTM F2413"
+      ],
+      "sizes": [
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "stock": 17,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/ladies-safety-trainer_1.jpg",
+        "/images/products/ladies-safety-trainer_2.jpg"
+      ]
+    },
+    {
+      "id": "p15",
+      "slug": "industrial-fleece-jacket",
+      "name": "Industrial Fleece Jacket",
+      "category": "fleece-jackets",
+      "price": 449,
+      "description": "320gsm anti-pill fleece with zip pockets.",
+      "features": [
+        "320gsm anti-pill",
+        "YKK zip",
+        "Side pockets"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Black",
+        "Navy",
+        "Charcoal"
+      ],
+      "stock": 15,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/industrial-fleece-jacket_1.jpg",
+        "/images/products/industrial-fleece-jacket_2.jpg"
+      ]
+    },
+    {
+      "id": "p16",
+      "slug": "padded-body-warmer",
+      "name": "Padded Body Warmer",
+      "category": "body-warmers",
+      "price": 549,
+      "description": "Quilted body warmer with high collar.",
+      "features": [
+        "Quilted polyester",
+        "High collar",
+        "Two-way zip"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Black",
+        "Navy"
+      ],
+      "stock": 23,
+      "discountPrice": 467,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/padded-body-warmer_1.jpg",
+        "/images/products/padded-body-warmer_2.jpg"
+      ]
+    },
+    {
+      "id": "p17",
+      "slug": "premium-leather-apron",
+      "name": "Premium Leather Apron",
+      "category": "aprons",
+      "price": 599,
+      "description": "Full-grain leather apron with adjustable straps.",
+      "features": [
+        "Full-grain leather",
+        "Cross-back straps",
+        "Tool pockets"
+      ],
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Brown",
+        "Black"
+      ],
+      "stock": 11,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/premium-leather-apron_1.jpg",
+        "/images/products/premium-leather-apron_2.jpg"
+      ]
+    },
+    {
+      "id": "p18",
+      "slug": "hi-vis-bump-cap",
+      "name": "Hi-Vis Bump Cap",
+      "category": "headwear",
+      "price": 189,
+      "description": "Baseball-style cap with impact-absorbing ABS shell insert.",
+      "features": [
+        "EN 812 certified",
+        "Reflective trim",
+        "Adjustable strap"
+      ],
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Hi-Vis Yellow",
+        "Navy"
+      ],
+      "stock": 10,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/hi-vis-bump-cap_1.jpg",
+        "/images/products/hi-vis-bump-cap_2.jpg"
+      ]
+    },
+    {
+      "id": "p19",
+      "slug": "salon-tunic-dress",
+      "name": "Salon Tunic Dress",
+      "category": "service-beauty",
+      "price": 379,
+      "description": "Stretch tunic dress for salon and spa professionals.",
+      "features": [
+        "4-way stretch",
+        "Side pockets",
+        "Easy care"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "stock": 21,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/salon-tunic-dress_1.jpg",
+        "/images/products/salon-tunic-dress_2.jpg"
+      ]
+    },
+    {
+      "id": "p20",
+      "slug": "all-weather-work-shorts",
+      "name": "All-Weather Work Shorts",
+      "category": "shorts",
+      "price": 259,
+      "description": "Knee-length work shorts with cargo pockets.",
+      "features": [
+        "230gsm fabric",
+        "Cargo pockets",
+        "Triple stitched"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Khaki",
+        "Navy",
+        "Black"
+      ],
+      "stock": 22,
+      "newArrival": false,
+      "outOfStock": false,
+      "images": [
+        "/images/products/all-weather-work-shorts_1.jpg",
+        "/images/products/all-weather-work-shorts_2.jpg"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "slug": "aprons",
+      "name": "Aprons",
+      "blurb": "Durable aprons for kitchen, service & industry."
+    },
+    {
+      "slug": "chef-wear",
+      "name": "Chef Wear",
+      "blurb": "Professional chef jackets, pants & accessories."
+    },
+    {
+      "slug": "golfers",
+      "name": "Golfers",
+      "blurb": "Corporate polo shirts in premium fabrics."
+    },
+    {
+      "slug": "jackets",
+      "name": "Jackets",
+      "blurb": "Workwear & corporate jackets built to last."
+    },
+    {
+      "slug": "safety-footwear",
+      "name": "Safety Footwear",
+      "blurb": "SABS-approved safety shoes & boots."
+    },
+    {
+      "slug": "corporate-wear",
+      "name": "Corporate Wear",
+      "blurb": "Smart, branded corporate uniforms."
+    },
+    {
+      "slug": "shirts",
+      "name": "Shirts",
+      "blurb": "Long & short-sleeve work and corporate shirts."
+    },
+    {
+      "slug": "shorts",
+      "name": "Shorts",
+      "blurb": "Hard-wearing work shorts."
+    },
+    {
+      "slug": "trousers",
+      "name": "Trousers",
+      "blurb": "Cargo, chino and conti-style trousers."
+    },
+    {
+      "slug": "hi-vis",
+      "name": "Hi-Visibility",
+      "blurb": "EN ISO 20471 reflective workwear."
+    },
+    {
+      "slug": "headwear",
+      "name": "Headwear",
+      "blurb": "Caps, beanies, hard hats & bump caps."
+    },
+    {
+      "slug": "rain-suits",
+      "name": "Rain Suits",
+      "blurb": "Waterproof PVC & PU rain protection."
+    },
+    {
+      "slug": "conti-suits",
+      "name": "Conti Suits",
+      "blurb": "Two-piece work suits in poly-cotton."
+    },
+    {
+      "slug": "security-wear",
+      "name": "Security Wear",
+      "blurb": "Tactical & guard uniforms."
+    },
+    {
+      "slug": "service-beauty",
+      "name": "Service & Beauty",
+      "blurb": "Salon, spa & hospitality uniforms."
+    },
+    {
+      "slug": "gumboots",
+      "name": "Gumboots",
+      "blurb": "PVC & nitrile rubber boots."
+    },
+    {
+      "slug": "ladies-footwear",
+      "name": "Ladies Footwear",
+      "blurb": "Safety & corporate shoes for women."
+    },
+    {
+      "slug": "mens-footwear",
+      "name": "Men's Footwear",
+      "blurb": "Safety & corporate shoes for men."
+    },
+    {
+      "slug": "gloves",
+      "name": "Protective Gloves",
+      "blurb": "Cut, chemical, heat & general gloves."
+    },
+    {
+      "slug": "face-protection",
+      "name": "Face Protection",
+      "blurb": "Masks, shields & respirators."
+    },
+    {
+      "slug": "coveralls",
+      "name": "Coveralls",
+      "blurb": "Disposable & reusable full-body suits."
+    },
+    {
+      "slug": "sneakers",
+      "name": "Sneakers",
+      "blurb": "Safety sneakers with composite toes."
+    },
+    {
+      "slug": "body-warmers",
+      "name": "Body Warmers",
+      "blurb": "Insulated sleeveless jackets."
+    },
+    {
+      "slug": "fleece-jackets",
+      "name": "Fleece Jackets",
+      "blurb": "Soft, warm fleece for layering."
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-9481",
+      "customerName": "Thabo Mokoena",
+      "customerEmail": "thabo.mokoena@builders-za.com",
+      "customerPhone": "+27 82 555 0192",
+      "deliveryAddress": "42 Witkoppen Road, Fourways, Johannesburg, 2055",
+      "items": [
+        {
+          "productId": "p1",
+          "name": "Navy Poly-Cotton Conti Suit",
+          "qty": 2,
+          "price": 649,
+          "size": "L",
+          "color": "Navy"
+        },
+        {
+          "productId": "p3",
+          "name": "Steel Toe Safety Boot",
+          "qty": 1,
+          "price": 1199,
+          "size": "9",
+          "color": "Black"
+        }
+      ],
+      "total": 2497,
+      "status": "Delivered",
+      "date": "2026-05-10T09:15:00Z"
+    },
+    {
+      "id": "ORD-9532",
+      "customerName": "Liezel de Wet",
+      "customerEmail": "liezel@wetlands-spa.co.za",
+      "customerPhone": "+27 71 444 9811",
+      "deliveryAddress": "Shop 12, Constantia Village, Main Road, Cape Town, 7806",
+      "items": [
+        {
+          "productId": "p4",
+          "name": "Premium Chef Jacket",
+          "qty": 1,
+          "price": 459,
+          "size": "M",
+          "color": "White"
+        }
+      ],
+      "total": 459,
+      "status": "Shipped",
+      "date": "2026-05-18T11:40:00Z"
+    },
+    {
+      "id": "ORD-9580",
+      "customerName": "Sipho Khumalo",
+      "customerEmail": "sipho.khumalo@minetech.co.za",
+      "customerPhone": "+27 83 999 1042",
+      "deliveryAddress": "15 Mining Crescent, Welkom, Free State, 9459",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Steel Toe Safety Boot",
+          "qty": 1,
+          "price": 1199,
+          "size": "10",
+          "color": "Brown"
+        }
+      ],
+      "total": 1199,
+      "status": "Pending",
+      "date": "2026-05-21T15:30:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "c1",
+      "name": "Thabo Mokoena",
+      "email": "thabo.mokoena@builders-za.com",
+      "phone": "+27 82 555 0192",
+      "ordersCount": 2,
+      "totalSpent": 2847,
+      "dateRegistered": "2026-03-10T11:20:00Z"
+    },
+    {
+      "id": "c2",
+      "name": "Liezel de Wet",
+      "email": "liezel@wetlands-spa.co.za",
+      "phone": "+27 71 444 9811",
+      "ordersCount": 1,
+      "totalSpent": 459,
+      "dateRegistered": "2026-04-15T08:45:00Z"
+    },
+    {
+      "id": "c3",
+      "name": "Sipho Khumalo",
+      "email": "sipho.khumalo@minetech.co.za",
+      "phone": "+27 83 999 1042",
+      "ordersCount": 1,
+      "totalSpent": 1199,
+      "dateRegistered": "2026-05-01T14:30:00Z"
+    },
+    {
+      "id": "c4",
+      "name": "Zanele Ndlovu",
+      "email": "zanele.n@apexsecurity.co.za",
+      "phone": "+27 60 123 4567",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "dateRegistered": "2026-05-20T10:15:00Z"
+    }
+  ],
+  "admins": [
+    {
+      "email": "admin@safegear.co.za",
+      "name": "System Admin",
+      "role": "Admin"
+    },
+    {
+      "email": "manager@safegear.co.za",
+      "name": "Store Manager",
+      "role": "Manager"
+    }
+  ]
+}

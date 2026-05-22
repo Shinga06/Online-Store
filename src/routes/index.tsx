@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, Award, Headphones } from "lucide-react";
-import { categories, products } from "@/lib/catalog";
+import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/")({
@@ -14,6 +14,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { products, categories } = useDb();
   const featured = products.filter((p) => p.featured).slice(0, 8);
   const featuredCats = categories.slice(0, 8);
 

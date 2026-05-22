@@ -2,14 +2,16 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, ChevronRight, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";
-import { formatZAR, getProduct, getProductsByCategory, categories, type Product } from "@/lib/catalog";
+import { formatZAR } from "@/lib/catalog";
 import { ProductImage } from "@/components/ProductImage";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/lib/cart";
+import { db, type DBProduct } from "@/lib/db";
+import { useDb } from "@/hooks/use-db";
 
 export const Route = createFileRoute("/product/$slug")({
-  loader: ({ params }) => {
-    const product = getProduct(params.slug);
+  loader: async ({ params }) => {
+    const product = await db.getProduct(params.slug);
     if (!product) throw notFound();
     return { product };
   },
@@ -32,16 +34,24 @@ export const Route = createFileRoute("/product/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: Product };
-  const cat = categories.find((c) => c.slug === product.category);
-  const related = getProductsByCategory(product.category).filter((p) => p.id !== product.id).slice(0, 4);
+  const { product: loadedProduct } = Route.useLoaderData() as { product: DBProduct };
+  const { products, categories } = useDb();
 
-  const [size, setSize] = useState(product.sizes[0]);
-  const [color, setColor] = useState(product.colors[0]);
+  // Load from reactively-synchronized DB state to reflect real-time updates
+  const product = products.find((p) => p.id === loadedProduct.id) || loadedProduct;
+  const cat = categories.find((c) => c.slug === product.category);
+  const related = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+
+  const [size, setSize] = useState(product.sizes[0] || "One Size");
+  const [color, setColor] = useState(product.colors[0] || "Default");
   const [qty, setQty] = useState(1);
   const { add } = useCart();
 
   const handleAdd = () => {
+    if (product.stock < qty) {
+      toast.error("Insufficient stock available", { description: `Only ${product.stock} items left in inventory.` });
+      return;
+    }
     add({
       productId: product.id,
       slug: product.slug,
@@ -74,12 +84,12 @@ function ProductPage() {
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         {/* Image */}
         <div>
-          <div className="aspect-square rounded-md overflow-hidden border border-border">
+          <div className="aspect-square rounded-md overflow-hidden border border-border bg-white p-2">
             <ProductImage name={product.name} category={product.category} />
           </div>
           <div className="grid grid-cols-4 gap-2 mt-2">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="aspect-square rounded-sm overflow-hidden border border-border opacity-80">
+              <div key={i} className="aspect-square rounded-sm overflow-hidden border border-border opacity-80 bg-white p-1">
                 <ProductImage name={product.name} category={product.category} />
               </div>
             ))}
@@ -92,66 +102,99 @@ function ProductPage() {
             <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">{cat.name}</div>
           )}
           <h1 className="text-3xl md:text-4xl font-bold leading-tight">{product.name}</h1>
-          <div className="mt-4 flex items-baseline gap-3">
+          <div className="mt-4 flex flex-wrap items-baseline gap-3">
             <span className="text-3xl font-bold">{formatZAR(product.price)}</span>
+            {product.discountPrice && (
+              <span className="text-lg text-muted-foreground line-through">{formatZAR(product.discountPrice)}</span>
+            )}
             <span className="text-xs text-muted-foreground">VAT incl.</span>
+
+            {/* Live Stock Indicator */}
+            {product.stock === 0 ? (
+              <span className="ml-2 bg-destructive/10 text-destructive text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">
+                Out of Stock
+              </span>
+            ) : product.stock <= 5 ? (
+              <span className="ml-2 bg-amber-500/10 text-amber-600 dark:text-amber-500 text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider animate-pulse">
+                Low Stock ({product.stock} left)
+              </span>
+            ) : (
+              <span className="ml-2 bg-green-500/10 text-green-600 text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">
+                In Stock ({product.stock})
+              </span>
+            )}
           </div>
 
           <p className="mt-6 text-foreground/80 leading-relaxed">{product.description}</p>
 
           {/* Size */}
-          <div className="mt-8">
-            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Size</div>
-            <div className="flex flex-wrap gap-2">
-              {product.sizes.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setSize(s)}
-                  className={`min-w-12 h-10 px-3 border rounded-sm text-sm font-medium ${
-                    size === s ? "border-primary bg-primary text-primary-foreground" : "border-input hover:border-primary"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
+          {product.sizes.length > 0 && product.sizes[0] !== "" && (
+            <div className="mt-8">
+              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Size</div>
+              <div className="flex flex-wrap gap-2">
+                {product.sizes.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setSize(s)}
+                    className={`min-w-12 h-10 px-3 border rounded-sm text-sm font-medium ${
+                      size === s ? "border-primary bg-primary text-primary-foreground" : "border-input hover:border-primary"
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Color */}
-          <div className="mt-6">
-            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Colour</div>
-            <div className="flex flex-wrap gap-2">
-              {product.colors.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setColor(c)}
-                  className={`h-10 px-3 border rounded-sm text-sm font-medium ${
-                    color === c ? "border-primary bg-primary text-primary-foreground" : "border-input hover:border-primary"
-                  }`}
-                >
-                  {c}
-                </button>
-              ))}
+          {product.colors.length > 0 && product.colors[0] !== "" && (
+            <div className="mt-6">
+              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Colour</div>
+              <div className="flex flex-wrap gap-2">
+                {product.colors.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setColor(c)}
+                    className={`h-10 px-3 border rounded-sm text-sm font-medium ${
+                      color === c ? "border-primary bg-primary text-primary-foreground" : "border-input hover:border-primary"
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Qty + add */}
           <div className="mt-8 flex items-stretch gap-3">
-            <div className="flex items-center border border-input rounded-sm">
-              <button className="h-12 w-10 grid place-items-center hover:bg-accent" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease">
-                <Minus size={16} />
+            {product.stock > 0 ? (
+              <>
+                <div className="flex items-center border border-input rounded-sm">
+                  <button className="h-12 w-10 grid place-items-center hover:bg-accent" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease">
+                    <Minus size={16} />
+                  </button>
+                  <span className="w-10 text-center font-semibold">{qty}</span>
+                  <button className="h-12 w-10 grid place-items-center hover:bg-accent" onClick={() => setQty((q) => Math.min(product.stock, q + 1))} aria-label="Increase">
+                    <Plus size={16} />
+                  </button>
+                </div>
+                <button
+                  onClick={handleAdd}
+                  className="flex-1 h-12 px-6 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition animate-fade-in"
+                >
+                  Add to cart
+                </button>
+              </>
+            ) : (
+              <button
+                disabled
+                className="flex-1 h-12 px-6 bg-secondary text-muted-foreground font-semibold rounded-sm cursor-not-allowed border border-border"
+              >
+                Out of Stock
               </button>
-              <span className="w-10 text-center font-semibold">{qty}</span>
-              <button className="h-12 w-10 grid place-items-center hover:bg-accent" onClick={() => setQty((q) => q + 1)} aria-label="Increase">
-                <Plus size={16} />
-              </button>
-            </div>
-            <button
-              onClick={handleAdd}
-              className="flex-1 h-12 px-6 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition"
-            >
-              Add to cart
-            </button>
+            )}
           </div>
 
           {/* Features */}

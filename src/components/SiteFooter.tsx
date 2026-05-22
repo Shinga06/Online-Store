@@ -34,6 +34,7 @@ export function SiteFooter() {
             <li><Link to="/about" className="hover:text-[var(--hi-vis)]">About us</Link></li>
             <li><Link to="/contact" className="hover:text-[var(--hi-vis)]">Contact</Link></li>
             <li><Link to="/shop" className="hover:text-[var(--hi-vis)]">All products</Link></li>
+            <li><Link to="/admin" className="hover:text-[var(--hi-vis)] font-semibold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--hi-vis)] animate-pulse"></span>Admin Portal</Link></li>
           </ul>
         </div>
         <div>
@@ -49,7 +50,11 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-4 text-xs text-white/60 flex flex-col md:flex-row justify-between gap-2">
           <span>© {new Date().getFullYear()} SafeGear PPE & Workwear. All rights reserved.</span>
-          <span>Prices in ZAR · VAT incl.</span>
+          <div className="flex items-center gap-3">
+            <Link to="/admin" className="hover:text-white transition">Admin Dashboard</Link>
+            <span>·</span>
+            <span>Prices in ZAR · VAT incl.</span>
+          </div>
         </div>
       </div>
     </footer>

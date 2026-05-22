@@ -21,8 +21,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 bg-surface text-surface-foreground border-b border-white/10">
       <div className="bg-black/40 text-xs">
         <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between text-white/70">
-          <span>Nationwide delivery across South Africa</span>
-          <span className="hidden sm:inline">SABS-approved PPE · Bulk orders welcome</span>
+          <div className="flex items-center gap-4">
+            <span>Nationwide delivery across South Africa</span>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <span className="hidden sm:inline">SABS-approved PPE · Bulk orders welcome</span>
+          </div>
+          <Link to="/admin" className="text-[var(--hi-vis)] hover:underline font-semibold tracking-wide flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--hi-vis)] animate-pulse"></span>
+            Admin Portal
+          </Link>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
@@ -112,6 +119,10 @@ export function SiteHeader() {
               <Link to="/shop" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">Shop</Link>
               <Link to="/about" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">About</Link>
               <Link to="/contact" onClick={() => setOpen(false)} className="py-2 border-b border-white/10">Contact</Link>
+              <Link to="/admin" onClick={() => setOpen(false)} className="py-2 border-b border-white/10 text-[var(--hi-vis)] font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--hi-vis)] animate-pulse"></span>
+                Admin Portal
+              </Link>
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-[0.18em] text-white/50 mt-3 mb-2">Categories</div>

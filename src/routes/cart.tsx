@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useCart, itemKey } from "@/lib/cart";
 import { formatZAR } from "@/lib/catalog";
 import { ProductImage } from "@/components/ProductImage";
+import { db } from "@/lib/db";
+import { useDb } from "@/hooks/use-db";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
@@ -19,18 +21,22 @@ export const Route = createFileRoute("/cart")({
 function CartPage() {
   const { items, setQty, remove, subtotal, clear, count } = useCart();
   const [stage, setStage] = useState<"cart" | "checkout" | "done">("cart");
+  const [orderId, setOrderId] = useState("");
   const shipping = subtotal > 1500 || subtotal === 0 ? 0 : 120;
   const total = subtotal + shipping;
 
   if (stage === "done") {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-        <div className="inline-flex h-14 w-14 rounded-full items-center justify-center mb-6" style={{ background: "var(--hi-vis)" }}>
-          <span className="text-2xl">✓</span>
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center animate-fade-in">
+        <div className="inline-flex h-14 w-14 rounded-full items-center justify-center mb-6 font-bold" style={{ background: "var(--hi-vis)", color: "black" }}>
+          ✓
         </div>
         <h1 className="text-3xl font-bold">Order received</h1>
-        <p className="text-muted-foreground mt-2">Thanks for your order. We'll email a confirmation and tracking shortly.</p>
-        <Link to="/shop" search={{ category: "", q: "" }} className="inline-block mt-8 bg-primary text-primary-foreground font-semibold px-6 h-12 rounded-sm leading-[3rem]">
+        <p className="text-primary font-bold text-lg mt-3">Invoice Number: {orderId}</p>
+        <p className="text-muted-foreground mt-2 max-w-md mx-auto">
+          Thanks for your order! Your request has been sent to our sales desk. We've updated the admin registry and reduced inventory counts. We'll email your VAT invoice shortly.
+        </p>
+        <Link to="/shop" search={{ category: "", q: "" }} className="inline-block mt-8 bg-primary text-primary-foreground font-semibold px-6 h-12 rounded-sm leading-[3rem] hover:bg-primary/90">
           Continue shopping
         </Link>
       </div>
@@ -96,10 +102,11 @@ function CartPage() {
             </div>
           ) : (
             <CheckoutForm
-              onSubmit={() => {
+              onSubmit={(generatedId) => {
+                setOrderId(generatedId);
                 clear();
                 setStage("done");
-                toast.success("Order placed successfully");
+                toast.success("Order placed successfully!", { description: `Invoice reference: ${generatedId}` });
               }}
             />
           )}
@@ -120,7 +127,7 @@ function CartPage() {
           {stage === "cart" ? (
             <button
               onClick={() => setStage("checkout")}
-              className="mt-6 w-full h-12 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90"
+              className="mt-6 w-full h-12 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition cursor-pointer"
             >
               Proceed to checkout
             </button>
@@ -128,9 +135,9 @@ function CartPage() {
             <button
               form="checkout-form"
               type="submit"
-              className="mt-6 w-full h-12 bg-[var(--hi-vis)] text-black font-semibold rounded-sm hover:brightness-95"
+              className="mt-6 w-full h-12 bg-[var(--hi-vis)] text-black font-semibold rounded-sm hover:brightness-95 transition cursor-pointer flex items-center justify-center gap-2"
             >
-              Place order
+              Confirm & Place Order
             </button>
           )}
           <p className="text-[11px] text-muted-foreground mt-3">
@@ -142,35 +149,112 @@ function CartPage() {
   );
 }
 
-function CheckoutForm({ onSubmit }: { onSubmit: () => void }) {
+function CheckoutForm({ onSubmit }: { onSubmit: (orderId: string) => void }) {
+  const { items } = useCart();
+  const { products } = useDb();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
+    const company = formData.get("company") as string;
+    const street = formData.get("street") as string;
+    const suburb = formData.get("suburb") as string;
+    const city = formData.get("city") as string;
+    const zip = formData.get("zip") as string;
+    const province = formData.get("province") as string;
+
+    const customerName = `${firstName} ${lastName}`;
+    const deliveryAddress = `${street}, ${suburb}, ${city}, ${province}, ${zip}${company ? ` (${company})` : ""}`;
+
+    // Verify stock availability on place order
+    for (const item of items) {
+      const dbProd = products.find((p) => p.id === item.productId);
+      if (!dbProd) {
+        toast.error(`Product "${item.name}" is no longer available.`);
+        setLoading(false);
+        return;
+      }
+      if (dbProd.stock < item.qty) {
+        toast.error(`Insufficient stock for "${item.name}"`, {
+          description: `Only ${dbProd.stock} items remaining. Please decrease your quantity in the cart.`,
+        });
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      const newOrder = await db.placeOrder({
+        customerName,
+        customerEmail: email,
+        customerPhone: phone,
+        deliveryAddress,
+        items: items.map((i) => ({
+          productId: i.productId,
+          name: i.name,
+          qty: i.qty,
+          price: i.price,
+          size: i.size,
+          color: i.color,
+        })),
+        status: "Pending",
+      });
+
+      setLoading(false);
+      onSubmit(newOrder.id);
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while placing your order. Please try again.");
+      setLoading(false);
+    }
+  };
+
   return (
     <form
       id="checkout-form"
       className="space-y-6"
-      onSubmit={(e) => { e.preventDefault(); onSubmit(); }}
+      onSubmit={handleSubmit}
     >
-      <Section title="Contact">
-        <Field label="Email" name="email" type="email" required />
-        <Field label="Phone" name="phone" type="tel" required />
+      {loading && (
+        <div className="fixed inset-0 z-50 bg-background/50 flex items-center justify-center backdrop-blur-xs">
+          <div className="bg-card border border-border p-5 rounded-md flex flex-col items-center gap-3">
+            <Loader2 className="animate-spin text-primary" size={32} />
+            <span className="text-sm font-semibold">Processing your order...</span>
+          </div>
+        </div>
+      )}
+
+      <Section title="Contact Info">
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Field label="Email" name="email" type="email" placeholder="e.g. thabo@builders-za.com" required />
+          <Field label="Phone" name="phone" type="tel" placeholder="e.g. +27 82 555 0192" required />
+        </div>
       </Section>
       <Section title="Shipping address">
         <div className="grid sm:grid-cols-2 gap-3">
           <Field label="First name" name="firstName" required />
           <Field label="Last name" name="lastName" required />
         </div>
-        <Field label="Company (optional)" name="company" />
-        <Field label="Street address" name="street" required />
+        <Field label="Company (optional)" name="company" placeholder="e.g. Acme Construction" />
+        <Field label="Street address" name="street" placeholder="e.g. 12 Witkoppen Road" required />
         <div className="grid sm:grid-cols-3 gap-3">
-          <Field label="Suburb" name="suburb" required />
-          <Field label="City" name="city" required />
-          <Field label="Postal code" name="zip" required />
+          <Field label="Suburb" name="suburb" placeholder="e.g. Fourways" required />
+          <Field label="City" name="city" placeholder="e.g. Johannesburg" required />
+          <Field label="Postal code" name="zip" placeholder="e.g. 2055" required />
         </div>
-        <Field label="Province" name="province" required />
+        <Field label="Province" name="province" placeholder="e.g. Gauteng" required />
       </Section>
-      <Section title="Payment">
-        <p className="text-sm text-muted-foreground">
-          Payment is collected on order confirmation. Our team will contact you with EFT details
-          or to confirm card payment.
+      <Section title="Payment Details">
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          <strong>Direct Account Transfer / COD:</strong> Your booking is secured immediately on submission. We will generate your official tax invoice, and our industrial sales desk will get in touch with you shortly to confirm credit/EFT accounts or card payment processing.
         </p>
       </Section>
     </form>
@@ -179,8 +263,8 @@ function CheckoutForm({ onSubmit }: { onSubmit: () => void }) {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="border border-border rounded-md p-5">
-      <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">{title}</div>
+    <div className="border border-border rounded-md p-5 bg-card">
+      <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4 font-semibold">{title}</div>
       <div className="space-y-3">{children}</div>
     </div>
   );
@@ -189,10 +273,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Field({ label, ...props }: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
   return (
     <label className="block">
-      <span className="text-xs font-medium text-foreground/80">{label}</span>
+      <span className="text-xs font-semibold text-foreground/80">{label}</span>
       <input
         {...props}
-        className="mt-1 w-full h-10 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+        className="mt-1 w-full h-10 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary placeholder:text-muted-foreground/60 focus:ring-1 focus:ring-primary"
       />
     </label>
   );
