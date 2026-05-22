@@ -16,8 +16,8 @@ export const Route = createFileRoute("/shop")({
   component: ShopPage,
   head: () => ({
     meta: [
-      { title: "Shop PPE & Workwear — SafeGear" },
-      { name: "description", content: "Browse the full SafeGear catalogue: safety footwear, hi-vis, gloves, coveralls, corporate uniforms and more." },
+      { title: "Shop PPE & Workwear — CBALCOOL" },
+      { name: "description", content: "Browse the full CBALCOOL catalogue: safety footwear, hi-vis, gloves, coveralls, corporate uniforms and more." },
     ],
   }),
 });

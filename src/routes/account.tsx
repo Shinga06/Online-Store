@@ -26,7 +26,7 @@ export const Route = createFileRoute("/account")({
   component: CustomerAccount,
   head: () => ({
     meta: [
-      { title: "My Account — SafeGear PPE" },
+      { title: "My Account — CBALCOOL PPE" },
       { name: "description", content: "Access your corporate B2B profile, purchase histories, and real-time tracking logs." },
     ],
   }),
@@ -46,7 +46,7 @@ function CustomerAccount() {
   useEffect(() => {
     const fetchCachedOrders = async () => {
       if (typeof window === "undefined") return;
-      const cached = localStorage.getItem("safegear_recent_checkouts");
+      const cached = localStorage.getItem("cbalcool_recent_checkouts");
       
       let discoveredOrders: DBOrder[] = [];
       
@@ -116,14 +116,14 @@ function CustomerAccount() {
         setActiveEmail(lookupEmail.trim());
         toast.success(`Found ${matched.length} order(s) for ${lookupEmail}`);
         // Store in cache for next time
-        const cached = localStorage.getItem("safegear_recent_checkouts");
+        const cached = localStorage.getItem("cbalcool_recent_checkouts");
         let refs = cached ? JSON.parse(cached) as { id: string; email: string }[] : [];
         matched.forEach(m => {
           if (!refs.some(r => r.id === m.id)) {
             refs.push({ id: m.id, email: m.customerEmail });
           }
         });
-        localStorage.setItem("safegear_recent_checkouts", JSON.stringify(refs));
+        localStorage.setItem("cbalcool_recent_checkouts", JSON.stringify(refs));
       }
     } catch (err) {
       console.error(err);
@@ -137,7 +137,7 @@ function CustomerAccount() {
     setActiveEmail(null);
     setUserOrders([]);
     if (typeof window !== "undefined") {
-      localStorage.removeItem("safegear_recent_checkouts");
+      localStorage.removeItem("cbalcool_recent_checkouts");
     }
     toast.info("Session reset. Cached order histories cleared.");
   };

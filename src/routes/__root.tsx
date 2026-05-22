@@ -66,9 +66,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SafeGear — PPE & Workwear South Africa" },
+      { title: "CBALCOOL — CBALCOOL PPE & Workwear South Africa" },
       { name: "description", content: "Shop SABS-approved PPE, safety footwear, hi-vis and corporate workwear. Trusted by industry across South Africa. Prices in ZAR." },
-      { property: "og:title", content: "SafeGear — PPE & Workwear" },
+      { property: "og:title", content: "CBALCOOL — CBALCOOL PPE & Workwear" },
       { property: "og:description", content: "SABS-approved PPE and durable workwear for industry, security, hospitality and corporate teams." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

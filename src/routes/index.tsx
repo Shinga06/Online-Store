@@ -7,7 +7,7 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "SafeGear — PPE & Workwear South Africa" },
+      { title: "CBALCOOL — CBALCOOL PPE & Workwear South Africa" },
       { name: "description", content: "Shop SABS-approved PPE, safety footwear, hi-vis and corporate workwear in South Africa. Bulk orders welcome." },
     ],
   }),

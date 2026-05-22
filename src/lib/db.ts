@@ -191,8 +191,8 @@ const DEFAULT_ORDERS: DBOrder[] = [
 ];
 
 const DEFAULT_ADMINS: DBAdmin[] = [
-  { email: "admin@safegear.co.za", name: "System Admin", role: "Admin" },
-  { email: "manager@safegear.co.za", name: "Store Manager", role: "Manager" },
+  { email: "admin@cbalcool.co.za", name: "System Admin", role: "Admin" },
+  { email: "manager@cbalcool.co.za", name: "Store Manager", role: "Manager" },
 ];
 
 const SEED_DATA: DBData = {
@@ -241,7 +241,7 @@ async function getDbData(): Promise<DBData> {
   
   if (typeof window !== "undefined") {
     // Client-side LocalStorage fallback
-    const local = localStorage.getItem("safegear_db");
+    const local = localStorage.getItem("cbalcool_db");
     if (local) {
       try {
         return JSON.parse(local) as DBData;
@@ -249,7 +249,7 @@ async function getDbData(): Promise<DBData> {
         // ignore
       }
     }
-    localStorage.setItem("safegear_db", JSON.stringify(SEED_DATA));
+    localStorage.setItem("cbalcool_db", JSON.stringify(SEED_DATA));
     return SEED_DATA;
   }
   
@@ -268,7 +268,7 @@ async function saveDbData(data: DBData) {
   }
   
   if (typeof window !== "undefined") {
-    localStorage.setItem("safegear_db", JSON.stringify(data));
+    localStorage.setItem("cbalcool_db", JSON.stringify(data));
     return;
   }
   
@@ -311,36 +311,36 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
 
   switch (status) {
     case "Pending Payment":
-      addLog("Email", `Hi ${name},\n\nYour SafeGear order ${id} has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR ${order.total.toFixed(2)}\nPayment Method: ${order.paymentMethod || "EFT Invoice"}\n\nPlease settle payment using your invoice details and email POP to accounts@safegear.co.za.`);
-      addLog("SMS", `SafeGear: Order ${id} placed successfully. Awaiting payment of ZAR ${order.total.toFixed(2)}. Check your email for tax invoice instructions.`);
+      addLog("Email", `Hi ${name},\n\nYour CBALCOOL order ${id} has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR ${order.total.toFixed(2)}\nPayment Method: ${order.paymentMethod || "EFT Invoice"}\n\nPlease settle payment using your invoice details and email POP to accounts@cbalcool.co.za.`);
+      addLog("SMS", `CBALCOOL: Order ${id} placed successfully. Awaiting payment of ZAR ${order.total.toFixed(2)}. Check your email for tax invoice instructions.`);
       break;
     case "Payment Confirmed":
-      addLog("WhatsApp", `*SafeGear PPE Order Confirmed!* 🛡️\n\nHi ${name}, thank you for your payment for order *${id}*.\n\n💰 *Total:* ZAR ${order.total.toFixed(2)}\n📦 *Status:* SABS warehouse inventory has been allocated.\n\nWe will update you as soon as the dispatch team packages your gear!`);
-      addLog("Email", `Hi ${name},\n\nWe have successfully received and verified your payment for order ${id}.\n\nYour order has been moved to our warehouse queue for packaging and quality checks.\n\nSafeGear Operations Desk.`);
+      addLog("WhatsApp", `*CBALCOOL PPE Order Confirmed!* 🛡️\n\nHi ${name}, thank you for your payment for order *${id}*.\n\n💰 *Total:* ZAR ${order.total.toFixed(2)}\n📦 *Status:* SABS warehouse inventory has been allocated.\n\nWe will update you as soon as the dispatch team packages your gear!`);
+      addLog("Email", `Hi ${name},\n\nWe have successfully received and verified your payment for order ${id}.\n\nYour order has been moved to our warehouse queue for packaging and quality checks.\n\nCBALCOOL Operations Desk.`);
       break;
     case "Processing":
-      addLog("WhatsApp", `*SafeGear Packing Queue* 📦\n\nHi ${name}, order *${id}* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!`);
-      addLog("Email", `Hi ${name},\n\nYour order ${id} is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing SafeGear.`);
+      addLog("WhatsApp", `*CBALCOOL Packing Queue* 📦\n\nHi ${name}, order *${id}* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!`);
+      addLog("Email", `Hi ${name},\n\nYour order ${id} is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing CBALCOOL.`);
       break;
     case "Packed":
-      addLog("SMS", `SafeGear: Order ${id} has been carefully packaged and sealed under SABS guidelines. Ready for courier collection!`);
-      addLog("Email", `Hi ${name},\n\nExcellent news! Your order ${id} has been fully packaged and is ready at our dispatch bays. Courier pick up has been scheduled.\n\nYour safety is our priority.\nSafeGear Logistics.`);
+      addLog("SMS", `CBALCOOL: Order ${id} has been carefully packaged and sealed under SABS guidelines. Ready for courier collection!`);
+      addLog("Email", `Hi ${name},\n\nExcellent news! Your order ${id} has been fully packaged and is ready at our dispatch bays. Courier pick up has been scheduled.\n\nYour safety is our priority.\nCBALCOOL Logistics.`);
       break;
     case "Shipped":
-      addLog("WhatsApp", `*SafeGear Shipment Dispatched!* 🚚\n\nHi ${name}, your safety package *${id}* is on its way!\n\n🚛 *Courier:* ${courier}\n🎫 *Tracking No:* ${trackNum}\n📅 *Expected Delivery:* ${deliveryDate}\n\nTrack your parcel here: https://thecourierguy.net/tracking/?t=${trackNum}`);
-      addLog("SMS", `SafeGear: Order ${id} shipped via ${courier}. Tracking No: ${trackNum}. Expected arrival: ${deliveryDate}.`);
-      addLog("Email", `Dear ${name},\n\nWe are pleased to inform you that your order ${id} has been dispatched.\n\nCourier: ${courier}\nTracking Number: ${trackNum}\nExpected Arrival: ${deliveryDate}\n\nTrack your shipment live at the courier page: https://thecourierguy.net/tracking/?t=${trackNum}\n\nSafeGear Dispatch.`);
+      addLog("WhatsApp", `*CBALCOOL Shipment Dispatched!* 🚚\n\nHi ${name}, your safety package *${id}* is on its way!\n\n🚛 *Courier:* ${courier}\n🎫 *Tracking No:* ${trackNum}\n📅 *Expected Delivery:* ${deliveryDate}\n\nTrack your parcel here: https://thecourierguy.net/tracking/?t=${trackNum}`);
+      addLog("SMS", `CBALCOOL: Order ${id} shipped via ${courier}. Tracking No: ${trackNum}. Expected arrival: ${deliveryDate}.`);
+      addLog("Email", `Dear ${name},\n\nWe are pleased to inform you that your order ${id} has been dispatched.\n\nCourier: ${courier}\nTracking Number: ${trackNum}\nExpected Arrival: ${deliveryDate}\n\nTrack your shipment live at the courier page: https://thecourierguy.net/tracking/?t=${trackNum}\n\nCBALCOOL Dispatch.`);
       break;
     case "Out for Delivery":
-      addLog("WhatsApp", `*SafeGear Delivery Alert!* 🔔\n\nHi ${name}, your order *${id}* is out for delivery today with *${courier}*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!`);
-      addLog("SMS", `SafeGear: Order ${id} is out for delivery today with ${courier}. Have a great day!`);
+      addLog("WhatsApp", `*CBALCOOL Delivery Alert!* 🔔\n\nHi ${name}, your order *${id}* is out for delivery today with *${courier}*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!`);
+      addLog("SMS", `CBALCOOL: Order ${id} is out for delivery today with ${courier}. Have a great day!`);
       break;
     case "Delivered":
-      addLog("WhatsApp", `*SafeGear Order Delivered!* 🎉\n\nHi ${name}, your SABS protective garments *${id}* have been successfully delivered!\n\nWe hope you are fully satisfied with your workwear. Need bulk orders or additional gear? Visit safegear.co.za.\n\nStay Safe, Stay Productive!`);
-      addLog("Email", `Dear ${name},\n\nWe have received confirmation that your order ${id} was successfully delivered.\n\nThank you for trusting SafeGear PPE & Workwear South Africa as your professional safety partner.\n\nWarm regards,\nSafeGear Customer Care.`);
+      addLog("WhatsApp", `*CBALCOOL Order Delivered!* 🎉\n\nHi ${name}, your SABS protective garments *${id}* have been successfully delivered!\n\nWe hope you are fully satisfied with your workwear. Need bulk orders or additional gear? Visit CBALCOOL.co.za.\n\nStay Safe, Stay Productive!`);
+      addLog("Email", `Dear ${name},\n\nWe have received confirmation that your order ${id} was successfully delivered.\n\nThank you for trusting CBALCOOL PPE & Workwear South Africa as your professional safety partner.\n\nWarm regards,\nCBALCOOL Customer Care.`);
       break;
     case "Cancelled":
-      addLog("Email", `Dear ${name},\n\nYour order ${id} has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at trade@safegear.co.za.\n\nSafeGear Support.`);
+      addLog("Email", `Dear ${name},\n\nYour order ${id} has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at trade@cbalcool.co.za.\n\nCBALCOOL Support.`);
       break;
   }
 }
@@ -366,7 +366,7 @@ export const db = {
       clientCachedData = data;
       // Also cache to local storage on the client
       if (typeof window !== "undefined") {
-        localStorage.setItem("safegear_db", JSON.stringify(data));
+        localStorage.setItem("cbalcool_db", JSON.stringify(data));
       }
       this.notify();
       return data;
@@ -382,7 +382,7 @@ export const db = {
   getDataSync(): DBData {
     if (clientCachedData) return clientCachedData;
     if (typeof window !== "undefined") {
-      const local = localStorage.getItem("safegear_db");
+      const local = localStorage.getItem("cbalcool_db");
       if (local) {
         try {
           clientCachedData = JSON.parse(local);
@@ -398,7 +398,7 @@ export const db = {
   async save(data: DBData) {
     clientCachedData = data;
     if (typeof window !== "undefined") {
-      localStorage.setItem("safegear_db", JSON.stringify(data));
+      localStorage.setItem("cbalcool_db", JSON.stringify(data));
     }
     this.notify();
     try {
@@ -596,6 +596,27 @@ export const db = {
     return newOrder;
   },
 };
+
+// One-time migration: purge legacy "safegear_*" storage keys
+if (typeof window !== "undefined") {
+  const legacyPrefixes = ["safegear_"];
+  for (const prefix of legacyPrefixes) {
+    // Clean localStorage
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(prefix)) {
+        localStorage.removeItem(key);
+      }
+    }
+    // Clean sessionStorage
+    for (let i = sessionStorage.length - 1; i >= 0; i--) {
+      const key = sessionStorage.key(i);
+      if (key && key.startsWith(prefix)) {
+        sessionStorage.removeItem(key);
+      }
+    }
+  }
+}
 
 // Initial background load in browser
 if (typeof window !== "undefined") {

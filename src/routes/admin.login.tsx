@@ -23,14 +23,14 @@ function AdminLoginPage() {
       const emailTrim = email.toLowerCase().trim();
       
       let matchedUser = null;
-      if (emailTrim === "admin@safegear.co.za" && password === "admin123") {
+      if (emailTrim === "admin@cbalcool.co.za" && password === "admin123") {
         matchedUser = { email: emailTrim, name: "Alexander Stone", role: "Admin" };
-      } else if (emailTrim === "manager@safegear.co.za" && password === "admin123") {
+      } else if (emailTrim === "manager@cbalcool.co.za" && password === "admin123") {
         matchedUser = { email: emailTrim, name: "Sibongile Dube", role: "Manager" };
       }
 
       if (matchedUser) {
-        sessionStorage.setItem("safegear_admin_session", JSON.stringify(matchedUser));
+        sessionStorage.setItem("cbalcool_admin_session", JSON.stringify(matchedUser));
         toast.success(`Welcome back, ${matchedUser.name}!`, { description: `Logged in as ${matchedUser.role}.` });
         setLoading(false);
         navigate({ to: "/admin" });
@@ -43,11 +43,11 @@ function AdminLoginPage() {
 
   const handleQuickLogin = (role: "Admin" | "Manager") => {
     if (role === "Admin") {
-      setEmail("admin@safegear.co.za");
+      setEmail("admin@cbalcool.co.za");
       setPassword("admin123");
       toast.info("Pre-filled Admin Credentials");
     } else {
-      setEmail("manager@safegear.co.za");
+      setEmail("manager@cbalcool.co.za");
       setPassword("admin123");
       toast.info("Pre-filled Manager Credentials");
     }
@@ -73,7 +73,7 @@ function AdminLoginPage() {
           </div>
         </div>
         <h2 className="text-center text-3xl font-bold tracking-tight text-white">
-          SafeGear Control Panel
+          CBALCOOL Control Panel
         </h2>
         <p className="mt-2 text-center text-sm text-slate-400">
           Sign in to securely manage products, orders, and stocks in real time.
@@ -99,7 +99,7 @@ function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@safegear.co.za"
+                  placeholder="admin@cbalcool.co.za"
                   className="block w-full h-11 pl-10 pr-3 border border-slate-800 rounded-sm bg-slate-950 text-slate-100 placeholder-slate-600 text-sm focus:outline-none focus:border-[var(--hi-vis)] focus:ring-1 focus:ring-[var(--hi-vis)] transition-all"
                 />
               </div>

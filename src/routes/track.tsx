@@ -34,7 +34,7 @@ export const Route = createFileRoute("/track")({
   },
   head: () => ({
     meta: [
-      { title: "Track Order — SafeGear" },
+      { title: "Track Order — CBALCOOL" },
       { name: "description", content: "Audit shipment timelines and trace SABS delivery routes in real time." },
     ],
   }),
@@ -283,7 +283,7 @@ function OrderTracking() {
                     <AlertCircle className="text-destructive mx-auto" size={36} />
                     <h4 className="font-bold text-lg text-foreground">Order Cancelled</h4>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      This order has been cancelled and warehouse item allocation has been reverted. For questions regarding payments or refunds, contact accounts@safegear.co.za.
+                      This order has been cancelled and warehouse item allocation has been reverted. For questions regarding payments or refunds, contact accounts@cbalcool.co.za.
                     </p>
                   </div>
                 ) : (
@@ -340,7 +340,7 @@ function OrderTracking() {
                                   {stage.key === "Packed" && "Parcel carefully sealed and SABS compliance labels checked at dispatch bay."}
                                   {stage.key === "Shipped" && `Package picked up and in transit with courier: ${activeOrder.courierName || "The Courier Guy"}.`}
                                   {stage.key === "Out for Delivery" && "Delivery driver is in transit to your shipping destination today!"}
-                                  {stage.key === "Delivered" && "Successfully received and signed. SafeGear safety protocols complete."}
+                                  {stage.key === "Delivered" && "Successfully received and signed. CBALCOOL safety protocols complete."}
                                 </p>
                                 <span className="text-[10px] text-muted-foreground flex items-center gap-1 pt-1 font-medium">
                                   <Clock size={12} /> Last Updated: {activeOrder.lastUpdated ? new Date(activeOrder.lastUpdated).toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" }) : new Date(activeOrder.date).toLocaleTimeString("en-ZA")}
@@ -472,7 +472,7 @@ function OrderTracking() {
                       <div className="bg-[#075e54] text-white p-2.5 flex items-center gap-2 shadow-xs shrink-0 select-none">
                         <div className="h-7 w-7 rounded-full bg-slate-300 font-bold text-black text-xs grid place-items-center">SG</div>
                         <div>
-                          <div className="text-[10px] font-bold">SafeGear Dispatch Desk</div>
+                          <div className="text-[10px] font-bold">CBALCOOL Dispatch Desk</div>
                           <span className="text-[8px] opacity-80 block">Standard Business Profile</span>
                         </div>
                       </div>
@@ -531,9 +531,9 @@ function OrderTracking() {
                     <div className="flex flex-col flex-1 bg-slate-50 dark:bg-slate-900/60 overflow-y-auto">
                       {/* Email client Header */}
                       <div className="bg-slate-900 text-white p-3 shrink-0 border-b border-slate-950 select-none">
-                        <div className="text-[10px] font-bold flex items-center gap-1.5"><Mail size={12} className="text-yellow-400" /> SafeGear Mail Client</div>
+                        <div className="text-[10px] font-bold flex items-center gap-1.5"><Mail size={12} className="text-yellow-400" /> CBALCOOL Mail Client</div>
                         <div className="text-[8px] opacity-80 mt-1 leading-normal">
-                          <p><strong>From:</strong> updates@safegear.co.za</p>
+                          <p><strong>From:</strong> updates@cbalcool.co.za</p>
                           <p><strong>To:</strong> {activeOrder.customerEmail}</p>
                         </div>
                       </div>
@@ -548,13 +548,13 @@ function OrderTracking() {
                               {/* Logo header inside email mockup */}
                               <div className="flex items-center gap-1.5 border-b pb-2 select-none">
                                 <div className="h-5 w-5 bg-slate-950 text-white font-bold text-[10px] grid place-items-center rounded-sm">S</div>
-                                <span className="font-extrabold text-[10px] tracking-tight">SAFEGEAR PPE LTD</span>
+                                <span className="font-extrabold text-[10px] tracking-tight">CBALCOOL PPE LTD</span>
                               </div>
 
                               <p className="whitespace-pre-wrap font-sans text-xs leading-normal">{l.message}</p>
                               
                               <div className="border-t pt-2 mt-2 text-[8px] text-slate-400 space-y-0.5 select-none leading-normal">
-                                <p>This is an automated transaction update from SafeGear PPE Germiston.</p>
+                                <p>This is an automated transaction update from CBALCOOL PPE Germiston.</p>
                                 <p>Tel: +27 11 555 4910 · Germiston, Gauteng</p>
                               </div>
                             </div>

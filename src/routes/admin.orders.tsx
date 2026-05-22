@@ -597,13 +597,13 @@ function AdminOrders() {
                 <div>
                   <div className="flex items-center gap-2">
                     <div className="h-8 w-8 rounded-sm bg-slate-950 font-bold text-white text-base grid place-items-center">S</div>
-                    <span className="font-bold text-lg tracking-tight">SAFEGEAR PPE LTD</span>
+                    <span className="font-bold text-lg tracking-tight">CBALCOOL PPE LTD</span>
                   </div>
                   <div className="text-xs text-slate-500 mt-2 space-y-0.5 leading-normal">
                     <p>42 Industrial Crescent, Germiston, 1401</p>
                     <p>Gauteng, South Africa</p>
                     <p>VAT Reg No: 4910394819</p>
-                    <p>Email: trade@safegear.co.za · Tel: +27 11 555 4910</p>
+                    <p>Email: trade@cbalcool.co.za · Tel: +27 11 555 4910</p>
                   </div>
                 </div>
 
@@ -707,7 +707,7 @@ function AdminOrders() {
                 <p className="font-semibold text-slate-500">
                   {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") ? "Thank you for requesting a wholesale quote!" : "Thank you for your business!"}
                 </p>
-                <p className="mt-1">All items conform to South African SABS PPE requirements. Goods remain property of SafeGear until fully settled.</p>
+                <p className="mt-1">All items conform to South African SABS PPE requirements. Goods remain property of CBALCOOL until fully settled.</p>
                 <p className="mt-0.5">
                   {invoiceOrder.isQuote || invoiceOrder.id.startsWith("RFQ") 
                     ? "Remarks: This quotation draft reserves stock for 5 business days. Contact bulk desks to finalise pricing discounts." 

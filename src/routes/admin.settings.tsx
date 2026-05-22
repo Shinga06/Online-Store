@@ -28,7 +28,7 @@ function AdminSettings() {
 
   useEffect(() => {
     // Session load
-    const sessionStr = sessionStorage.getItem("safegear_admin_session");
+    const sessionStr = sessionStorage.getItem("cbalcool_admin_session");
     if (sessionStr) {
       try {
         setUser(JSON.parse(sessionStr));
@@ -38,13 +38,13 @@ function AdminSettings() {
     }
 
     // Theme load
-    const storedTheme = localStorage.getItem("safegear_admin_theme") as "light" | "dark";
+    const storedTheme = localStorage.getItem("cbalcool_admin_theme") as "light" | "dark";
     setTheme(storedTheme || "dark");
   }, []);
 
   const toggleTheme = (selectedTheme: "light" | "dark") => {
     setTheme(selectedTheme);
-    localStorage.setItem("safegear_admin_theme", selectedTheme);
+    localStorage.setItem("cbalcool_admin_theme", selectedTheme);
     if (selectedTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
@@ -140,7 +140,7 @@ function AdminSettings() {
                 <div>
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">Authorized Officer</span>
                   <div className="text-sm font-bold text-foreground mt-0.5">{user?.name || "Alexander Stone"}</div>
-                  <div className="text-xs text-muted-foreground">{user?.email || "admin@safegear.co.za"}</div>
+                  <div className="text-xs text-muted-foreground">{user?.email || "admin@cbalcool.co.za"}</div>
                 </div>
                 <div>
                   <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">Security Clearance</span>
@@ -234,7 +234,7 @@ function AdminSettings() {
                   <label className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">Corporate Trading Entity</label>
                   <div className="text-sm font-bold text-foreground mt-1 flex items-center gap-2">
                     <Building size={14} className="text-muted-foreground" />
-                    <span>SafeGear PPE (Pty) Ltd</span>
+                    <span>CBALCOOL PPE (Pty) Ltd</span>
                   </div>
                 </div>
 
@@ -264,7 +264,7 @@ function AdminSettings() {
                 <div className="space-y-2 mt-4 text-xs font-semibold text-foreground">
                   <div className="flex items-center gap-2">
                     <Mail size={13} className="text-primary" />
-                    <span>logistics@safegear.co.za</span>
+                    <span>logistics@cbalcool.co.za</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone size={13} className="text-primary" />

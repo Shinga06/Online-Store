@@ -1,6 +1,43 @@
 {
   "products": [
     {
+      "id": "p1",
+      "slug": "navy-poly-cotton-conti-suit",
+      "name": "Navy Poly-Cotton Conti Suit",
+      "category": "conti-suits",
+      "price": 649,
+      "discountPrice": 552,
+      "stock": 14,
+      "description": "Heavy-duty two-piece conti suit in 65/35 poly-cotton. Reinforced stitching, multiple utility pockets, and a fade-resistant finish ideal for daily site wear.",
+      "features": [
+        "240gsm poly-cotton",
+        "Triple-needle stitching",
+        "Branded chest pocket",
+        "SABS compliant"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ],
+      "colors": [
+        "Navy",
+        "Royal",
+        "Khaki"
+      ],
+      "images": [
+        "/images/products/navy-poly-cotton-conti-suit_1.jpg",
+        "/images/products/navy-poly-cotton-conti-suit_2.jpg"
+      ],
+      "badge": "Bestseller",
+      "featured": true,
+      "newArrival": true,
+      "outOfStock": false
+    },
+    {
       "id": "p2",
       "slug": "hi-vis-orange-bomber-jacket",
       "name": "Hi-Vis Orange Bomber Jacket",
@@ -26,7 +63,7 @@
         "Hi-Vis Yellow"
       ],
       "featured": true,
-      "stock": 14,
+      "stock": 17,
       "newArrival": true,
       "outOfStock": false,
       "images": [
@@ -40,7 +77,6 @@
       "name": "Steel Toe Safety Boot",
       "category": "safety-footwear",
       "price": 1199,
-      "stock": 13,
       "description": "Full-grain leather safety boot with steel toe-cap, oil-resistant sole and padded ankle collar.",
       "features": [
         "200J steel toe",
@@ -59,16 +95,18 @@
         "13"
       ],
       "colors": [
-        "Black"
-      ],
-      "images": [
-        "https://i1-c.pinimg.com/1200x/e6/5d/03/e65d038efd45992a1c9a4c50f3f7880f.jpg",
-        "https://i1-c.pinimg.com/1200x/8d/f2/ee/8df2ee2089b5d6325c7e9fc0a8aaa5fa.jpg"
+        "Black",
+        "Brown"
       ],
       "badge": "Top Rated",
       "featured": true,
+      "stock": 16,
       "newArrival": true,
-      "outOfStock": false
+      "outOfStock": false,
+      "images": [
+        "/images/products/steel-toe-safety-boot_1.jpg",
+        "/images/products/steel-toe-safety-boot_2.jpg"
+      ]
     },
     {
       "id": "p4",
@@ -76,7 +114,7 @@
       "name": "Premium Chef Jacket",
       "category": "chef-wear",
       "price": 459,
-      "stock": 30,
+      "stock": 10,
       "description": "Crisp white chef jacket with knotted cloth buttons and a vented back panel.",
       "features": [
         "220gsm cotton blend",
@@ -128,7 +166,7 @@
         "Sky Blue",
         "Charcoal"
       ],
-      "stock": 6,
+      "stock": 10,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -161,7 +199,7 @@
         "Khaki",
         "Black"
       ],
-      "stock": 12,
+      "stock": 8,
       "discountPrice": 331,
       "newArrival": false,
       "outOfStock": false,
@@ -197,7 +235,7 @@
         "Red"
       ],
       "featured": true,
-      "stock": 21,
+      "stock": 8,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -211,7 +249,6 @@
       "name": "Heavy Duty PVC Rain Suit",
       "category": "rain-suits",
       "price": 369,
-      "stock": 45,
       "description": "Two-piece PVC rain suit with welded seams and storm flap.",
       "features": [
         "100% waterproof",
@@ -230,13 +267,13 @@
         "Yellow",
         "Navy"
       ],
+      "stock": 4,
+      "newArrival": false,
+      "outOfStock": false,
       "images": [
         "/images/products/heavy-duty-pvc-rain-suit_1.jpg",
         "/images/products/heavy-duty-pvc-rain-suit_2.jpg"
-      ],
-      "featured": false,
-      "newArrival": false,
-      "outOfStock": false
+      ]
     },
     {
       "id": "p9",
@@ -260,7 +297,7 @@
       "colors": [
         "Grey/Black"
       ],
-      "stock": 13,
+      "stock": 18,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -274,7 +311,6 @@
       "name": "FFP2 Face Mask (20pk)",
       "category": "face-protection",
       "price": 219,
-      "stock": 13,
       "description": "Filtering half-mask offering ≥94% filtration efficiency.",
       "features": [
         "FFP2 / N95 grade",
@@ -287,13 +323,13 @@
       "colors": [
         "White"
       ],
+      "stock": 20,
+      "newArrival": false,
+      "outOfStock": false,
       "images": [
         "/images/products/ffp2-face-mask-20pk_1.jpg",
         "/images/products/ffp2-face-mask-20pk_2.jpg"
-      ],
-      "featured": false,
-      "newArrival": false,
-      "outOfStock": false
+      ]
     },
     {
       "id": "p11",
@@ -316,7 +352,7 @@
       "colors": [
         "White"
       ],
-      "stock": 22,
+      "stock": 16,
       "discountPrice": 135,
       "newArrival": false,
       "outOfStock": false,
@@ -349,7 +385,7 @@
         "Black",
         "Navy"
       ],
-      "stock": 7,
+      "stock": 24,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -382,7 +418,7 @@
       "colors": [
         "Black"
       ],
-      "stock": 13,
+      "stock": 23,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -414,7 +450,7 @@
         "Black",
         "Grey"
       ],
-      "stock": 17,
+      "stock": 18,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -447,7 +483,7 @@
         "Navy",
         "Charcoal"
       ],
-      "stock": 15,
+      "stock": 8,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -479,7 +515,7 @@
         "Black",
         "Navy"
       ],
-      "stock": 23,
+      "stock": 21,
       "discountPrice": 467,
       "newArrival": false,
       "outOfStock": false,
@@ -507,7 +543,7 @@
         "Brown",
         "Black"
       ],
-      "stock": 11,
+      "stock": 18,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -534,7 +570,7 @@
         "Hi-Vis Yellow",
         "Navy"
       ],
-      "stock": 10,
+      "stock": 8,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -567,7 +603,7 @@
         "White",
         "Navy"
       ],
-      "stock": 21,
+      "stock": 15,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -600,7 +636,7 @@
         "Navy",
         "Black"
       ],
-      "stock": 22,
+      "stock": 11,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -733,94 +769,6 @@
   ],
   "orders": [
     {
-      "customerName": "Bongumusa Shinga",
-      "customerEmail": "bshinga81@gmail.com",
-      "customerPhone": "+27722655614",
-      "deliveryAddress": "526 Moleko Road, Lamontville, Lamontville, KwaZulu-Natal, 4027",
-      "paymentMethod": "Pay Now",
-      "items": [
-        {
-          "productId": "p3",
-          "name": "Steel Toe Safety Boot",
-          "qty": 2,
-          "price": 1199,
-          "size": "6",
-          "color": "Black"
-        }
-      ],
-      "status": "Out for Delivery",
-      "isQuote": false,
-      "id": "ORD-9088",
-      "total": 2398,
-      "date": "2026-05-22T02:11:35.040Z",
-      "lastUpdated": "2026-05-22T03:01:29.372Z",
-      "courierName": "The Courier Guy",
-      "trackingNumber": "TCG-22052026",
-      "expectedDelivery": "2026-05-28T00:00:00.000Z",
-      "notificationLogs": [
-        {
-          "channel": "WhatsApp",
-          "trigger": "Status: Processing",
-          "timestamp": "2026-05-22T02:57:59.228Z",
-          "message": "*SafeGear Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-9088* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
-        },
-        {
-          "channel": "Email",
-          "trigger": "Status: Processing",
-          "timestamp": "2026-05-22T02:57:59.228Z",
-          "message": "Hi Bongumusa Shinga,\n\nYour order ORD-9088 is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing SafeGear."
-        },
-        {
-          "channel": "WhatsApp",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T02:58:17.850Z",
-          "message": "*SafeGear Delivery Alert!* 🔔\n\nHi Bongumusa Shinga, your order *ORD-9088* is out for delivery today with *The Courier Guy*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!"
-        },
-        {
-          "channel": "SMS",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T02:58:17.850Z",
-          "message": "SafeGear: Order ORD-9088 is out for delivery today with The Courier Guy. Have a great day!"
-        },
-        {
-          "channel": "SMS",
-          "trigger": "Status: Packed",
-          "timestamp": "2026-05-22T03:00:00.415Z",
-          "message": "SafeGear: Order ORD-9088 has been carefully packaged and sealed under SABS guidelines. Ready for courier collection!"
-        },
-        {
-          "channel": "Email",
-          "trigger": "Status: Packed",
-          "timestamp": "2026-05-22T03:00:00.415Z",
-          "message": "Hi Bongumusa Shinga,\n\nExcellent news! Your order ORD-9088 has been fully packaged and is ready at our dispatch bays. Courier pick up has been scheduled.\n\nYour safety is our priority.\nSafeGear Logistics."
-        },
-        {
-          "channel": "WhatsApp",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T03:01:16.074Z",
-          "message": "*SafeGear Delivery Alert!* 🔔\n\nHi Bongumusa Shinga, your order *ORD-9088* is out for delivery today with *The Courier Guy*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!"
-        },
-        {
-          "channel": "SMS",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T03:01:16.074Z",
-          "message": "SafeGear: Order ORD-9088 is out for delivery today with The Courier Guy. Have a great day!"
-        },
-        {
-          "channel": "WhatsApp",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T03:01:29.372Z",
-          "message": "*SafeGear Delivery Alert!* 🔔\n\nHi Bongumusa Shinga, your order *ORD-9088* is out for delivery today with *The Courier Guy*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!"
-        },
-        {
-          "channel": "SMS",
-          "trigger": "Status: Out for Delivery",
-          "timestamp": "2026-05-22T03:01:29.372Z",
-          "message": "SafeGear: Order ORD-9088 is out for delivery today with The Courier Guy. Have a great day!"
-        }
-      ]
-    },
-    {
       "id": "ORD-9481",
       "customerName": "Thabo Mokoena",
       "customerEmail": "thabo.mokoena@builders-za.com",
@@ -925,25 +873,16 @@
       "ordersCount": 0,
       "totalSpent": 0,
       "dateRegistered": "2026-05-20T10:15:00Z"
-    },
-    {
-      "id": "c5",
-      "name": "Bongumusa Shinga",
-      "email": "bshinga81@gmail.com",
-      "phone": "+27722655614",
-      "ordersCount": 1,
-      "totalSpent": 2398,
-      "dateRegistered": "2026-05-22T02:11:35.040Z"
     }
   ],
   "admins": [
     {
-      "email": "admin@safegear.co.za",
+      "email": "admin@cbalcool.co.za",
       "name": "System Admin",
       "role": "Admin"
     },
     {
-      "email": "manager@safegear.co.za",
+      "email": "manager@cbalcool.co.za",
       "name": "Store Manager",
       "role": "Manager"
     }

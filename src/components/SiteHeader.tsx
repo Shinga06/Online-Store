@@ -43,11 +43,11 @@ export function SiteHeader() {
 
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <div className="h-8 w-8 rounded-sm grid place-items-center font-bold text-black" style={{ background: "var(--hi-vis)" }}>
-            S
+            C
           </div>
           <div className="leading-tight">
-            <div className="font-display font-bold tracking-tight text-base">SAFEGEAR</div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-white/60">PPE & Workwear</div>
+            <div className="font-display font-bold tracking-tight text-base">CBALCOOL</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-white/60">CBALCOOL PPE & Workwear</div>
           </div>
         </Link>
 

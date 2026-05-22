@@ -7,8 +7,8 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
     meta: [
-      { title: "Contact — SafeGear PPE & Workwear" },
-      { name: "description", content: "Get in touch with SafeGear for quotes, bulk orders, and branded workwear. Johannesburg, South Africa." },
+      { title: "Contact — CBALCOOL PPE & Workwear" },
+      { name: "description", content: "Get in touch with CBALCOOL for quotes, bulk orders, and branded workwear. Johannesburg, South Africa." },
     ],
   }),
 });
@@ -76,7 +76,7 @@ function ContactPage() {
             <li className="flex gap-3">
               <Mail size={18} className="text-[var(--hi-vis)] shrink-0 mt-0.5" />
               <div>
-                <div className="font-semibold">sales@safegear.co.za</div>
+                <div className="font-semibold">sales@cbalcool.co.za</div>
                 <div className="text-white/70 text-xs">Quotes & orders</div>
               </div>
             </li>

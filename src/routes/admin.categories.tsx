@@ -29,7 +29,7 @@ function AdminCategories() {
   // Auth User Role Check
   const [userRole, setUserRole] = useState("Manager"); // Default safe role
   useEffect(() => {
-    const sessionStr = sessionStorage.getItem("safegear_admin_session");
+    const sessionStr = sessionStorage.getItem("cbalcool_admin_session");
     if (sessionStr) {
       try {
         const u = JSON.parse(sessionStr);
@@ -53,7 +53,7 @@ function AdminCategories() {
   const handleOpenAddDrawer = () => {
     if (isReadOnly) {
       toast.error("Access Denied", {
-        description: "Managers possess read-only catalog authorization. Contact stone@safegear.co.za",
+        description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za",
       });
       return;
     }
@@ -66,7 +66,7 @@ function AdminCategories() {
   const handleOpenEditDrawer = (category: DBCategory) => {
     if (isReadOnly) {
       toast.error("Access Denied", {
-        description: "Managers possess read-only catalog authorization. Contact stone@safegear.co.za",
+        description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za",
       });
       return;
     }

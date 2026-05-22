@@ -5,8 +5,8 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About — SafeGear PPE & Workwear" },
-      { name: "description", content: "SafeGear has supplied PPE and workwear to South African industry since 2008 — quality gear, fair pricing, expert service." },
+      { title: "About — CBALCOOL PPE & Workwear" },
+      { name: "description", content: "CBALCOOL has supplied PPE and workwear to South African industry since 2008 — quality gear, fair pricing, expert service." },
     ],
   }),
 });
@@ -16,12 +16,12 @@ function AboutPage() {
     <div>
       <section className="bg-surface text-surface-foreground">
         <div className="max-w-5xl mx-auto px-4 py-20">
-          <div className="text-xs uppercase tracking-[0.2em] text-[var(--hi-vis)] mb-4">About SafeGear</div>
+          <div className="text-xs uppercase tracking-[0.2em] text-[var(--hi-vis)] mb-4">About CBALCOOL</div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight max-w-3xl">
             Workwear that holds the line — shift after shift, site after site.
           </h1>
           <p className="mt-6 max-w-2xl text-white/75 text-lg">
-            SafeGear has been outfitting South Africa's industrial, security, hospitality
+            CBALCOOL has been outfitting South Africa's industrial, security, hospitality
             and corporate teams since 2008. We focus on one thing: durable, compliant
             gear that performs on the job.
           </p>

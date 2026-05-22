@@ -12,7 +12,7 @@ export const Route = createFileRoute("/cart")({
   component: CartPage,
   head: () => ({
     meta: [
-      { title: "Cart — SafeGear" },
+      { title: "Cart — CBALCOOL" },
       { name: "description", content: "Review your PPE & workwear order." },
     ],
   }),

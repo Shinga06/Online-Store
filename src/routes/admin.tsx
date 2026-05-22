@@ -43,18 +43,18 @@ function AdminLayout() {
 
   useEffect(() => {
     // 1. Session and Auth Check
-    const sessionStr = sessionStorage.getItem("safegear_admin_session");
+    const sessionStr = sessionStorage.getItem("cbalcool_admin_session");
     if (sessionStr) {
       try {
         setUser(JSON.parse(sessionStr));
       } catch {
-        sessionStorage.removeItem("safegear_admin_session");
+        sessionStorage.removeItem("cbalcool_admin_session");
       }
     }
     setCheckingAuth(false);
 
     // 2. Load Theme from LocalStorage or Default to Dark (professional industrial dark theme fits PPE best)
-    const storedTheme = localStorage.getItem("safegear_admin_theme") as "light" | "dark";
+    const storedTheme = localStorage.getItem("cbalcool_admin_theme") as "light" | "dark";
     const selectedTheme = storedTheme || "dark";
     setTheme(selectedTheme);
     
@@ -83,7 +83,7 @@ function AdminLayout() {
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem("safegear_admin_theme", newTheme);
+    localStorage.setItem("cbalcool_admin_theme", newTheme);
     if (newTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
@@ -93,7 +93,7 @@ function AdminLayout() {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("safegear_admin_session");
+    sessionStorage.removeItem("cbalcool_admin_session");
     setUser(null);
     toast.success("Logged out successfully");
     navigate({ to: "/admin/login" });
@@ -155,7 +155,7 @@ function AdminLayout() {
               S
             </div>
             <div className="leading-none">
-              <div className="font-bold text-sm tracking-tight text-white">SAFEGEAR</div>
+              <div className="font-bold text-sm tracking-tight text-white">CBALCOOL</div>
               <div className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold mt-0.5">Control Panel</div>
             </div>
           </Link>
@@ -223,7 +223,7 @@ function AdminLayout() {
           <div className="h-7 w-7 rounded-sm grid place-items-center font-bold text-black bg-[var(--hi-vis)] text-sm">
             S
           </div>
-          <span className="font-bold text-sm tracking-tight text-white">SAFEGEAR ADMIN</span>
+          <span className="font-bold text-sm tracking-tight text-white">CBALCOOL ADMIN</span>
         </Link>
 
         <button onClick={toggleTheme} className="p-2 bg-slate-800 rounded-sm hover:bg-slate-700" aria-label="Toggle theme">

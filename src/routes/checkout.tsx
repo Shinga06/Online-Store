@@ -30,7 +30,7 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
   head: () => ({
     meta: [
-      { title: "Secure Checkout — SafeGear" },
+      { title: "Secure Checkout — CBALCOOL" },
       { name: "description", content: "Complete your PPE & workwear purchase or submit a bulk quotation request safely." },
     ],
   }),
@@ -196,13 +196,13 @@ function CheckoutPage() {
       // Cache completed reference in localStorage for Account Dashboard
       if (typeof window !== "undefined") {
         try {
-          const cachedStr = localStorage.getItem("safegear_recent_checkouts") || "[]";
+          const cachedStr = localStorage.getItem("cbalcool_recent_checkouts") || "[]";
           const cachedList = JSON.parse(cachedStr);
           if (Array.isArray(cachedList)) {
             // Avoid duplicate additions
             if (!cachedList.some(item => item.id === newOrder.id)) {
               cachedList.unshift({ id: newOrder.id, email: formState.email });
-              localStorage.setItem("safegear_recent_checkouts", JSON.stringify(cachedList));
+              localStorage.setItem("cbalcool_recent_checkouts", JSON.stringify(cachedList));
             }
           }
         } catch (e) {
@@ -302,7 +302,7 @@ function CheckoutPage() {
                   <Building2 size={16} className="text-primary dark:text-yellow-400" /> B2B Account Credit Billing
                 </p>
                 <p className="text-slate-600 dark:text-slate-400 leading-normal">
-                  An official SafeGear VAT Tax Invoice has been generated for <strong>{formState.company}</strong>. 
+                  An official CBALCOOL VAT Tax Invoice has been generated for <strong>{formState.company}</strong>. 
                 </p>
                 <div className="text-xs text-muted-foreground bg-white dark:bg-slate-950 p-3 rounded-sm border space-y-1">
                   <p><strong>Bank:</strong> First National Bank (FNB)</p>
@@ -321,7 +321,7 @@ function CheckoutPage() {
                   <ClipboardList size={16} className="text-[var(--hi-vis)]" /> Bulk Procurement Request
                 </p>
                 <p className="text-slate-600 dark:text-slate-400 leading-normal">
-                  Your customized quotation request has been successfully routed to the **SafeGear Bulk Tendering Desk**.
+                  Your customized quotation request has been successfully routed to the **CBALCOOL Bulk Tendering Desk**.
                 </p>
                 <p className="text-slate-500 text-xs leading-normal">
                   A certified industrial apparel consultant will formulate your bulk discount and branded clothing specs. A comprehensive PDF quotation will be sent to <strong>{formState.email}</strong> shortly.
@@ -370,7 +370,7 @@ function CheckoutPage() {
               {step === "payment-method" && (
                 <div className="space-y-6">
                   <p className="text-sm text-muted-foreground">
-                    Select a payment option suited for your procurement. SafeGear offers secure immediate payments, dedicated corporate invoice accounts, and wholesale tender bids.
+                    Select a payment option suited for your procurement. CBALCOOL offers secure immediate payments, dedicated corporate invoice accounts, and wholesale tender bids.
                   </p>
                   
                   <div className="grid gap-4">
@@ -822,7 +822,7 @@ function CheckoutPage() {
                         {/* Top row */}
                         <div className="flex justify-between items-start">
                           <div className="flex flex-col">
-                            <span className="text-[9px] uppercase tracking-wider text-slate-400">SafeGear Industrial Client</span>
+                            <span className="text-[9px] uppercase tracking-wider text-slate-400">CBALCOOL Industrial Client</span>
                             <span className="font-bold text-sm tracking-wide mt-0.5">SABS Safety Card</span>
                           </div>
                           {/* Credit card chip */}
@@ -935,7 +935,7 @@ function CheckoutPage() {
                       </p>
 
                       <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-sm space-y-2 text-xs">
-                        <div className="flex justify-between"><strong className="text-slate-450 font-normal">Account Corporate Holder:</strong> <span className="font-bold text-slate-800 dark:text-slate-200">SAFEGEAR PPE LTD</span></div>
+                        <div className="flex justify-between"><strong className="text-slate-450 font-normal">Account Corporate Holder:</strong> <span className="font-bold text-slate-800 dark:text-slate-200">CBALCOOL PPE LTD</span></div>
                         <div className="flex justify-between"><strong className="text-slate-450 font-normal">Registered Trade Institution:</strong> <span className="font-bold text-slate-800 dark:text-slate-200">First National Bank (FNB)</span></div>
                         <div className="flex justify-between"><strong className="text-slate-450 font-normal">Account Number:</strong> <span className="font-bold text-slate-850 dark:text-slate-200 font-mono">62013948194</span></div>
                         <div className="flex justify-between"><strong className="text-slate-450 font-normal">Branch Transit Code:</strong> <span className="font-bold text-slate-850 dark:text-slate-200 font-mono">250655</span></div>
@@ -945,7 +945,7 @@ function CheckoutPage() {
                       <div className="flex items-start gap-2 text-xs text-slate-500 mt-2 bg-indigo-500/5 p-3 rounded-sm">
                         <Info size={16} className="text-indigo-500 shrink-0 mt-0.5" />
                         <p className="leading-normal">
-                          Dispatches are held temporarily pending EFT confirmation or trade department credit checks. Banking confirmations should be emailed to <strong>accounts@safegear.co.za</strong> with the reference code.
+                          Dispatches are held temporarily pending EFT confirmation or trade department credit checks. Banking confirmations should be emailed to <strong>accounts@cbalcool.co.za</strong> with the reference code.
                         </p>
                       </div>
                     </div>
