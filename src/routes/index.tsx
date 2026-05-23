@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Truck, Award, Headphones } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck, Award, Headphones, Sparkles } from "lucide-react";
 import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -19,58 +19,107 @@ function Home() {
   const featuredCats = categories.slice(0, 8);
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative bg-surface text-surface-foreground overflow-hidden">
+    <div className="overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative bg-surface text-surface-foreground overflow-hidden border-b border-white/5">
         <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{ backgroundImage: "repeating-linear-gradient(135deg, white 0 2px, transparent 2px 22px)" }}
         />
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[var(--hi-vis)] font-semibold mb-5">
-              <span className="h-px w-8 bg-[var(--hi-vis)]" />
+          {/* Hero Left Content */}
+          <div className="flex flex-col items-start">
+            <div 
+              className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[var(--hi-vis)] font-bold mb-5"
+              style={{
+                animation: "fadeInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: "100ms",
+                opacity: 0,
+              }}
+            >
+              <span className="h-px w-8 bg-[var(--hi-vis)] animate-pulse" />
               SABS Approved Safety Gear
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight">
+            
+            <h1 
+              className="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-white"
+              style={{
+                animation: "fadeInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: "200ms",
+                opacity: 0,
+              }}
+            >
               Built for the job.<br />
-              <span className="text-[var(--hi-vis)]">Trusted on every site.</span>
+              <span className="text-[var(--hi-vis)] relative">
+                Trusted on every site.
+              </span>
             </h1>
-            <p className="mt-6 text-white/75 text-base md:text-lg max-w-lg">
+            
+            <p 
+              className="mt-6 text-white/75 text-base md:text-lg max-w-lg leading-relaxed"
+              style={{
+                animation: "fadeInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: "300ms",
+                opacity: 0,
+              }}
+            >
               Industrial PPE, hi-vis, safety footwear and corporate workwear —
               shipped fast across South Africa. Quality you can stake your team on.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            
+            <div 
+              className="mt-8 flex flex-wrap gap-3"
+              style={{
+                animation: "fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: "400ms",
+                opacity: 0,
+              }}
+            >
               <Link
                 to="/shop"
                 search={{ category: "", q: "" }}
-                className="inline-flex items-center gap-2 bg-[var(--hi-vis)] text-black font-semibold px-6 h-12 rounded-sm hover:brightness-95 transition"
+                className="inline-flex items-center gap-2 bg-[var(--hi-vis)] text-black font-bold px-6 h-12 rounded-sm hover:brightness-95 hover:shadow-[0_0_15px_rgba(224,188,38,0.25)] transition duration-300 group"
               >
-                Shop all gear <ArrowRight size={18} />
+                Shop all gear 
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/shop"
                 search={{ category: "safety-footwear", q: "" }}
-                className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-6 h-12 rounded-sm hover:bg-white/10"
+                className="inline-flex items-center gap-2 border border-white/20 text-white font-bold px-6 h-12 rounded-sm hover:bg-white/5 hover:border-[var(--hi-vis)]/40 transition duration-300"
               >
                 Safety footwear
               </Link>
             </div>
           </div>
-          <div className="hidden md:block">
+
+          {/* Hero Right Visual Category Grid */}
+          <div 
+            className="hidden md:block"
+            style={{
+              animation: "fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              animationDelay: "450ms",
+              opacity: 0,
+            }}
+          >
             <div className="relative aspect-[4/5] max-w-md ml-auto">
-              <div className="absolute inset-0 rounded-md border border-white/15 bg-gradient-to-br from-white/5 to-transparent" />
-              <div className="absolute -top-4 -left-4 h-20 w-20 rounded-sm" style={{ background: "var(--hi-vis)" }} />
-              <div className="absolute inset-6 grid grid-cols-2 gap-3">
-                {categories.slice(0, 4).map((c) => (
+              <div className="absolute inset-0 rounded-md border border-white/10 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-[1px]" />
+              <div className="absolute -top-4 -left-4 h-16 w-16 rounded-sm bg-[var(--hi-vis)] animate-pulse" style={{ opacity: 0.8 }} />
+              <div className="absolute inset-6 grid grid-cols-2 gap-4">
+                {categories.slice(0, 4).map((c, idx) => (
                   <Link
                     key={c.slug}
                     to="/shop"
                     search={{ category: c.slug, q: "" }}
-                    className="relative bg-white/5 border border-white/10 rounded-sm p-4 flex flex-col justify-end hover:bg-white/10 transition"
+                    className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.1)] transition-all duration-300 group"
+                    style={{
+                      animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, float ${6 + idx * 1.5}s ease-in-out infinite`,
+                      animationDelay: `${500 + idx * 100}ms, ${idx * 1.2}s`,
+                      opacity: 0,
+                    }}
                   >
-                    <div className="text-[10px] uppercase tracking-[0.18em] text-white/60">Category</div>
-                    <div className="font-semibold text-white">{c.name}</div>
+                    <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
+                    <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
                   </Link>
                 ))}
               </div>
@@ -79,19 +128,29 @@ function Home() {
         </div>
       </section>
 
-      {/* Trust bar */}
-      <section className="border-b border-border bg-secondary">
+      {/* Trust & Features bar */}
+      <section className="border-b border-border bg-secondary/80">
         <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { icon: ShieldCheck, label: "SABS approved", sub: "Tested & compliant" },
-            { icon: Truck, label: "Nationwide delivery", sub: "2–4 working days" },
-            { icon: Award, label: "Trade pricing", sub: "Bulk discounts" },
-            { icon: Headphones, label: "Expert support", sub: "Mon–Fri 8–5" },
-          ].map(({ icon: Icon, label, sub }) => (
-            <div key={label} className="flex items-center gap-3">
-              <Icon size={26} className="text-primary shrink-0" />
+            { icon: ShieldCheck, label: "SABS approved", sub: "Tested & compliant", iconClass: "group-hover:rotate-6 group-hover:-translate-y-0.5 text-primary" },
+            { icon: Truck, label: "Nationwide delivery", sub: "2–4 working days", iconClass: "group-hover:translate-x-1 text-primary" },
+            { icon: Award, label: "Trade pricing", sub: "Bulk discounts", iconClass: "group-hover:scale-110 group-hover:-rotate-3 text-primary" },
+            { icon: Headphones, label: "Expert support", sub: "Mon–Fri 8–5", iconClass: "group-hover:animate-pulse text-primary" },
+          ].map(({ icon: Icon, label, sub, iconClass }, idx) => (
+            <div 
+              key={label} 
+              className="flex items-center gap-3 group cursor-pointer"
+              style={{
+                animation: "fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: `${idx * 80}ms`,
+                opacity: 0,
+              }}
+            >
+              <div className="p-2 rounded-sm bg-primary/5 group-hover:bg-primary/10 transition-colors duration-300">
+                <Icon size={26} className={`shrink-0 transition-all duration-300 ease-out ${iconClass}`} />
+              </div>
               <div>
-                <div className="text-sm font-semibold text-foreground">{label}</div>
+                <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{label}</div>
                 <div className="text-xs text-muted-foreground">{sub}</div>
               </div>
             </div>
@@ -99,15 +158,16 @@ function Home() {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Categories Grid Section */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="flex items-end justify-between mb-8">
           <div>
             <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Shop by category</div>
             <h2 className="text-3xl font-bold">Outfit your whole team</h2>
           </div>
-          <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            View all <ArrowRight size={16} />
+          <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline group">
+            View all categories 
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -162,29 +222,67 @@ function Home() {
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Featured</div>
               <h2 className="text-3xl font-bold">Best-selling gear</h2>
             </div>
-            <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-              All products <ArrowRight size={16} />
+            <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline group">
+              All products 
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
+          
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {featured.map((p) => <ProductCard key={p.id} product={p} />)}
+            {featured.map((p, idx) => (
+              <div 
+                key={p.id}
+                style={{
+                  animation: "fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                  animationDelay: `${idx * 80}ms`,
+                  opacity: 0,
+                }}
+              >
+                <ProductCard product={p} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* B2B Call To Action Section */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="relative overflow-hidden rounded-md bg-surface text-surface-foreground p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-6 items-center">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold">Kitting out a team or site?</h3>
-            <p className="mt-2 text-white/75 max-w-xl">
-              Get trade pricing, branded uniforms and account terms. Our team will quote within one working day.
+        <div 
+          className="relative overflow-hidden rounded-md bg-surface text-surface-foreground p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-6 items-center border border-white/5 hover:border-[var(--hi-vis)]/20 transition-all duration-500 group shadow-lg"
+          style={{
+            animation: "fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+            opacity: 0,
+          }}
+        >
+          <div className="z-10 relative">
+            <div className="flex items-center gap-1.5 text-[var(--hi-vis)] text-xs font-semibold uppercase tracking-widest mb-3">
+              <Sparkles size={14} className="animate-pulse" />
+              Corporate Accounts Welcome
+            </div>
+            <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Kitting out a team or site?</h3>
+            <p className="mt-2 text-white/70 max-w-xl leading-relaxed text-sm">
+              Get corporate trade pricing, custom branded uniforms, and flexible account payment terms. Our safety coordinators will compile a customized quote for your enterprise within one working day.
             </p>
           </div>
-          <Link to="/contact" className="inline-flex items-center gap-2 bg-[var(--hi-vis)] text-black font-semibold px-6 h-12 rounded-sm hover:brightness-95">
-            Request a quote <ArrowRight size={18} />
-          </Link>
-          <div className="absolute -right-10 -bottom-10 h-40 w-40 rotate-12" style={{ background: "var(--hi-vis)", opacity: 0.15 }} />
+          
+          <div className="z-10 relative">
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center gap-2 bg-[var(--hi-vis)] text-black font-bold px-8 h-12 rounded-sm hover:brightness-95 hover:shadow-[0_0_20px_rgba(224,188,38,0.3)] transition duration-300 group-button"
+            >
+              Request a trade quote 
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+          
+          {/* Animated Gold Breathing Glow shape */}
+          <div 
+            className="absolute -right-10 -bottom-10 h-56 w-56 rounded-full blur-3xl pointer-events-none"
+            style={{ 
+              background: "var(--hi-vis)", 
+              animation: "pulseGlow 6s ease-in-out infinite"
+            }} 
+          />
         </div>
       </section>
     </div>
