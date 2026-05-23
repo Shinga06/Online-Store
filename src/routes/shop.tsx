@@ -134,6 +134,54 @@ function ShopPage() {
   );
 }
 
+const DEPARTMENTS = [
+  {
+    name: "Workwear",
+    items: [
+      { name: "Corporate Wear", slug: "corporate-wear" },
+      { name: "Chef Wear", slug: "chef-wear" },
+      { name: "Hi-Visibility", slug: "hi-vis" },
+      { name: "Rain Suits", slug: "rain-suits" },
+      { name: "Aprons", slug: "aprons" },
+      { name: "Conti Suits", slug: "conti-suits" },
+      { name: "Security Wear", slug: "security-wear" },
+      { name: "Service & Beauty", slug: "service-beauty" },
+    ]
+  },
+  {
+    name: "Apparel",
+    items: [
+      { name: "Shirts", slug: "shirts" },
+      { name: "Golfers", slug: "golfers" },
+      { name: "Jackets", slug: "jackets" },
+      { name: "Shorts", slug: "shorts" },
+      { name: "Trousers", slug: "trousers" },
+      { name: "Fleece Jackets", slug: "fleece-jackets" },
+      { name: "Body Warmers", slug: "body-warmers" },
+    ]
+  },
+  {
+    name: "PPE & Safety",
+    items: [
+      { name: "Safety Footwear", slug: "safety-footwear" },
+      { name: "Hi-Visibility", slug: "hi-vis" },
+      { name: "Protective Gloves", slug: "gloves" },
+      { name: "Face Protection", slug: "face-protection" },
+      { name: "Coveralls", slug: "coveralls" },
+      { name: "Gumboots", slug: "gumboots" },
+      { name: "Sneakers", slug: "sneakers" },
+    ]
+  },
+  {
+    name: "Accessories",
+    items: [
+      { name: "Headwear", slug: "headwear" },
+      { name: "Men's Footwear", slug: "mens-footwear" },
+      { name: "Ladies Footwear", slug: "ladies-footwear" },
+    ]
+  }
+];
+
 function FilterList({
   currentCategory,
   currentQ,
@@ -144,33 +192,99 @@ function FilterList({
   onPick?: () => void;
 }) {
   const { categories } = useDb();
+
+  // Find any category that might not be mapped in DEPARTMENTS to ensure 100% coverage
+  const mappedSlugs = new Set(DEPARTMENTS.flatMap(d => d.items.map(i => i.slug)));
+  const unmappedCategories = categories.filter(c => !mappedSlugs.has(c.slug));
+
   return (
-    <div>
-      <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">Categories</div>
-      <ul className="space-y-1 text-sm">
-        <li>
-          <Link
-            to="/shop"
-            search={{ category: "", q: currentQ }}
-            onClick={onPick}
-            className={`block py-1.5 px-2 rounded-sm ${currentCategory === "" ? "bg-primary text-primary-foreground" : "hover:bg-accent"}`}
-          >
-            All products
-          </Link>
-        </li>
-        {categories.map((c) => (
-          <li key={c.slug}>
+    <div className="space-y-6">
+      <div>
+        <ul className="text-sm">
+          <li>
             <Link
               to="/shop"
-              search={{ category: c.slug, q: currentQ }}
+              search={{ category: "", q: currentQ }}
               onClick={onPick}
-              className={`block py-1.5 px-2 rounded-sm ${currentCategory === c.slug ? "bg-primary text-primary-foreground" : "hover:bg-accent"}`}
+              className={`block py-2 px-3 rounded-sm font-semibold tracking-wide border transition-all ${
+                currentCategory === "" 
+                  ? "bg-primary text-primary-foreground border-primary" 
+                  : "border-border hover:bg-accent text-foreground"
+              }`}
             >
-              {c.name}
+              All products
             </Link>
           </li>
-        ))}
-      </ul>
+        </ul>
+      </div>
+
+      {DEPARTMENTS.map((dept) => {
+        // Only render the department if it has categories present in the database
+        const deptCategories = dept.items.filter(item => 
+          categories.some(cat => cat.slug === item.slug)
+        );
+
+        if (deptCategories.length === 0) return null;
+
+        return (
+          <div key={dept.name} className="space-y-2 border-b border-border/60 pb-4 last:border-0 last:pb-0">
+            <h3 className="text-xs uppercase tracking-wider font-bold text-muted-foreground">
+              {dept.name}
+            </h3>
+            <ul className="space-y-1 pl-1">
+              {deptCategories.map((c) => {
+                // Find matching DB name just in case the admin edited it
+                const dbCat = categories.find(cat => cat.slug === c.slug);
+                const displayName = dbCat ? dbCat.name : c.name;
+
+                return (
+                  <li key={c.slug}>
+                    <Link
+                      to="/shop"
+                      search={{ category: c.slug, q: currentQ }}
+                      onClick={onPick}
+                      className={`block py-1.5 px-2 rounded-sm text-sm transition-all ${
+                        currentCategory === c.slug 
+                          ? "font-semibold text-primary pl-3 border-l-2 border-primary bg-primary/5" 
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent/40"
+                      }`}
+                    >
+                      {displayName}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
+
+      {/* Render unmapped categories at the bottom as a safeguard */}
+      {unmappedCategories.length > 0 && (
+        <div className="space-y-2 pt-2">
+          <h3 className="text-xs uppercase tracking-wider font-bold text-muted-foreground">
+            Other Equipment
+          </h3>
+          <ul className="space-y-1 pl-1">
+            {unmappedCategories.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/shop"
+                  search={{ category: c.slug, q: currentQ }}
+                  onClick={onPick}
+                  className={`block py-1.5 px-2 rounded-sm text-sm transition-all ${
+                    currentCategory === c.slug 
+                      ? "font-semibold text-primary pl-3 border-l-2 border-primary bg-primary/5" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/40"
+                  }`}
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
