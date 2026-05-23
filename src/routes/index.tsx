@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, Award, Headphones } from "lucide-react";
 import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
+import { PremiumCategories } from "@/components/PremiumCategories";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -99,40 +100,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Shop by category</div>
-            <h2 className="text-3xl font-bold">Outfit your whole team</h2>
-          </div>
-          <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            View all <ArrowRight size={16} />
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {featuredCats.map((c) => (
-            <Link
-              key={c.slug}
-              to="/shop"
-              search={{ category: c.slug, q: "" }}
-              className="group relative aspect-[5/4] bg-surface text-surface-foreground rounded-md overflow-hidden border border-border hover:border-primary transition"
-            >
-              <div className="absolute top-0 left-0 h-1 w-full" style={{ background: "var(--hi-vis)" }} />
-              <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">Category</div>
-                <div>
-                  <div className="text-lg font-bold">{c.name}</div>
-                  <div className="text-xs text-white/65 mt-1 line-clamp-2">{c.blurb}</div>
-                  <div className="mt-3 inline-flex items-center gap-1 text-[var(--hi-vis)] text-xs font-semibold">
-                    Shop now <ArrowRight size={14} />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* Premium Interactive Categories Showcase */}
+      <PremiumCategories />
 
       {/* Featured products */}
       <section className="bg-secondary/40 border-y border-border">
