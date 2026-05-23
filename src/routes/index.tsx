@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, Award, Headphones } from "lucide-react";
 import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
-import { PremiumCategories } from "@/components/PremiumCategories";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -100,8 +99,60 @@ function Home() {
         </div>
       </section>
 
-      {/* Premium Interactive Categories Showcase */}
-      <PremiumCategories />
+      {/* Categories */}
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Shop by category</div>
+            <h2 className="text-3xl font-bold">Outfit your whole team</h2>
+          </div>
+          <Link to="/shop" search={{ category: "", q: "" }} className="hidden md:inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            View all <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {featuredCats.map((c, idx) => (
+            <Link
+              key={c.slug}
+              to="/shop"
+              search={{ category: c.slug, q: "" }}
+              className="group relative aspect-[5/4] bg-surface text-surface-foreground rounded-md overflow-hidden border border-white/10 hover:border-[var(--hi-vis)]/40 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(224,188,38,0.15)] transition-all duration-300 ease-out"
+              style={{
+                animation: "fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                animationDelay: `${idx * 80}ms`,
+                opacity: 0,
+              }}
+            >
+              {/* Top Accent Strip */}
+              <div className="absolute top-0 left-0 h-[3px] w-full bg-[var(--hi-vis)] transition-transform duration-300 origin-left" />
+              
+              {/* Background gradient glow that fades in on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[var(--hi-vis)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              {/* Subtle shimmer sweep effect on hover */}
+              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
+              
+              <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">
+                  Category
+                </div>
+                <div>
+                  <div className="text-xl font-extrabold tracking-tight text-white group-hover:text-white transition-colors">
+                    {c.name}
+                  </div>
+                  <div className="text-xs text-white/60 mt-2 line-clamp-2 leading-relaxed">
+                    {c.blurb}
+                  </div>
+                  <div className="mt-4 inline-flex items-center gap-1.5 text-[var(--hi-vis)] text-xs font-bold uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
+                    Shop now 
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Featured products */}
       <section className="bg-secondary/40 border-y border-border">
