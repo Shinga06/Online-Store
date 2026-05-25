@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { categories } from "@/lib/catalog";
+import { Logo } from "./Logo";
 
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-surface-foreground mt-24">
       <div className="max-w-7xl mx-auto px-4 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-sm grid place-items-center font-bold text-black" style={{ background: "var(--hi-vis)" }}>C</div>
-            <div className="font-display font-bold">CBALCOOL</div>
-          </div>
+          <Link to="/" className="inline-block hover:opacity-95 transition-opacity">
+            <Logo variant="horizontal" subTextType="solutions" />
+          </Link>
           <p className="mt-4 text-sm text-white/70 leading-relaxed">
             South Africa's trusted source for SABS-approved PPE and durable
             workwear. Outfitting industry, security, hospitality and corporate

@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ShieldAlert, ShieldCheck, Mail, Lock, Loader2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -67,14 +68,9 @@ function AdminLoginPage() {
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
-        <div className="flex justify-center mb-6">
-          <div className="h-12 w-12 rounded-sm grid place-items-center font-bold text-black text-2xl shadow-lg shadow-yellow-500/10" style={{ background: "var(--hi-vis)" }}>
-            S
-          </div>
+        <div className="flex justify-center mb-1">
+          <Logo variant="large" subTextType="control" />
         </div>
-        <h2 className="text-center text-3xl font-bold tracking-tight text-white">
-          CBALCOOL Control Panel
-        </h2>
         <p className="mt-2 text-center text-sm text-slate-400">
           Sign in to securely manage products, orders, and stocks in real time.
         </p>

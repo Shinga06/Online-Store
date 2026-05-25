@@ -299,7 +299,7 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
     ? new Date(order.expectedDelivery).toLocaleDateString("en-ZA", { year: "numeric", month: "long", day: "numeric" }) 
     : "within 2-3 business days";
 
-  // Helper to push a log and trigger live notification
+  // Helper to push a log
   const addLog = (channel: "WhatsApp" | "Email" | "SMS", message: string) => {
     order.notificationLogs!.push({
       channel,
@@ -307,21 +307,6 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
       timestamp,
       message,
     });
-
-    // Dynamically trigger the live WhatsApp notification on the server
-    if (channel === "WhatsApp") {
-      import("./whatsapp")
-        .then(({ sendWhatsAppNotification }) => {
-          sendWhatsAppNotification({
-            toPhone: order.customerPhone,
-            customerName: order.customerName,
-            orderId: order.id,
-            totalPrice: order.total,
-            messageBody: message,
-          }).catch((err) => console.error("Error dispatching live WhatsApp API request:", err));
-        })
-        .catch((err) => console.error("Failed to import WhatsApp service module:", err));
-    }
   };
 
   switch (status) {

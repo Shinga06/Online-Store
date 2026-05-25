@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, Search, ShoppingCart, X, ChevronDown, Sparkles, ArrowRight } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { Logo } from "./Logo";
 
 // Hierarchical departments and category items structure
 const DEPARTMENTS = [
@@ -148,14 +149,8 @@ export function SiteHeader() {
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-8 w-8 rounded-sm grid place-items-center font-bold text-black" style={{ background: "var(--hi-vis)" }}>
-            C
-          </div>
-          <div className="leading-tight">
-            <div className="font-display font-bold tracking-tight text-base">CBALCOOL</div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-white/60">CBALCOOL PPE & Workwear</div>
-          </div>
+        <Link to="/" className="flex items-center gap-2 shrink-0 hover:opacity-95 transition-opacity">
+          <Logo variant="horizontal" subTextType="ppe" />
         </Link>
 
         {/* Desktop Search Bar */}

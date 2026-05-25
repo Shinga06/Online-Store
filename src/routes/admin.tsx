@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useDb } from "@/hooks/use-db";
 import { toast } from "sonner";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
@@ -150,14 +151,8 @@ function AdminLayout() {
       {/* 1. Sidebar Left (Desktop) */}
       <aside className="hidden md:flex md:w-64 bg-slate-900 border-r border-border dark:bg-slate-950 flex-col shrink-0 text-slate-300">
         <div className="h-16 px-6 border-b border-border flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-sm grid place-items-center font-bold text-black bg-[var(--hi-vis)]">
-              S
-            </div>
-            <div className="leading-none">
-              <div className="font-bold text-sm tracking-tight text-white">CBALCOOL</div>
-              <div className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold mt-0.5">Control Panel</div>
-            </div>
+          <Link to="/" className="flex items-center hover:opacity-95 transition-opacity">
+            <Logo variant="sidebar" subTextType="control" />
           </Link>
           <div className="bg-slate-800 text-[10px] text-slate-400 font-bold px-2 py-0.5 rounded-sm flex items-center gap-1">
             <Shield size={10} className="text-[var(--hi-vis)]" />
@@ -219,11 +214,8 @@ function AdminLayout() {
           <Menu size={22} />
         </button>
 
-        <Link to="/admin" className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-sm grid place-items-center font-bold text-black bg-[var(--hi-vis)] text-sm">
-            S
-          </div>
-          <span className="font-bold text-sm tracking-tight text-white">CBALCOOL ADMIN</span>
+        <Link to="/admin" className="flex items-center hover:opacity-95 transition-opacity">
+          <Logo variant="sidebar" subTextType="control" />
         </Link>
 
         <button onClick={toggleTheme} className="p-2 bg-slate-800 rounded-sm hover:bg-slate-700" aria-label="Toggle theme">

@@ -267,7 +267,7 @@
         "Yellow",
         "Navy"
       ],
-      "stock": 4,
+      "stock": 3,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -771,6 +771,85 @@
   ],
   "orders": [
     {
+      "customerName": "Bongumusa Shinga",
+      "customerEmail": "bshinga81@gmail.com",
+      "customerPhone": "+27722655614",
+      "deliveryAddress": "526 Moleko Road, Lamontville, Lamontville, KwaZulu-Natal, 4027",
+      "paymentMethod": "Pay Now",
+      "items": [
+        {
+          "productId": "p8",
+          "name": "Heavy Duty PVC Rain Suit",
+          "qty": 1,
+          "price": 369,
+          "size": "L",
+          "color": "Navy"
+        }
+      ],
+      "status": "Shipped",
+      "isQuote": false,
+      "id": "ORD-2378",
+      "total": 369,
+      "date": "2026-05-24T01:26:10.166Z",
+      "lastUpdated": "2026-05-24T01:31:33.659Z",
+      "notificationLogs": [
+        {
+          "channel": "Email",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "Hi Bongumusa Shinga,\n\nYour CBALCOOL order ORD-2378 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 369.00\nPayment Method: Pay Now\n\nPlease settle payment using your invoice details and email POP to accounts@cbalcool.co.za."
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "CBALCOOL: Order ORD-2378 placed successfully. Awaiting payment of ZAR 369.00. Check your email for tax invoice instructions."
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Payment Confirmed",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "*CBALCOOL PPE Order Confirmed!* 🛡️\n\nHi Bongumusa Shinga, thank you for your payment for order *ORD-2378*.\n\n💰 *Total:* ZAR 369.00\n📦 *Status:* SABS warehouse inventory has been allocated.\n\nWe will update you as soon as the dispatch team packages your gear!"
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Payment Confirmed",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "Hi Bongumusa Shinga,\n\nWe have successfully received and verified your payment for order ORD-2378.\n\nYour order has been moved to our warehouse queue for packaging and quality checks.\n\nCBALCOOL Operations Desk."
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Processing",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "*CBALCOOL Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-2378* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Processing",
+          "timestamp": "2026-05-24T01:26:10.167Z",
+          "message": "Hi Bongumusa Shinga,\n\nYour order ORD-2378 is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing CBALCOOL."
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-24T01:31:33.659Z",
+          "message": "*CBALCOOL Shipment Dispatched!* 🚚\n\nHi Bongumusa Shinga, your safety package *ORD-2378* is on its way!\n\n🚛 *Courier:* The Courier Guy\n🎫 *Tracking No:* TCG-MOCK-12345\n📅 *Expected Delivery:* within 2-3 business days\n\nTrack your parcel here: https://thecourierguy.net/tracking/?t=TCG-MOCK-12345"
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-24T01:31:33.659Z",
+          "message": "CBALCOOL: Order ORD-2378 shipped via The Courier Guy. Tracking No: TCG-MOCK-12345. Expected arrival: within 2-3 business days."
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-24T01:31:33.659Z",
+          "message": "Dear Bongumusa Shinga,\n\nWe are pleased to inform you that your order ORD-2378 has been dispatched.\n\nCourier: The Courier Guy\nTracking Number: TCG-MOCK-12345\nExpected Arrival: within 2-3 business days\n\nTrack your shipment live at the courier page: https://thecourierguy.net/tracking/?t=TCG-MOCK-12345\n\nCBALCOOL Dispatch."
+        }
+      ]
+    },
+    {
       "id": "ORD-9481",
       "customerName": "Thabo Mokoena",
       "customerEmail": "thabo.mokoena@builders-za.com",
@@ -875,6 +954,15 @@
       "ordersCount": 0,
       "totalSpent": 0,
       "dateRegistered": "2026-05-20T10:15:00Z"
+    },
+    {
+      "id": "c5",
+      "name": "Bongumusa Shinga",
+      "email": "bshinga81@gmail.com",
+      "phone": "+27722655614",
+      "ordersCount": 1,
+      "totalSpent": 369,
+      "dateRegistered": "2026-05-24T01:26:10.167Z"
     }
   ],
   "admins": [
