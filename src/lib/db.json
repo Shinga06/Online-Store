@@ -926,7 +926,8 @@
       "phone": "+27 82 555 0192",
       "ordersCount": 2,
       "totalSpent": 2847,
-      "dateRegistered": "2026-03-10T11:20:00Z"
+      "dateRegistered": "2026-03-10T11:20:00Z",
+      "password": "password123"
     },
     {
       "id": "c2",
@@ -935,7 +936,8 @@
       "phone": "+27 71 444 9811",
       "ordersCount": 1,
       "totalSpent": 459,
-      "dateRegistered": "2026-04-15T08:45:00Z"
+      "dateRegistered": "2026-04-15T08:45:00Z",
+      "password": "password123"
     },
     {
       "id": "c3",
@@ -944,7 +946,8 @@
       "phone": "+27 83 999 1042",
       "ordersCount": 1,
       "totalSpent": 1199,
-      "dateRegistered": "2026-05-01T14:30:00Z"
+      "dateRegistered": "2026-05-01T14:30:00Z",
+      "password": "password123"
     },
     {
       "id": "c4",
@@ -953,7 +956,8 @@
       "phone": "+27 60 123 4567",
       "ordersCount": 0,
       "totalSpent": 0,
-      "dateRegistered": "2026-05-20T10:15:00Z"
+      "dateRegistered": "2026-05-20T10:15:00Z",
+      "password": "password123"
     },
     {
       "id": "c5",
@@ -962,7 +966,8 @@
       "phone": "+27722655614",
       "ordersCount": 1,
       "totalSpent": 369,
-      "dateRegistered": "2026-05-24T01:26:10.167Z"
+      "dateRegistered": "2026-05-24T01:26:10.167Z",
+      "password": "password123"
     }
   ],
   "admins": [

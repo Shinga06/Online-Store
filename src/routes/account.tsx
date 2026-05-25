@@ -46,6 +46,20 @@ function CustomerAccount() {
   useEffect(() => {
     const fetchCachedOrders = async () => {
       if (typeof window === "undefined") return;
+      
+      // Auto-sync with unified customer session
+      const sessionStr = localStorage.getItem("cbalcool_customer_session");
+      let sessionEmail = null;
+      if (sessionStr) {
+        try {
+          const parsed = JSON.parse(sessionStr);
+          sessionEmail = parsed.email;
+          if (sessionEmail && sessionEmail !== activeEmail) {
+            setActiveEmail(sessionEmail);
+          }
+        } catch {}
+      }
+
       const cached = localStorage.getItem("cbalcool_recent_checkouts");
       
       let discoveredOrders: DBOrder[] = [];
@@ -57,7 +71,7 @@ function CustomerAccount() {
           const allOrders = await db.getOrders();
           discoveredOrders = allOrders.filter(o => refs.some(r => r.id === o.id));
           
-          if (refs.length > 0 && !activeEmail) {
+          if (refs.length > 0 && !activeEmail && !sessionEmail) {
             // Default active email to the most recent cached checkout email
             setActiveEmail(refs[0].email);
           }
@@ -66,11 +80,13 @@ function CustomerAccount() {
         }
       }
 
+      const lookupTarget = sessionEmail || activeEmail;
+
       // If active email is set, fetch all matching orders from the database
-      if (activeEmail) {
+      if (lookupTarget) {
         const allOrders = await db.getOrders();
         const emailOrders = allOrders.filter(
-          o => o.customerEmail.toLowerCase() === activeEmail.toLowerCase()
+          o => o.customerEmail.toLowerCase() === lookupTarget.toLowerCase()
         );
         
         // Merge without duplicates
@@ -138,6 +154,8 @@ function CustomerAccount() {
     setUserOrders([]);
     if (typeof window !== "undefined") {
       localStorage.removeItem("cbalcool_recent_checkouts");
+      localStorage.removeItem("cbalcool_customer_session");
+      window.dispatchEvent(new Event("cbalcool_session_changed"));
     }
     toast.info("Session reset. Cached order histories cleared.");
   };

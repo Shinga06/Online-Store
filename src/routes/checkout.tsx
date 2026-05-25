@@ -80,6 +80,121 @@ function CheckoutPage() {
     focused: "",
   });
 
+  // Customer Authentication Session State
+  const [activeCustomer, setActiveCustomer] = useState<{ id: string; name: string; email: string; phone: string } | null>(null);
+  const [authTab, setAuthTab] = useState<"login" | "register">("login");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authName, setAuthName] = useState("");
+  const [authPhone, setAuthPhone] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
+
+  // Sync customer session
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const session = localStorage.getItem("cbalcool_customer_session");
+      if (session) {
+        try {
+          const parsed = JSON.parse(session);
+          setActiveCustomer(parsed);
+          
+          // Pre-populate fields!
+          const [first = "", last = ""] = parsed.name.split(" ");
+          setFormState((prev) => ({
+            ...prev,
+            email: parsed.email || "",
+            phone: parsed.phone || "",
+            firstName: first,
+            lastName: last,
+          }));
+        } catch {}
+      }
+    }
+  }, []);
+
+  const handleAuthLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!authEmail || !authPassword) {
+      toast.error("Please enter both email and password.");
+      return;
+    }
+    setAuthLoading(true);
+    try {
+      const customer = await db.loginCustomer(authEmail.trim(), authPassword);
+      const sessionData = {
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+      };
+      localStorage.setItem("cbalcool_customer_session", JSON.stringify(sessionData));
+      setActiveCustomer(sessionData);
+      
+      const [first = "", last = ""] = customer.name.split(" ");
+      setFormState((prev) => ({
+        ...prev,
+        email: customer.email,
+        phone: customer.phone,
+        firstName: first,
+        lastName: last,
+      }));
+      
+      window.dispatchEvent(new Event("cbalcool_session_changed"));
+      toast.success(`Welcome back, ${customer.name}!`);
+    } catch (err: any) {
+      toast.error("Sign In Failed", { description: err.message });
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleAuthRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!authName || !authEmail || !authPhone || !authPassword) {
+      toast.error("Please fill in all registration fields.");
+      return;
+    }
+    setAuthLoading(true);
+    try {
+      const customer = await db.registerCustomer({
+        name: authName.trim(),
+        email: authEmail.trim().toLowerCase(),
+        phone: authPhone.trim(),
+        password: authPassword,
+      });
+      const sessionData = {
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+      };
+      localStorage.setItem("cbalcool_customer_session", JSON.stringify(sessionData));
+      setActiveCustomer(sessionData);
+      
+      const [first = "", last = ""] = customer.name.split(" ");
+      setFormState((prev) => ({
+        ...prev,
+        email: customer.email,
+        phone: customer.phone,
+        firstName: first,
+        lastName: last,
+      }));
+      
+      window.dispatchEvent(new Event("cbalcool_session_changed"));
+      toast.success(`Registration complete! Welcome, ${customer.name}.`);
+    } catch (err: any) {
+      toast.error("Registration Failed", { description: err.message });
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleQuickCustomerLogin = (c: { name: string; email: string; phone: string }) => {
+    setAuthEmail(c.email);
+    setAuthPassword("password123");
+    toast.info(`Pre-filled credentials for ${c.name}`);
+  };
+
   const shipping = subtotal > 1500 || subtotal === 0 ? 0 : 120;
   const total = subtotal + shipping;
 
@@ -354,9 +469,197 @@ function CheckoutPage() {
           </div>
         )}
 
-        {/* WIZARD LAYOUT */}
-        {step !== "done" && (
-          <div className="grid lg:grid-cols-[1fr_380px] gap-10 items-start">
+        {/* CUSTOMER AUTHENTICATION LOCK INTERCEPTOR */}
+        {!activeCustomer && step !== "done" ? (
+          <div className="max-w-md mx-auto bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-md p-6 sm:p-8 shadow-lg animate-fade-in my-10 relative z-10 text-slate-850 dark:text-slate-200">
+            <div className="text-center mb-6">
+              <div className="inline-flex h-12 w-12 rounded-full bg-primary/10 dark:bg-[var(--hi-vis)]/10 text-primary dark:text-[var(--hi-vis)] items-center justify-center mb-4 shadow-sm">
+                <Lock size={22} className="animate-pulse" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">
+                Secure Checkout Gate
+              </h2>
+              <p className="text-xs text-muted-foreground mt-2 max-w-xs mx-auto leading-relaxed">
+                Before proceeding, please sign in to your B2B corporate trade account or register a new customer profile.
+              </p>
+            </div>
+
+            {/* Tab Controller */}
+            <div className="flex border-b border-slate-200 dark:border-slate-800 mb-6 bg-slate-100 dark:bg-slate-900 p-1 rounded-md">
+              <button
+                type="button"
+                onClick={() => setAuthTab("login")}
+                className={`flex-1 text-center py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all duration-200 cursor-pointer ${
+                  authTab === "login"
+                    ? "bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-xs"
+                    : "text-slate-450 hover:text-slate-800"
+                }`}
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                onClick={() => setAuthTab("register")}
+                className={`flex-1 text-center py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all duration-200 cursor-pointer ${
+                  authTab === "register"
+                    ? "bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-xs"
+                    : "text-slate-450 hover:text-slate-800"
+                }`}
+              >
+                Register
+              </button>
+            </div>
+
+            {/* SIGN IN VIEW */}
+            {authTab === "login" ? (
+              <form onSubmit={handleAuthLogin} className="space-y-4">
+                <div>
+                  <label htmlFor="authEmail" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    id="authEmail"
+                    type="email"
+                    required
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    placeholder="buyer@builders-za.com"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="authPassword" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Password
+                  </label>
+                  <input
+                    id="authPassword"
+                    type="password"
+                    required
+                    value={authPassword}
+                    onChange={(e) => setAuthPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={authLoading}
+                  className="w-full h-11 bg-primary hover:bg-primary/95 text-white font-bold rounded-sm text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition cursor-pointer disabled:opacity-55"
+                >
+                  {authLoading ? (
+                    <>
+                      <Loader2 className="animate-spin" size={14} /> Authorizing...
+                    </>
+                  ) : (
+                    "Authorize & Resume Checkout"
+                  )}
+                </button>
+
+                {/* Quick seed accounts testing widget */}
+                <div className="border-t border-slate-200 dark:border-slate-850 mt-6 pt-6">
+                  <div className="text-[10px] uppercase tracking-wider text-slate-450 font-bold text-center mb-3">
+                    Quick-Access Seeding (Testing Accounts)
+                  </div>
+                  <div className="grid grid-cols-1 gap-2 max-h-[180px] overflow-y-auto pr-1">
+                    {[
+                      { name: "Thabo Mokoena (B2B Builders)", email: "thabo.mokoena@builders-za.com", phone: "+27 82 555 0192" },
+                      { name: "Liezel de Wet (Wetlands Spa)", email: "liezel@wetlands-spa.co.za", phone: "+27 71 444 9811" },
+                      { name: "Sipho Khumalo (Minetech)", email: "sipho.khumalo@minetech.co.za", phone: "+27 83 999 1042" }
+                    ].map((c) => (
+                      <button
+                        key={c.email}
+                        type="button"
+                        onClick={() => handleQuickCustomerLogin(c)}
+                        className="text-left text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded px-3 py-2 hover:bg-primary/5 hover:border-primary/20 dark:hover:bg-[var(--hi-vis)]/5 dark:hover:border-[var(--hi-vis)]/20 transition cursor-pointer text-slate-700 dark:text-slate-350"
+                      >
+                        <div className="font-bold flex justify-between">
+                          <span>{c.name}</span>
+                          <span className="text-[10px] text-primary dark:text-[var(--hi-vis)] font-semibold">password123</span>
+                        </div>
+                        <div className="text-[10px] text-slate-450">{c.email}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </form>
+            ) : (
+              /* REGISTER VIEW */
+              <form onSubmit={handleAuthRegister} className="space-y-4">
+                <div>
+                  <label htmlFor="authName" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Full Name / Representative
+                  </label>
+                  <input
+                    id="authName"
+                    type="text"
+                    required
+                    value={authName}
+                    onChange={(e) => setAuthName(e.target.value)}
+                    placeholder="e.g. Thabo Mokoena"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="authEmailReg" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    id="authEmailReg"
+                    type="email"
+                    required
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    placeholder="e.g. thabo@builders-za.com"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="authPhone" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    id="authPhone"
+                    type="tel"
+                    required
+                    value={authPhone}
+                    onChange={(e) => setAuthPhone(e.target.value)}
+                    placeholder="e.g. +27 82 555 0192"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="authPasswordReg" className="block text-xs font-semibold uppercase tracking-wider text-slate-450 mb-1">
+                    Create Password
+                  </label>
+                  <input
+                    id="authPasswordReg"
+                    type="password"
+                    required
+                    value={authPassword}
+                    onChange={(e) => setAuthPassword(e.target.value)}
+                    placeholder="Minimum 6 characters"
+                    className="w-full h-11 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={authLoading}
+                  className="w-full h-11 bg-primary hover:bg-primary/95 text-white font-bold rounded-sm text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition cursor-pointer disabled:opacity-55"
+                >
+                  {authLoading ? (
+                    <>
+                      <Loader2 className="animate-spin" size={14} /> Creating Account...
+                    </>
+                  ) : (
+                    "Register & Continue Checkout"
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        ) : (
+          step !== "done" && (
+            <div className="grid lg:grid-cols-[1fr_380px] gap-10 items-start">
             
             {/* WIZARD LEFT MAIN AREA */}
             <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-md p-6 shadow-sm">
@@ -1092,7 +1395,7 @@ function CheckoutPage() {
             </aside>
 
           </div>
-        )}
+        ))}
 
       </div>
     </div>

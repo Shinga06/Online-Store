@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Search, ShoppingCart, X, ChevronDown, Sparkles, ArrowRight } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { Logo } from "./Logo";
+import { toast } from "sonner";
 
 // Hierarchical departments and category items structure
 const DEPARTMENTS = [
@@ -105,6 +106,41 @@ export function SiteHeader() {
 
   const navigate = useNavigate();
 
+  // Customer Session State
+  const [customerSession, setCustomerSession] = useState<{ id: string; name: string; email: string } | null>(null);
+
+  useEffect(() => {
+    const loadSession = () => {
+      if (typeof window !== "undefined") {
+        const session = localStorage.getItem("cbalcool_customer_session");
+        if (session) {
+          try {
+            setCustomerSession(JSON.parse(session));
+          } catch {
+            setCustomerSession(null);
+          }
+        } else {
+          setCustomerSession(null);
+        }
+      }
+    };
+    
+    loadSession();
+    
+    window.addEventListener("cbalcool_session_changed", loadSession);
+    return () => window.removeEventListener("cbalcool_session_changed", loadSession);
+  }, []);
+
+  const handleCustomerSignOut = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cbalcool_customer_session");
+      localStorage.removeItem("cbalcool_recent_checkouts");
+      window.dispatchEvent(new Event("cbalcool_session_changed"));
+      toast.success("Signed out successfully.");
+      navigate({ to: "/" });
+    }
+  };
+
   const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!q.trim()) return;
@@ -184,7 +220,27 @@ export function SiteHeader() {
           <Link to="/about" className="text-white/80 hover:text-white transition-colors">About</Link>
           <Link to="/contact" className="text-white/80 hover:text-white transition-colors">Contact</Link>
           <Link to="/track" className="text-white/80 hover:text-white transition-colors">Track Order</Link>
-          <Link to="/account" className="text-white/80 hover:text-white transition-colors">My Account</Link>
+          {customerSession ? (
+            <div className="relative group h-full flex items-center">
+              <button className="flex items-center gap-1 text-[var(--hi-vis)] hover:text-white transition-colors cursor-pointer py-2 font-medium">
+                Hi, {customerSession.name.split(" ")[0]}
+                <ChevronDown size={12} className="text-white/60 group-hover:rotate-180 transition-transform duration-200" />
+              </button>
+              <div className="absolute top-full right-0 bg-surface/98 backdrop-blur-md border border-white/10 rounded-sm shadow-xl p-2 hidden group-hover:block w-36 space-y-1 z-50 text-xs">
+                <Link to="/account" className="block px-2.5 py-1.5 text-white/85 hover:text-white hover:bg-white/5 rounded-sm transition">
+                  My Profile
+                </Link>
+                <button
+                  onClick={handleCustomerSignOut}
+                  className="w-full text-left block px-2.5 py-1.5 text-red-400 hover:text-red-300 hover:bg-white/5 rounded-sm transition cursor-pointer font-medium"
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Link to="/account" className="text-white/80 hover:text-white transition-colors">My Account</Link>
+          )}
         </nav>
 
         {/* Cart Icon */}
@@ -345,7 +401,20 @@ export function SiteHeader() {
               <Link to="/about" onClick={() => setOpen(false)} className="py-3 text-white/90">About</Link>
               <Link to="/contact" onClick={() => setOpen(false)} className="py-3 text-white/90">Contact</Link>
               <Link to="/track" onClick={() => setOpen(false)} className="py-3 text-white/90">Track Order</Link>
-              <Link to="/account" onClick={() => setOpen(false)} className="py-3 text-white/90">My Account</Link>
+              {customerSession ? (
+                <div className="py-2 space-y-1">
+                  <div className="text-xs text-[var(--hi-vis)] font-bold px-1 py-1">LOGGED IN: {customerSession.name}</div>
+                  <Link to="/account" onClick={() => setOpen(false)} className="block py-2 px-1 text-white/90">My Profile</Link>
+                  <button
+                    onClick={() => { handleCustomerSignOut(); setOpen(false); }}
+                    className="w-full text-left py-2 px-1 text-red-400 font-semibold cursor-pointer"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <Link to="/account" onClick={() => setOpen(false)} className="py-3 text-white/90">My Account</Link>
+              )}
               <Link 
                 to="/admin" 
                 onClick={() => setOpen(false)} 

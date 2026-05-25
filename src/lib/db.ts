@@ -66,6 +66,7 @@ export type DBCustomer = {
   ordersCount: number;
   totalSpent: number;
   dateRegistered: string;
+  password?: string; // added for customer authentication
 };
 
 export type DBAdmin = {
@@ -496,6 +497,44 @@ export const db = {
   async getCustomers() {
     const data = await this.load();
     return data.customers;
+  },
+
+  async registerCustomer(customer: { name: string; email: string; phone: string; password?: string }) {
+    const data = await this.load();
+    const existing = data.customers.find(
+      (c) => c.email.toLowerCase() === customer.email.toLowerCase()
+    );
+    if (existing) {
+      throw new Error("An account with this email address already exists.");
+    }
+    const newCust: DBCustomer = {
+      id: `c${data.customers.length + 1}`,
+      name: customer.name,
+      email: customer.email,
+      phone: customer.phone,
+      ordersCount: 0,
+      totalSpent: 0,
+      dateRegistered: new Date().toISOString(),
+      password: customer.password || "password123",
+    };
+    data.customers.push(newCust);
+    await this.save(data);
+    return newCust;
+  },
+
+  async loginCustomer(email: string, password?: string) {
+    const data = await this.load();
+    const customer = data.customers.find(
+      (c) => c.email.toLowerCase() === email.toLowerCase()
+    );
+    if (!customer) {
+      throw new Error("No account found registered under this email.");
+    }
+    const savedPassword = customer.password || "password123";
+    if (password && savedPassword !== password) {
+      throw new Error("Incorrect password. Please verify and try again.");
+    }
+    return customer;
   },
 
   async updateOrderStatus(
