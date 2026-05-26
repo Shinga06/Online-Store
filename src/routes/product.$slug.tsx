@@ -1,8 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, ChevronRight, Heart, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
+import { Check, ChevronRight, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";
-import { tracker } from "@/lib/tracker";
 import { formatZAR } from "@/lib/catalog";
 import { ProductImage } from "@/components/ProductImage";
 import { ProductCard } from "@/components/ProductCard";
@@ -47,52 +46,6 @@ function ProductPage() {
   const [color, setColor] = useState(product.colors[0] || "Default");
   const [qty, setQty] = useState(1);
   const { add } = useCart();
-
-  const [isWishlisted, setIsWishlisted] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const wishlistStr = localStorage.getItem("cbalcool_wishlist");
-      if (wishlistStr) {
-        try {
-          const list = JSON.parse(wishlistStr) as string[];
-          setIsWishlisted(list.includes(product.id));
-        } catch {}
-      }
-    }
-  }, [product.id]);
-
-  const toggleWishlist = () => {
-    const wishlistStr = localStorage.getItem("cbalcool_wishlist");
-    let list: string[] = [];
-    if (wishlistStr) {
-      try {
-        list = JSON.parse(wishlistStr);
-      } catch {}
-    }
-
-    const exists = list.includes(product.id);
-    if (exists) {
-      list = list.filter((id) => id !== product.id);
-      setIsWishlisted(false);
-      toast.info("Removed from Wishlist", { description: `${product.name} removed.` });
-      tracker.track("Wishlist Action", {
-        targetId: product.id,
-        targetName: `Removed ${product.name} from Wishlist`
-      });
-    } else {
-      list.push(product.id);
-      setIsWishlisted(true);
-      toast.success("Saved to Wishlist", { description: `${product.name} saved successfully.` });
-      tracker.track("Wishlist Action", {
-        targetId: product.id,
-        targetName: `Saved ${product.name} to Wishlist`
-      });
-    }
-
-    localStorage.setItem("cbalcool_wishlist", JSON.stringify(list));
-    window.dispatchEvent(new Event("cbalcool_wishlist_changed"));
-  };
 
   const handleAdd = () => {
     if (product.stock < qty) {
@@ -232,20 +185,6 @@ function ProductPage() {
                   className="flex-1 h-12 px-6 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition animate-fade-in"
                 >
                   Add to cart
-                </button>
-
-                {/* Heart Wishlist Button */}
-                <button
-                  type="button"
-                  onClick={toggleWishlist}
-                  className={`h-12 w-12 rounded-sm border flex items-center justify-center transition cursor-pointer hover:scale-105 active:scale-95 shrink-0 ${
-                    isWishlisted 
-                      ? "border-red-200 bg-red-500/10 text-red-500 hover:bg-red-500/20" 
-                      : "border-input bg-background hover:bg-accent text-muted-foreground hover:text-foreground"
-                  }`}
-                  title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                >
-                  <Heart size={18} className={isWishlisted ? "fill-red-500 text-red-500" : ""} />
                 </button>
               </>
             ) : (

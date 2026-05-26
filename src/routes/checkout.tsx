@@ -23,7 +23,6 @@ import { toast } from "sonner";
 import { useCart, itemKey } from "@/lib/cart";
 import { formatZAR } from "@/lib/catalog";
 import { ProductImage } from "@/components/ProductImage";
-import { tracker } from "@/lib/tracker";
 import { db } from "@/lib/db";
 import { useDb } from "@/hooks/use-db";
 
@@ -141,7 +140,6 @@ function CheckoutPage() {
       }));
       
       window.dispatchEvent(new Event("cbalcool_session_changed"));
-      tracker.track("Login");
       toast.success(`Welcome back, ${customer.name}!`);
     } catch (err: any) {
       toast.error("Sign In Failed", { description: err.message });
@@ -183,7 +181,6 @@ function CheckoutPage() {
       }));
       
       window.dispatchEvent(new Event("cbalcool_session_changed"));
-      tracker.track("Registration");
       toast.success(`Registration complete! Welcome, ${customer.name}.`);
     } catch (err: any) {
       toast.error("Registration Failed", { description: err.message });
@@ -208,27 +205,6 @@ function CheckoutPage() {
       navigate({ to: "/shop" });
     }
   }, [items, navigate, step]);
-
-  // Log Checkout Attempt when entering page
-  useEffect(() => {
-    if (step !== "done" && items.length > 0) {
-      tracker.track("Checkout Attempt", { cartTotal: subtotal });
-    }
-  }, []);
-
-  // Detect Cart Abandonment on page exit/unmount
-  useEffect(() => {
-    return () => {
-      // If the user navigates away from checkout while items are still in the cart
-      if (step !== "done" && items.length > 0) {
-        tracker.track("Cart Abandoned", {
-          cartTotal: subtotal,
-          targetId: items[0]?.productId,
-          targetName: items[0]?.name
-        });
-      }
-    };
-  }, [step, items, subtotal]);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -327,13 +303,6 @@ function CheckoutPage() {
       };
 
       const newOrder = await db.placeOrder(paymentMetadata);
-
-      // Track successful purchase in behavior analytics
-      tracker.track("Purchase", {
-        targetId: newOrder.id,
-        targetName: `Completed Purchase (${selectedMethod})`,
-        cartTotal: newOrder.total
-      });
 
       setOrderId(newOrder.id);
       setLoading(false);

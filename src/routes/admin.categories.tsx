@@ -49,6 +49,7 @@ function AdminCategories() {
   // Form inputs
   const [formName, setFormName] = useState("");
   const [formBlurb, setFormBlurb] = useState("");
+  const [formImage, setFormImage] = useState("");
 
   const handleOpenAddDrawer = () => {
     if (isReadOnly) {
@@ -60,6 +61,7 @@ function AdminCategories() {
     setEditCategory(null);
     setFormName("");
     setFormBlurb("");
+    setFormImage("");
     setIsDrawerOpen(true);
   };
 
@@ -73,6 +75,7 @@ function AdminCategories() {
     setEditCategory(category);
     setFormName(category.name);
     setFormBlurb(category.blurb);
+    setFormImage(category.image || "");
     setIsDrawerOpen(true);
   };
 
@@ -114,6 +117,7 @@ function AdminCategories() {
         slug,
         name: formName.trim(),
         blurb: formBlurb.trim(),
+        image: formImage.trim() || undefined,
       });
 
       toast.success(
@@ -278,8 +282,14 @@ function AdminCategories() {
           filteredCategories.map((cat) => (
             <div
               key={cat.slug}
-              className="bg-card border border-border rounded-md shadow-xs p-5 hover:shadow-md transition flex flex-col justify-between group"
+              className="bg-card border border-border rounded-md shadow-xs p-5 hover:shadow-md transition flex flex-col justify-between group overflow-hidden relative"
             >
+              {/* Subtle visual thumbnail watermark for the category cover photo */}
+              {cat.image && (
+                <div className="absolute top-0 right-0 w-24 h-24 opacity-[0.07] group-hover:opacity-15 pointer-events-none overflow-hidden rounded-bl-full transition-all duration-300">
+                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div>
                 <div className="flex items-start justify-between">
                   <div>
@@ -411,6 +421,23 @@ function AdminCategories() {
                   placeholder="Summarize products covered, certifications required (e.g. SABS, ISO specs)..."
                   className="mt-1 w-full p-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary resize-y"
                 />
+              </div>
+
+              {/* Category Cover Image URL */}
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Category Cover Image URL
+                </label>
+                <input
+                  type="url"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  placeholder="https://images.unsplash.com/photo-..."
+                  className="mt-1 w-full h-10 px-3 border border-input rounded-sm bg-background text-sm focus:outline-none focus:border-primary"
+                />
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Specify a high-resolution Unsplash photo URL to represent this category on the storefront.
+                </p>
               </div>
 
               {/* Caution note about deletions */}

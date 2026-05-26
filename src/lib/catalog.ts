@@ -2,33 +2,34 @@ export type Category = {
   slug: string;
   name: string;
   blurb: string;
+  image?: string;
 };
 
 export const categories: Category[] = [
-  { slug: "aprons", name: "Aprons", blurb: "Durable aprons for kitchen, service & industry." },
-  { slug: "chef-wear", name: "Chef Wear", blurb: "Professional chef jackets, pants & accessories." },
-  { slug: "golfers", name: "Golfers", blurb: "Corporate polo shirts in premium fabrics." },
-  { slug: "jackets", name: "Jackets", blurb: "Workwear & corporate jackets built to last." },
-  { slug: "safety-footwear", name: "Safety Footwear", blurb: "SABS-approved safety shoes & boots." },
-  { slug: "corporate-wear", name: "Corporate Wear", blurb: "Smart, branded corporate uniforms." },
-  { slug: "shirts", name: "Shirts", blurb: "Long & short-sleeve work and corporate shirts." },
-  { slug: "shorts", name: "Shorts", blurb: "Hard-wearing work shorts." },
-  { slug: "trousers", name: "Trousers", blurb: "Cargo, chino and conti-style trousers." },
-  { slug: "hi-vis", name: "Hi-Visibility", blurb: "EN ISO 20471 reflective workwear." },
-  { slug: "headwear", name: "Headwear", blurb: "Caps, beanies, hard hats & bump caps." },
-  { slug: "rain-suits", name: "Rain Suits", blurb: "Waterproof PVC & PU rain protection." },
-  { slug: "conti-suits", name: "Conti Suits", blurb: "Two-piece work suits in poly-cotton." },
-  { slug: "security-wear", name: "Security Wear", blurb: "Tactical & guard uniforms." },
-  { slug: "service-beauty", name: "Service & Beauty", blurb: "Salon, spa & hospitality uniforms." },
-  { slug: "gumboots", name: "Gumboots", blurb: "PVC & nitrile rubber boots." },
-  { slug: "ladies-footwear", name: "Ladies Footwear", blurb: "Safety & corporate shoes for women." },
-  { slug: "mens-footwear", name: "Men's Footwear", blurb: "Safety & corporate shoes for men." },
-  { slug: "gloves", name: "Protective Gloves", blurb: "Cut, chemical, heat & general gloves." },
-  { slug: "face-protection", name: "Face Protection", blurb: "Masks, shields & respirators." },
-  { slug: "coveralls", name: "Coveralls", blurb: "Disposable & reusable full-body suits." },
-  { slug: "sneakers", name: "Sneakers", blurb: "Safety sneakers with composite toes." },
-  { slug: "body-warmers", name: "Body Warmers", blurb: "Insulated sleeveless jackets." },
-  { slug: "fleece-jackets", name: "Fleece Jackets", blurb: "Soft, warm fleece for layering." },
+  { slug: "aprons", name: "Aprons", blurb: "Durable aprons for kitchen, service & industry.", image: "https://images.unsplash.com/photo-1577900232427-18219b9166a0?auto=format&fit=crop&w=600&q=80" },
+  { slug: "chef-wear", name: "Chef Wear", blurb: "Professional chef jackets, pants & accessories.", image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80" },
+  { slug: "golfers", name: "Golfers", blurb: "Corporate polo shirts in premium fabrics.", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=600&q=80" },
+  { slug: "jackets", name: "Jackets", blurb: "Workwear & corporate jackets built to last.", image: "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=600&q=80" },
+  { slug: "safety-footwear", name: "Safety Footwear", blurb: "SABS-approved safety shoes & boots.", image: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=600&q=80" },
+  { slug: "corporate-wear", name: "Corporate Wear", blurb: "Smart, branded corporate uniforms.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" },
+  { slug: "shirts", name: "Shirts", blurb: "Long & short-sleeve work and corporate shirts.", image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=600&q=80" },
+  { slug: "shorts", name: "Shorts", blurb: "Hard-wearing work shorts.", image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=600&q=80" },
+  { slug: "trousers", name: "Trousers", blurb: "Cargo, chino and conti-style trousers.", image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80" },
+  { slug: "hi-vis", name: "Hi-Visibility", blurb: "EN ISO 20471 reflective workwear.", image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=600&q=80" },
+  { slug: "headwear", name: "Headwear", blurb: "Caps, beanies, hard hats & bump caps.", image: "https://images.unsplash.com/photo-1534215754734-18e55d13ce35?auto=format&fit=crop&w=600&q=80" },
+  { slug: "rain-suits", name: "Rain Suits", blurb: "Waterproof PVC & PU rain protection.", image: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&w=600&q=80" },
+  { slug: "conti-suits", name: "Conti Suits", blurb: "Two-piece work suits in poly-cotton.", image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80" },
+  { slug: "security-wear", name: "Security Wear", blurb: "Tactical & guard uniforms.", image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=600&q=80" },
+  { slug: "service-beauty", name: "Service & Beauty", blurb: "Salon, spa & hospitality uniforms.", image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" },
+  { slug: "gumboots", name: "Gumboots", blurb: "PVC & nitrile rubber boots.", image: "https://images.unsplash.com/photo-1562183241-b937e95585b6?auto=format&fit=crop&w=600&q=80" },
+  { slug: "ladies-footwear", name: "Ladies Footwear", blurb: "Safety & corporate shoes for women.", image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" },
+  { slug: "mens-footwear", name: "Men's Footwear", blurb: "Safety & corporate shoes for men.", image: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=600&q=80" },
+  { slug: "gloves", name: "Protective Gloves", blurb: "Cut, chemical, heat & general gloves.", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" },
+  { slug: "face-protection", name: "Face Protection", blurb: "Masks, shields & respirators.", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" },
+  { slug: "coveralls", name: "Coveralls", blurb: "Disposable & reusable full-body suits.", image: "https://images.unsplash.com/photo-1618090584126-129cd1f3fbaa?auto=format&fit=crop&w=600&q=80" },
+  { slug: "sneakers", name: "Sneakers", blurb: "Safety sneakers with composite toes.", image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80" },
+  { slug: "body-warmers", name: "Body Warmers", blurb: "Insulated sleeveless jackets.", image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=600&q=80" },
+  { slug: "fleece-jackets", name: "Fleece Jackets", blurb: "Soft, warm fleece for layering.", image: "https://images.unsplash.com/photo-1508445861827-7711f397115a?auto=format&fit=crop&w=600&q=80" },
 ];
 
 export type Product = {

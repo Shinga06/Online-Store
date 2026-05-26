@@ -75,46 +75,12 @@ export type DBAdmin = {
   role: "Admin" | "Manager";
 };
 
-export type DBActivityLog = {
-  id: string;
-  timestamp: string;
-  actionType: 
-    | "Registration"
-    | "Login"
-    | "Product View"
-    | "Category View"
-    | "Search"
-    | "Add to Cart"
-    | "Remove from Cart"
-    | "Cart Abandoned"
-    | "Checkout Attempt"
-    | "Purchase"
-    | "Wishlist Action"
-    | "Page View";
-  userType: "Registered" | "Guest";
-  userId?: string;
-  userEmail?: string;
-  userName?: string;
-  targetId?: string;
-  targetName?: string;
-  searchQuery?: string;
-  cartTotal?: number;
-  durationSeconds?: number;
-  deviceType: "Desktop" | "Mobile" | "Tablet";
-  browserName: string;
-  osName: string;
-  ipAddress?: string;
-  location?: string;
-  repeatVisit?: boolean;
-};
-
 export type DBData = {
   products: DBProduct[];
   categories: DBCategory[];
   orders: DBOrder[];
   customers: DBCustomer[];
   admins: DBAdmin[];
-  auditLogs?: DBActivityLog[];
 };
 
 // Seed Data
@@ -271,9 +237,6 @@ let serverInMemoryDb: DBData | null = null;
 async function getDbData(): Promise<DBData> {
   const serverDb = await getServerDb();
   if (serverDb) {
-    if (!serverDb.data.auditLogs) {
-      serverDb.data.auditLogs = [];
-    }
     return serverDb.data;
   }
   
@@ -282,11 +245,7 @@ async function getDbData(): Promise<DBData> {
     const local = localStorage.getItem("cbalcool_db");
     if (local) {
       try {
-        const parsed = JSON.parse(local) as DBData;
-        if (!parsed.auditLogs) {
-          parsed.auditLogs = [];
-        }
-        return parsed;
+        return JSON.parse(local) as DBData;
       } catch {
         // ignore
       }
@@ -298,9 +257,6 @@ async function getDbData(): Promise<DBData> {
   // Server-side in-memory backup
   if (!serverInMemoryDb) {
     serverInMemoryDb = JSON.parse(JSON.stringify(SEED_DATA)) as DBData;
-    if (!serverInMemoryDb!.auditLogs) {
-      serverInMemoryDb!.auditLogs = [];
-    }
   }
   return serverInMemoryDb;
 }
@@ -579,26 +535,6 @@ export const db = {
       throw new Error("Incorrect password. Please verify and try again.");
     }
     return customer;
-  },
-
-  async getAuditLogs() {
-    const data = await this.load();
-    return data.auditLogs || [];
-  },
-
-  async logActivity(log: Omit<DBActivityLog, "id" | "timestamp">) {
-    const data = await this.load();
-    if (!data.auditLogs) {
-      data.auditLogs = [];
-    }
-    const newLog: DBActivityLog = {
-      ...log,
-      id: `log-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      timestamp: new Date().toISOString(),
-    };
-    data.auditLogs.unshift(newLog);
-    await this.save(data);
-    return newLog;
   },
 
   async updateOrderStatus(

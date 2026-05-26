@@ -1,5 +1,4 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { tracker } from "./tracker";
 
 export type CartItem = {
   productId: string;
@@ -54,27 +53,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, item];
     });
-    // Record cart activity
-    tracker.track("Add to Cart", {
-      targetId: item.productId,
-      targetName: item.name,
-      cartTotal: item.price * item.qty
-    });
   }, []);
 
   const remove = useCallback((key: string) => {
-    setItems((prev) => {
-      const item = prev.find((p) => itemKey(p) === key);
-      if (item) {
-        // Record removal activity
-        tracker.track("Remove from Cart", {
-          targetId: item.productId,
-          targetName: item.name,
-          cartTotal: item.price * item.qty
-        });
-      }
-      return prev.filter((p) => itemKey(p) !== key);
-    });
+    setItems((prev) => prev.filter((p) => itemKey(p) !== key));
   }, []);
 
   const setQty = useCallback((key: string, qty: number) => {

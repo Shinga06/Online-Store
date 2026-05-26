@@ -183,14 +183,26 @@ function Home() {
                 opacity: 0,
               }}
             >
+              {/* Background Cover Image */}
+              {c.image && (
+                <img 
+                  src={c.image} 
+                  alt={c.name} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-700 ease-out z-0 pointer-events-none"
+                />
+              )}
+
+              {/* Premium Dark Gradient Overlay for Maximum Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/40 group-hover:from-slate-950 group-hover:via-slate-950/65 group-hover:to-slate-900/20 transition-all duration-500 z-0 pointer-events-none" />
+
               {/* Top Accent Strip */}
               <div className="absolute top-0 left-0 h-[3px] w-full bg-[var(--hi-vis)] transition-transform duration-300 origin-left" />
               
               {/* Background gradient glow that fades in on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[var(--hi-vis)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[var(--hi-vis)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
               
               {/* Subtle shimmer sweep effect on hover */}
-              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none z-0" />
               
               <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">

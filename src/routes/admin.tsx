@@ -16,7 +16,6 @@ import {
   Menu,
   X,
   User,
-  ScrollText,
 } from "lucide-react";
 import { useDb } from "@/hooks/use-db";
 import { toast } from "sonner";
@@ -144,7 +143,6 @@ function AdminLayout() {
       badge: lowStockCount > 0 ? lowStockCount : undefined,
       badgeColor: "bg-destructive text-white",
     },
-    { label: "Audit Logs", to: "/admin/logs", icon: ScrollText },
     { label: "Settings", to: "/admin/settings", icon: Settings },
   ];
 

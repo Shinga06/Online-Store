@@ -14,7 +14,6 @@ import { CartProvider } from "@/lib/cart";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
-import { usePageTracker } from "@/hooks/use-page-tracker";
 
 function NotFoundComponent() {
   return (
@@ -100,9 +99,6 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
-  
-  // Activate automatic storefront behavioral tracking hook
-  usePageTracker();
 
   if (isAdminPath) {
     return (
