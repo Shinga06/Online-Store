@@ -176,12 +176,12 @@ function Home() {
                 <img 
                   src={c.image} 
                   alt={c.name} 
-                  className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-700 ease-out z-0 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-65 group-hover:scale-110 transition-all duration-700 ease-out z-0 pointer-events-none"
                 />
               )}
 
               {/* Premium Dark Gradient Overlay for Maximum Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/40 group-hover:from-slate-950 group-hover:via-slate-950/65 group-hover:to-slate-900/20 transition-all duration-500 z-0 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent group-hover:from-slate-950 group-hover:via-slate-950/30 transition-all duration-500 z-0 pointer-events-none" />
 
               {/* Top Accent Strip */}
               <div className="absolute top-0 left-0 h-[3px] w-full bg-[var(--hi-vis)] transition-transform duration-300 origin-left" />
@@ -357,14 +357,14 @@ function HeroCategoryCard({ c, idx }: { c: any; idx: number }) {
             key={i}
             src={imgUrl} 
             alt={`${c.name} preview ${i}`} 
-            className="h-full object-cover opacity-15 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700 ease-out pointer-events-none"
+            className="h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out pointer-events-none"
             style={{ width: `${100 / images.length}%` }}
           />
         ))}
       </div>
 
       {/* Premium Dark overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/30 group-hover:from-slate-950 group-hover:via-slate-950/60 transition-all duration-500 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent group-hover:from-slate-950/90 group-hover:via-slate-950/30 transition-all duration-500 z-0 pointer-events-none" />
 
       <div className="relative z-10">
         <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
