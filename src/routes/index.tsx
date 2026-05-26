@@ -111,15 +111,29 @@ function Home() {
                     key={c.slug}
                     to="/shop"
                     search={{ category: c.slug, q: "" }}
-                    className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.1)] transition-all duration-300 group"
+                    className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.15)] transition-all duration-300 group overflow-hidden"
                     style={{
                       animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, float ${6 + idx * 1.5}s ease-in-out infinite`,
                       animationDelay: `${500 + idx * 100}ms, ${idx * 1.2}s`,
                       opacity: 0,
                     }}
                   >
-                    <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
-                    <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
+                    {/* Background Cover Image */}
+                    {c.image && (
+                      <img 
+                        src={c.image} 
+                        alt={c.name} 
+                        className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700 ease-out z-0 pointer-events-none"
+                      />
+                    )}
+
+                    {/* Premium Dark overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/30 group-hover:from-slate-950 group-hover:via-slate-950/60 transition-all duration-500 z-0 pointer-events-none" />
+
+                    <div className="relative z-10">
+                      <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
+                      <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
+                    </div>
                   </Link>
                 ))}
               </div>
