@@ -6,7 +6,8 @@ export function usePageTracker() {
   const location = useLocation();
   const startTime = useRef<number>(Date.now());
   const activePath = useRef<string>(location.pathname);
-  const activeSearch = useRef<string>(location.search.q || "");
+  const activeSearch = useRef<string>((location.search as any)?.q || "");
+  const searchStr = typeof window !== "undefined" ? window.location.search : "";
 
   useEffect(() => {
     // Exclude admin route activities to avoid polluting customer behavior metrics
@@ -102,5 +103,5 @@ export function usePageTracker() {
         });
       }
     };
-  }, [location.pathname, location.search]);
+  }, [location.pathname, searchStr]);
 }
