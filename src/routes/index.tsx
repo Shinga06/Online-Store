@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, Award, Headphones, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -107,34 +108,7 @@ function Home() {
               <div className="absolute -top-4 -left-4 h-16 w-16 rounded-sm bg-[var(--hi-vis)] animate-pulse" style={{ opacity: 0.8 }} />
               <div className="absolute inset-6 grid grid-cols-2 gap-4">
                 {categories.slice(0, 4).map((c, idx) => (
-                  <Link
-                    key={c.slug}
-                    to="/shop"
-                    search={{ category: c.slug, q: "" }}
-                    className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.15)] transition-all duration-300 group overflow-hidden"
-                    style={{
-                      animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, float ${6 + idx * 1.5}s ease-in-out infinite`,
-                      animationDelay: `${500 + idx * 100}ms, ${idx * 1.2}s`,
-                      opacity: 0,
-                    }}
-                  >
-                    {/* Background Cover Image */}
-                    {c.image && (
-                      <img 
-                        src={c.image} 
-                        alt={c.name} 
-                        className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700 ease-out z-0 pointer-events-none"
-                      />
-                    )}
-
-                    {/* Premium Dark overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/30 group-hover:from-slate-950 group-hover:via-slate-950/60 transition-all duration-500 z-0 pointer-events-none" />
-
-                    <div className="relative z-10">
-                      <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
-                      <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
-                    </div>
-                  </Link>
+                  <HeroCategoryCard key={c.slug} c={c} idx={idx} />
                 ))}
               </div>
             </div>
@@ -312,5 +286,90 @@ function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+const HERO_CATEGORY_IMAGES: Record<string, string[]> = {
+  aprons: [
+    "https://images.unsplash.com/photo-1577900232427-18219b9166a0?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80"
+  ],
+  "chef-wear": [
+    "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1581084324492-c8076f130f86?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1605270864945-8ed8b90be886?auto=format&fit=crop&w=600&q=80"
+  ],
+  golfers: [
+    "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=600&q=80"
+  ],
+  jackets: [
+    "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1508445861827-7711f397115a?auto=format&fit=crop&w=600&q=80"
+  ]
+};
+
+function HeroCategoryCard({ c, idx }: { c: any; idx: number }) {
+  const images = HERO_CATEGORY_IMAGES[c.slug] || [c.image || ""];
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    
+    // Staggered delay of 1200ms per index to cycle them separately
+    const initialDelay = idx * 1200;
+    
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        setActiveIdx((prev) => (prev + 1) % images.length);
+      }, 5000); // Transitions slide every 5 seconds
+      
+      return () => clearInterval(interval);
+    }, initialDelay);
+
+    return () => clearTimeout(timeout);
+  }, [images, idx]);
+
+  return (
+    <Link
+      to="/shop"
+      search={{ category: c.slug, q: "" }}
+      className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.15)] transition-all duration-300 group overflow-hidden"
+      style={{
+        animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, float ${6 + idx * 1.5}s ease-in-out infinite`,
+        animationDelay: `${500 + idx * 100}ms, ${idx * 1.2}s`,
+        opacity: 0,
+      }}
+    >
+      {/* Background Cover Sliding Image Panel */}
+      <div 
+        className="absolute inset-0 flex transition-transform duration-1000 ease-in-out z-0 pointer-events-none"
+        style={{ 
+          width: `${images.length * 100}%`,
+          transform: `translateX(-${(activeIdx * 100) / images.length}%)` 
+        }}
+      >
+        {images.map((imgUrl, i) => (
+          <img 
+            key={i}
+            src={imgUrl} 
+            alt={`${c.name} preview ${i}`} 
+            className="h-full object-cover opacity-15 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700 ease-out pointer-events-none"
+            style={{ width: `${100 / images.length}%` }}
+          />
+        ))}
+      </div>
+
+      {/* Premium Dark overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/30 group-hover:from-slate-950 group-hover:via-slate-950/60 transition-all duration-500 z-0 pointer-events-none" />
+
+      <div className="relative z-10">
+        <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
+        <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
+      </div>
+    </Link>
   );
 }
