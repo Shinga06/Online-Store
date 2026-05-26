@@ -334,10 +334,8 @@ function HeroCategoryCard({ c, idx }: { c: any; idx: number }) {
   }, [images, idx]);
 
   return (
-    <Link
-      to="/shop"
-      search={{ category: c.slug, q: "" }}
-      className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.15)] transition-all duration-300 group overflow-hidden"
+    <div
+      className="relative bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-end hover:bg-white/10 hover:border-[var(--hi-vis)]/30 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(224,188,38,0.15)] transition-all duration-300 group overflow-hidden select-none"
       style={{
         animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, float ${6 + idx * 1.5}s ease-in-out infinite`,
         animationDelay: `${500 + idx * 100}ms, ${idx * 1.2}s`,
@@ -370,6 +368,6 @@ function HeroCategoryCard({ c, idx }: { c: any; idx: number }) {
         <div className="text-[9px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">Category</div>
         <div className="font-bold text-white text-base mt-1 group-hover:translate-x-0.5 transition-transform duration-300">{c.name}</div>
       </div>
-    </Link>
+    </div>
   );
 }
