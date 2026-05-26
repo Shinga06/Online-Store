@@ -638,6 +638,21 @@ export const db = {
 
 // One-time migration: purge legacy "safegear_*" storage keys
 if (typeof window !== "undefined") {
+  // Purge local storage cache if category images are missing to force refresh
+  const localDb = localStorage.getItem("cbalcool_db");
+  if (localDb) {
+    try {
+      const parsed = JSON.parse(localDb);
+      const categories = parsed.categories || [];
+      const hasImages = categories.some((c: any) => c.image);
+      if (categories.length > 0 && !hasImages) {
+        localStorage.removeItem("cbalcool_db");
+      }
+    } catch {
+      localStorage.removeItem("cbalcool_db");
+    }
+  }
+
   const legacyPrefixes = ["safegear_"];
   for (const prefix of legacyPrefixes) {
     // Clean localStorage
