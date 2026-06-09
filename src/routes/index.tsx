@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Truck, Award, Headphones, Sparkles } from "luc
 import { useState, useEffect } from "react";
 import { useDb } from "@/hooks/use-db";
 import { ProductCard } from "@/components/ProductCard";
+import { ClientLogos } from "@/components/ClientLogos";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -146,6 +147,8 @@ function Home() {
         </div>
       </section>
 
+      <ClientLogos />
+
       {/* Categories Grid Section */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="flex items-end justify-between mb-8">
@@ -164,7 +167,7 @@ function Home() {
               key={c.slug}
               to="/shop"
               search={{ category: c.slug, q: "" }}
-              className="group relative aspect-[5/4] bg-surface text-surface-foreground rounded-md overflow-hidden border border-white/10 hover:border-[var(--hi-vis)]/40 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(224,188,38,0.15)] transition-all duration-300 ease-out"
+              className="group relative aspect-[4/5] sm:aspect-[5/4] bg-surface text-surface-foreground rounded-md overflow-hidden border border-white/10 hover:border-[var(--hi-vis)]/40 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(224,188,38,0.15)] transition-all duration-300 ease-out"
               style={{
                 animation: "fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                 animationDelay: `${idx * 80}ms`,
@@ -192,18 +195,18 @@ function Home() {
               {/* Subtle shimmer sweep effect on hover */}
               <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none z-0" />
               
-              <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
+              <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-between z-10">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-[var(--hi-vis)] transition-colors duration-300">
                   Category
                 </div>
                 <div>
-                  <div className="text-xl font-extrabold tracking-tight text-white group-hover:text-white transition-colors">
+                  <div className="text-lg sm:text-xl font-extrabold tracking-tight text-white group-hover:text-white transition-colors">
                     {c.name}
                   </div>
-                  <div className="text-xs text-white/60 mt-2 line-clamp-2 leading-relaxed">
+                  <div className="text-xs text-white/60 mt-1 sm:mt-2 line-clamp-2 leading-relaxed">
                     {c.blurb}
                   </div>
-                  <div className="mt-4 inline-flex items-center gap-1.5 text-[var(--hi-vis)] text-xs font-bold uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
+                  <div className="mt-2.5 sm:mt-4 inline-flex items-center gap-1.5 text-[var(--hi-vis)] text-xs font-bold uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
                     Shop now 
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
                   </div>

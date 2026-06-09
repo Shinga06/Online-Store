@@ -34,6 +34,7 @@
   --color-hi-vis: var(--hi-vis);
   --font-display: "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
+  --animate-marquee: marquee 35s linear infinite;
 }
 
 :root {
@@ -135,4 +136,15 @@
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

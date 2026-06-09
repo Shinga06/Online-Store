@@ -811,12 +811,12 @@
           "color": "Navy"
         }
       ],
-      "status": "Packed",
+      "status": "Delivered",
       "isQuote": false,
       "id": "ORD-6742",
       "total": 279,
       "date": "2026-05-25T23:31:29.943Z",
-      "lastUpdated": "2026-05-25T23:35:09.101Z",
+      "lastUpdated": "2026-05-26T01:40:58.634Z",
       "notificationLogs": [
         {
           "channel": "Email",
@@ -865,6 +865,48 @@
           "trigger": "Status: Packed",
           "timestamp": "2026-05-25T23:35:09.101Z",
           "message": "Hi Bongumusa Shinga,\n\nExcellent news! Your order ORD-6742 has been fully packaged and is ready at our dispatch bays. Courier pick up has been scheduled.\n\nYour safety is our priority.\nCBALCOOL Logistics."
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-26T01:40:43.009Z",
+          "message": "*CBALCOOL Shipment Dispatched!* 🚚\n\nHi Bongumusa Shinga, your safety package *ORD-6742* is on its way!\n\n🚛 *Courier:* The Courier Guy\n🎫 *Tracking No:* TCG-MOCK-12345\n📅 *Expected Delivery:* within 2-3 business days\n\nTrack your parcel here: https://thecourierguy.net/tracking/?t=TCG-MOCK-12345"
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-26T01:40:43.009Z",
+          "message": "CBALCOOL: Order ORD-6742 shipped via The Courier Guy. Tracking No: TCG-MOCK-12345. Expected arrival: within 2-3 business days."
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Shipped",
+          "timestamp": "2026-05-26T01:40:43.009Z",
+          "message": "Dear Bongumusa Shinga,\n\nWe are pleased to inform you that your order ORD-6742 has been dispatched.\n\nCourier: The Courier Guy\nTracking Number: TCG-MOCK-12345\nExpected Arrival: within 2-3 business days\n\nTrack your shipment live at the courier page: https://thecourierguy.net/tracking/?t=TCG-MOCK-12345\n\nCBALCOOL Dispatch."
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Out for Delivery",
+          "timestamp": "2026-05-26T01:40:53.362Z",
+          "message": "*CBALCOOL Delivery Alert!* 🔔\n\nHi Bongumusa Shinga, your order *ORD-6742* is out for delivery today with *The Courier Guy*!\n\nPlease ensure someone is available at your delivery address to sign for the package.\n\nWear your safety gear with pride!"
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Out for Delivery",
+          "timestamp": "2026-05-26T01:40:53.362Z",
+          "message": "CBALCOOL: Order ORD-6742 is out for delivery today with The Courier Guy. Have a great day!"
+        },
+        {
+          "channel": "WhatsApp",
+          "trigger": "Status: Delivered",
+          "timestamp": "2026-05-26T01:40:58.634Z",
+          "message": "*CBALCOOL Order Delivered!* 🎉\n\nHi Bongumusa Shinga, your SABS protective garments *ORD-6742* have been successfully delivered!\n\nWe hope you are fully satisfied with your workwear. Need bulk orders or additional gear? Visit CBALCOOL.co.za.\n\nStay Safe, Stay Productive!"
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Delivered",
+          "timestamp": "2026-05-26T01:40:58.634Z",
+          "message": "Dear Bongumusa Shinga,\n\nWe have received confirmation that your order ORD-6742 was successfully delivered.\n\nThank you for trusting CBALCOOL PPE & Workwear South Africa as your professional safety partner.\n\nWarm regards,\nCBALCOOL Customer Care."
         }
       ]
     },
