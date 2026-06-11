@@ -64,6 +64,7 @@ function ContactPage() {
         </form>
 
         <aside className="bg-surface text-surface-foreground rounded-md p-6 h-fit">
+          {/* Direct contact information pointing to the Durban main branch */}
           <div className="text-xs uppercase tracking-[0.18em] text-white/60 mb-4">Get in touch directly</div>
           <ul className="space-y-4 text-sm">
             <li className="flex gap-3">

@@ -553,6 +553,7 @@ function OrderTracking() {
 
                               <p className="whitespace-pre-wrap font-sans text-xs leading-normal">{l.message}</p>
                               
+                              {/* Automated update signature block reflecting Durban branch details */}
                               <div className="border-t pt-2 mt-2 text-[8px] text-slate-400 space-y-0.5 select-none leading-normal">
                                 <p>This is an automated transaction update from CBALCOOL PPE Durban.</p>
                                 <p>Tel: +27 83 966 4946 · Durban, KwaZulu-Natal</p>

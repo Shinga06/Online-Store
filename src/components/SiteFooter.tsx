@@ -40,6 +40,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
+          {/* Durban depot contact info and support email address */}
           <div className="text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Get in touch</div>
           <ul className="space-y-2 text-sm text-white/80">
             <li>Mon–Fri, 08:00–17:00</li>

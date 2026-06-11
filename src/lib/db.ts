@@ -287,6 +287,7 @@ export const saveDbFn = createServerFn({ method: "POST" })
     return { success: true };
   });
 
+// Notification logs generator template updated with Durban branch details and intandoyodlamini@gmail.com contact email.
 function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
   if (!order.notificationLogs) {
     order.notificationLogs = [];
