@@ -312,7 +312,7 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
 
   switch (status) {
     case "Pending Payment":
-      addLog("Email", `Hi ${name},\n\nYour CBALCOOL order ${id} has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR ${order.total.toFixed(2)}\nPayment Method: ${order.paymentMethod || "EFT Invoice"}\n\nPlease settle payment using your invoice details and email POP to accounts@cbalcool.co.za.`);
+      addLog("Email", `Hi ${name},\n\nYour CBALCOOL order ${id} has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR ${order.total.toFixed(2)}\nPayment Method: ${order.paymentMethod || "EFT Invoice"}\n\nPlease settle payment using your invoice details and email POP to intandoyodlamini@gmail.com.`);
       addLog("SMS", `CBALCOOL: Order ${id} placed successfully. Awaiting payment of ZAR ${order.total.toFixed(2)}. Check your email for tax invoice instructions.`);
       break;
     case "Payment Confirmed":
@@ -320,7 +320,7 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
       addLog("Email", `Hi ${name},\n\nWe have successfully received and verified your payment for order ${id}.\n\nYour order has been moved to our warehouse queue for packaging and quality checks.\n\nCBALCOOL Operations Desk.`);
       break;
     case "Processing":
-      addLog("WhatsApp", `*CBALCOOL Packing Queue* 📦\n\nHi ${name}, order *${id}* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!`);
+      addLog("WhatsApp", `*CBALCOOL Packing Queue* 📦\n\nHi ${name}, order *${id}* is now being processed at our Durban warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!`);
       addLog("Email", `Hi ${name},\n\nYour order ${id} is currently in progress. Our technicians are preparing your custom sizing requirements and packaging your protective garments.\n\nThank you for choosing CBALCOOL.`);
       break;
     case "Packed":
@@ -341,7 +341,7 @@ function generateNotificationLogs(order: DBOrder, status: DBOrder["status"]) {
       addLog("Email", `Dear ${name},\n\nWe have received confirmation that your order ${id} was successfully delivered.\n\nThank you for trusting CBALCOOL PPE & Workwear South Africa as your professional safety partner.\n\nWarm regards,\nCBALCOOL Customer Care.`);
       break;
     case "Cancelled":
-      addLog("Email", `Dear ${name},\n\nYour order ${id} has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at trade@cbalcool.co.za.\n\nCBALCOOL Support.`);
+      addLog("Email", `Dear ${name},\n\nYour order ${id} has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at intandoyodlamini@gmail.com.\n\nCBALCOOL Support.`);
       break;
   }
 }

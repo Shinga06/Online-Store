@@ -33,7 +33,7 @@ function AboutPage() {
           <h2 className="text-2xl font-bold">Our story</h2>
           <div className="mt-4 space-y-4 text-foreground/80 leading-relaxed">
             <p>
-              We started in a small Johannesburg warehouse with two ranges and a handful
+              We started in a small Durban warehouse with two ranges and a handful
               of mining clients. Today we stock 24 product categories and supply
               hundreds of businesses across South Africa — from single-site contractors
               to national security firms and hotel groups.
@@ -68,7 +68,7 @@ function AboutPage() {
             {[
               { t: "Compliance first", d: "We only stock gear that meets SABS, EN and ASTM standards relevant to the job." },
               { t: "Honest pricing", d: "Transparent ZAR pricing with proper trade discounts for bulk orders." },
-              { t: "Service that answers", d: "Real humans in Johannesburg. We respond within one working day." },
+              { t: "Service that answers", d: "Real humans in Durban. We respond within one working day." },
             ].map((v) => (
               <div key={v.t} className="bg-card border border-border rounded-md p-6">
                 <div className="font-semibold">{v.t}</div>

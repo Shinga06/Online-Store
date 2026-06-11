@@ -70,7 +70,7 @@ function AdminProducts() {
 
   const handleOpenAddDrawer = () => {
     if (isReadOnly) {
-      toast.error("Access Denied", { description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za" });
+      toast.error("Access Denied", { description: "Managers possess read-only catalog authorization. Contact intandoyodlamini@gmail.com" });
       return;
     }
     setEditProduct(null);
@@ -93,7 +93,7 @@ function AdminProducts() {
 
   const handleOpenEditDrawer = (product: DBProduct) => {
     if (isReadOnly) {
-      toast.error("Access Denied", { description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za" });
+      toast.error("Access Denied", { description: "Managers possess read-only catalog authorization. Contact intandoyodlamini@gmail.com" });
       return;
     }
     setEditProduct(product);

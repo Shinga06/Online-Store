@@ -249,7 +249,7 @@ function AdminSettings() {
                 <div>
                   <label className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">Registered Depot Address</label>
                   <div className="text-sm font-bold text-foreground mt-1 leading-relaxed">
-                    <span>42 Witkoppen Road, Fourways<br />Johannesburg, Gauteng, 2055</span>
+                    <span>55 Gillespie Street, The Wheel Shopping Centre<br />1st Floor Shop 115a, Durban, KwaZulu-Natal, 4001</span>
                   </div>
                 </div>
               </div>
@@ -264,15 +264,11 @@ function AdminSettings() {
                 <div className="space-y-2 mt-4 text-xs font-semibold text-foreground">
                   <div className="flex items-center gap-2">
                     <Mail size={13} className="text-primary" />
-                    <span>logistics@cbalcool.co.za</span>
+                    <span>intandoyodlamini@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone size={13} className="text-primary" />
-                    <span>+27 11 555 0199 (JHB Depot)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone size={13} className="text-primary" />
-                    <span>+27 21 444 9800 (CT Branch)</span>
+                    <span>+27 83 966 4946 (Durban Depot)</span>
                   </div>
                 </div>
               </div>

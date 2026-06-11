@@ -600,10 +600,10 @@ function AdminOrders() {
                     <span className="font-bold text-lg tracking-tight">CBALCOOL PPE LTD</span>
                   </div>
                   <div className="text-xs text-slate-500 mt-2 space-y-0.5 leading-normal">
-                    <p>42 Industrial Crescent, Germiston, 1401</p>
-                    <p>Gauteng, South Africa</p>
+                    <p>55 Gillespie Street, The Wheel Shopping Centre</p>
+                    <p>1st Floor Shop 115a, Durban, KwaZulu-Natal, 4001</p>
                     <p>VAT Reg No: 4910394819</p>
-                    <p>Email: trade@cbalcool.co.za · Tel: +27 11 555 4910</p>
+                    <p>Email: intandoyodlamini@gmail.com · Tel: +27 83 966 4946</p>
                   </div>
                 </div>
 

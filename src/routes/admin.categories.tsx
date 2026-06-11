@@ -54,7 +54,7 @@ function AdminCategories() {
   const handleOpenAddDrawer = () => {
     if (isReadOnly) {
       toast.error("Access Denied", {
-        description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za",
+        description: "Managers possess read-only catalog authorization. Contact intandoyodlamini@gmail.com",
       });
       return;
     }
@@ -68,7 +68,7 @@ function AdminCategories() {
   const handleOpenEditDrawer = (category: DBCategory) => {
     if (isReadOnly) {
       toast.error("Access Denied", {
-        description: "Managers possess read-only catalog authorization. Contact stone@cbalcool.co.za",
+        description: "Managers possess read-only catalog authorization. Contact intandoyodlamini@gmail.com",
       });
       return;
     }

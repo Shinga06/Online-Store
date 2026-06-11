@@ -1248,7 +1248,7 @@ function CheckoutPage() {
                       <div className="flex items-start gap-2 text-xs text-slate-500 mt-2 bg-indigo-500/5 p-3 rounded-sm">
                         <Info size={16} className="text-indigo-500 shrink-0 mt-0.5" />
                         <p className="leading-normal">
-                          Dispatches are held temporarily pending EFT confirmation or trade department credit checks. Banking confirmations should be emailed to <strong>accounts@cbalcool.co.za</strong> with the reference code.
+                          Dispatches are held temporarily pending EFT confirmation or trade department credit checks. Banking confirmations should be emailed to <strong>intandoyodlamini@gmail.com</strong> with the reference code.
                         </p>
                       </div>
                     </div>

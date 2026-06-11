@@ -283,7 +283,7 @@ function OrderTracking() {
                     <AlertCircle className="text-destructive mx-auto" size={36} />
                     <h4 className="font-bold text-lg text-foreground">Order Cancelled</h4>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      This order has been cancelled and warehouse item allocation has been reverted. For questions regarding payments or refunds, contact accounts@cbalcool.co.za.
+                      This order has been cancelled and warehouse item allocation has been reverted. For questions regarding payments or refunds, contact intandoyodlamini@gmail.com.
                     </p>
                   </div>
                 ) : (
@@ -533,7 +533,7 @@ function OrderTracking() {
                       <div className="bg-slate-900 text-white p-3 shrink-0 border-b border-slate-950 select-none">
                         <div className="text-[10px] font-bold flex items-center gap-1.5"><Mail size={12} className="text-yellow-400" /> CBALCOOL Mail Client</div>
                         <div className="text-[8px] opacity-80 mt-1 leading-normal">
-                          <p><strong>From:</strong> updates@cbalcool.co.za</p>
+                          <p><strong>From:</strong> intandoyodlamini@gmail.com</p>
                           <p><strong>To:</strong> {activeOrder.customerEmail}</p>
                         </div>
                       </div>
@@ -554,8 +554,8 @@ function OrderTracking() {
                               <p className="whitespace-pre-wrap font-sans text-xs leading-normal">{l.message}</p>
                               
                               <div className="border-t pt-2 mt-2 text-[8px] text-slate-400 space-y-0.5 select-none leading-normal">
-                                <p>This is an automated transaction update from CBALCOOL PPE Germiston.</p>
-                                <p>Tel: +27 11 555 4910 · Germiston, Gauteng</p>
+                                <p>This is an automated transaction update from CBALCOOL PPE Durban.</p>
+                                <p>Tel: +27 83 966 4946 · Durban, KwaZulu-Natal</p>
                               </div>
                             </div>
                           ))

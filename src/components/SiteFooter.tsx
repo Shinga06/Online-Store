@@ -43,9 +43,9 @@ export function SiteFooter() {
           <div className="text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Get in touch</div>
           <ul className="space-y-2 text-sm text-white/80">
             <li>Mon–Fri, 08:00–17:00</li>
-            <li>sales@cbalcool.co.za</li>
-            <li>+27 (0)11 555 0100</li>
-            <li>Johannesburg, South Africa</li>
+            <li>intandoyodlamini@gmail.com</li>
+            <li>+27 83 966 4946</li>
+            <li>Durban, South Africa</li>
           </ul>
         </div>
       </div>

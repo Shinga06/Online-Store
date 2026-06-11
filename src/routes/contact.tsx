@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — CBALCOOL PPE & Workwear" },
-      { name: "description", content: "Get in touch with CBALCOOL for quotes, bulk orders, and branded workwear. Johannesburg, South Africa." },
+      { name: "description", content: "Get in touch with CBALCOOL for quotes, bulk orders, and branded workwear. Durban, South Africa." },
     ],
   }),
 });
@@ -69,29 +69,29 @@ function ContactPage() {
             <li className="flex gap-3">
               <Phone size={18} className="text-[var(--hi-vis)] shrink-0 mt-0.5" />
               <div>
-                <div className="font-semibold">+27 (0)11 555 0100</div>
+                <div className="font-semibold">+27 83 966 4946</div>
                 <div className="text-white/70 text-xs">Sales & support</div>
               </div>
             </li>
             <li className="flex gap-3">
               <Mail size={18} className="text-[var(--hi-vis)] shrink-0 mt-0.5" />
               <div>
-                <div className="font-semibold">sales@cbalcool.co.za</div>
+                <div className="font-semibold">intandoyodlamini@gmail.com</div>
                 <div className="text-white/70 text-xs">Quotes & orders</div>
               </div>
             </li>
             <li className="flex gap-3">
               <MapPin size={18} className="text-[var(--hi-vis)] shrink-0 mt-0.5" />
               <div>
-                <div className="font-semibold">Industrial Way, Johannesburg</div>
-                <div className="text-white/70 text-xs">Gauteng, South Africa</div>
+                <div className="font-semibold">55 Gillespie Street</div>
+                <div className="text-white/70 text-xs">The Wheel Shopping Centre, 1st Floor Shop 115a, Durban, KwaZulu-Natal, 4001, South Africa</div>
               </div>
             </li>
             <li className="flex gap-3">
               <Clock size={18} className="text-[var(--hi-vis)] shrink-0 mt-0.5" />
               <div>
                 <div className="font-semibold">Mon–Fri · 08:00–17:00</div>
-                <div className="text-white/70 text-xs">Closed weekends & public holidays</div>
+                <div className="text-white/70 text-xs">Closed on Sundays & public holidays</div>
               </div>
             </li>
           </ul>

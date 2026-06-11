@@ -822,7 +822,7 @@
           "channel": "Email",
           "trigger": "Status: Pending Payment",
           "timestamp": "2026-05-25T23:31:29.943Z",
-          "message": "Hi Bongumusa Shinga,\n\nYour CBALCOOL order ORD-6742 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 279.00\nPayment Method: Pay Now\n\nPlease settle payment using your invoice details and email POP to accounts@cbalcool.co.za."
+          "message": "Hi Bongumusa Shinga,\n\nYour CBALCOOL order ORD-6742 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 279.00\nPayment Method: Pay Now\n\nPlease settle payment using your invoice details and email POP to intandoyodlamini@gmail.com."
         },
         {
           "channel": "SMS",
@@ -846,7 +846,7 @@
           "channel": "WhatsApp",
           "trigger": "Status: Processing",
           "timestamp": "2026-05-25T23:31:29.943Z",
-          "message": "*CBALCOOL Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-6742* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
+          "message": "*CBALCOOL Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-6742* is now being processed at our Durban warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
         },
         {
           "channel": "Email",
@@ -937,7 +937,7 @@
           "channel": "Email",
           "trigger": "Status: Pending Payment",
           "timestamp": "2026-05-24T01:26:10.167Z",
-          "message": "Hi Bongumusa Shinga,\n\nYour CBALCOOL order ORD-2378 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 369.00\nPayment Method: Pay Now\n\nPlease settle payment using your invoice details and email POP to accounts@cbalcool.co.za."
+          "message": "Hi Bongumusa Shinga,\n\nYour CBALCOOL order ORD-2378 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 369.00\nPayment Method: Pay Now\n\nPlease settle payment using your invoice details and email POP to intandoyodlamini@gmail.com."
         },
         {
           "channel": "SMS",
@@ -961,7 +961,7 @@
           "channel": "WhatsApp",
           "trigger": "Status: Processing",
           "timestamp": "2026-05-24T01:26:10.167Z",
-          "message": "*CBALCOOL Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-2378* is now being processed at our Germiston warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
+          "message": "*CBALCOOL Packing Queue* 📦\n\nHi Bongumusa Shinga, order *ORD-2378* is now being processed at our Durban warehouse.\n\nOur safety coordinators are picking your Conti suits and boots to verify SABS compliant fittings.\n\nWe'll notify you once shipped!"
         },
         {
           "channel": "Email",
@@ -991,7 +991,7 @@
           "channel": "Email",
           "trigger": "Status: Cancelled",
           "timestamp": "2026-05-25T23:34:50.605Z",
-          "message": "Dear Bongumusa Shinga,\n\nYour order ORD-2378 has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at trade@cbalcool.co.za.\n\nCBALCOOL Support."
+          "message": "Dear Bongumusa Shinga,\n\nYour order ORD-2378 has been cancelled.\n\nIf you have any questions or believe this is an error, please contact our support team at intandoyodlamini@gmail.com.\n\nCBALCOOL Support."
         }
       ]
     },
