@@ -1,61 +1,8 @@
-// Custom, modern industrial vector logos representing major client industries with original brand colors
+// Custom vector logos for real South African institutional clients (eThekwini, FASSET, and KZN Health)
 const Logos = {
-  ApexMining: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <path d="M12 2L2 22h20L12 2z" stroke="#CA8A04" strokeLinejoin="round" />
-        <path d="M12 8l-6 10h12L12 8z" stroke="#CA8A04" strokeLinejoin="round" opacity="0.6" />
-      </svg>
-      <span>APEX MINING</span>
-    </div>
-  ),
-  SummitPower: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="#D97706" />
-        <path d="M13 6l-4 7h5l-4 5" stroke="#D97706" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span>SUMMIT ENERGY</span>
-    </div>
-  ),
-  VanguardSteel: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#0284C7" strokeLinejoin="round" />
-        <path d="M9 10l2 2 4-4" stroke="#0284C7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span>VANGUARD STEEL</span>
-    </div>
-  ),
-  DeltaBuild: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <path d="M3 21h18M5 21V8l7-5 7 5v13" stroke="#EA580C" strokeLinejoin="round" />
-        <path d="M9 13h6v8H9v-8z" stroke="#EA580C" strokeLinejoin="round" />
-      </svg>
-      <span>DELTA BUILD</span>
-    </div>
-  ),
-  SafewayLogistics: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <path d="M5 12h14M13 5l7 7-7 7" stroke="#2563EB" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M2 12h1" stroke="#2563EB" strokeLinecap="round" />
-      </svg>
-      <span>SAFEWAY LOGISTICS</span>
-    </div>
-  ),
-  TitanForestry: () => (
-    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <path d="M12 2L3 17h6v5h6v-5h6L12 2z" stroke="#16A34A" fill="#16A34A" fillOpacity="0.15" strokeLinejoin="round" />
-      </svg>
-      <span>TITAN FORESTRY</span>
-    </div>
-  ),
   Ethekwini: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 stroke-[1.5]" viewBox="0 0 100 100">
+      <svg className="w-6 h-6 stroke-[1.5] shrink-0" viewBox="0 0 100 100">
         <defs>
           <linearGradient id="ethekwiniGrad" x1="0" y1="1" x2="0" y2="0">
             <stop offset="0%" stopColor="#3FA9F5" />
@@ -81,16 +28,82 @@ const Logos = {
       <span>ETHEKWINI MUNICIPALITY</span>
     </div>
   ),
+  Fasset: () => (
+    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
+      <svg className="w-6 h-6 shrink-0" viewBox="0 0 100 100">
+        <defs>
+          <clipPath id="fassetClip">
+            <circle cx="55" cy="45" r="38" />
+          </clipPath>
+        </defs>
+        <g clipPath="url(#fassetClip)">
+          {/* Dark Blue fanning rays */}
+          <path 
+            d="M 45,65 L 10,45 L 20,30 Z 
+               M 45,65 L 25,20 L 40,10 Z 
+               M 45,65 L 50,5 L 65,8 Z 
+               M 45,65 L 75,15 L 88,30 Z 
+               M 45,65 L 92,48 L 80,68 Z" 
+            fill="#0B2265" 
+          />
+        </g>
+        {/* Sun shape overlay */}
+        <circle cx="45" cy="65" r="14" fill="#FFEB00" stroke="#ffffff" strokeWidth="2" />
+      </svg>
+      <span>FASSET</span>
+    </div>
+  ),
+  KznHealth: () => (
+    <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
+      <svg className="w-7 h-7 shrink-0" viewBox="0 0 120 100" fill="none">
+        {/* Shield Background */}
+        <path d="M 45,25 C 45,55 50,70 60,78 C 70,70 75,55 75,25 Z" fill="#15803D" stroke="#15803D" strokeWidth="2" strokeLinejoin="round" />
+        {/* Shield Inner Divisions */}
+        {/* Top Blue section */}
+        <path d="M 46,26 H 74 V 42 L 60,50 L 46,42 Z" fill="#2563EB" />
+        {/* White Star in blue section */}
+        <polygon points="60,30 62,34 66,34 63,37 64,41 60,39 56,41 57,37 54,34 58,34" fill="#ffffff" />
+        {/* Zigzag Green hills */}
+        <path d="M 46,42 L 53,38 L 60,45 L 67,38 L 74,42 V 55 L 60,65 L 46,55 Z" fill="#16A34A" />
+        {/* White bottom section with Strelitzia flower */}
+        <path d="M 46,55 L 60,65 L 74,55 V 70 C 74,70 70,75 60,77 C 50,75 46,70 46,70 Z" fill="#ffffff" />
+        {/* Simplified Strelitzia Flower (Provincial Flower) */}
+        <path d="M 60,58 C 58,54 62,50 60,48 C 62,52 64,54 60,58 Z" fill="#EA580C" />
+        <path d="M 60,58 C 56,56 56,62 55,60 C 58,60 59,58 60,58 Z" fill="#3B82F6" />
+
+        {/* Left Supporter (Lion) */}
+        <path d="M 25,65 C 28,60 32,58 35,48 C 38,38 34,32 37,28 C 39,25 42,28 41,32 C 40,35 43,38 42,42 C 41,46 44,50 43,55 C 42,60 38,65 38,70 L 32,70 C 31,66 28,68 25,65 Z" fill="#EAB308" />
+        <line x1="32" y1="28" x2="38" y2="40" stroke="#EAB308" strokeWidth="1.5" />
+
+        {/* Right Supporter (Wildebeest) */}
+        <path d="M 95,65 C 92,60 88,58 85,48 C 82,38 86,32 83,28 C 81,25 78,28 79,32 C 80,35 77,38 78,42 C 79,46 76,50 77,55 C 78,60 82,65 82,70 L 88,70 C 89,66 92,68 95,65 Z" fill="#78350F" />
+        <line x1="88" y1="26" x2="82" y2="40" stroke="#1F2937" strokeWidth="1.5" />
+
+        {/* Top Crown/Emblem */}
+        <path d="M 52,25 C 52,18 68,18 68,25 Z" fill="#CA8A04" />
+        <circle cx="60" cy="18" r="4" fill="#CA8A04" />
+
+        {/* Bottom Scroll */}
+        <path d="M 25,72 Q 60,82 95,72 L 92,78 Q 60,88 28,78 Z" fill="#ffffff" stroke="#15803D" strokeWidth="1" />
+      </svg>
+      <span>KZN HEALTH</span>
+    </div>
+  ),
 };
 
 const clientLogos = [
-  <Logos.ApexMining key="apex" />,
-  <Logos.SummitPower key="summit" />,
-  <Logos.VanguardSteel key="vanguard" />,
-  <Logos.DeltaBuild key="delta" />,
-  <Logos.SafewayLogistics key="safeway" />,
-  <Logos.TitanForestry key="titan" />,
-  <Logos.Ethekwini key="ethekwini" />,
+  <Logos.Ethekwini key="ethekwini-1" />,
+  <Logos.Fasset key="fasset-1" />,
+  <Logos.KznHealth key="kznhealth-1" />,
+  <Logos.Ethekwini key="ethekwini-2" />,
+  <Logos.Fasset key="fasset-2" />,
+  <Logos.KznHealth key="kznhealth-2" />,
+  <Logos.Ethekwini key="ethekwini-3" />,
+  <Logos.Fasset key="fasset-3" />,
+  <Logos.KznHealth key="kznhealth-3" />,
+  <Logos.Ethekwini key="ethekwini-4" />,
+  <Logos.Fasset key="fasset-4" />,
+  <Logos.KznHealth key="kznhealth-4" />,
 ];
 
 export function ClientLogos() {
