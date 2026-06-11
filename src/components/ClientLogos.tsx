@@ -1,4 +1,4 @@
-// Custom vector logos for real South African institutional clients
+// Custom vector logos for real South African institutional clients (eThekwini, FASSET, KZN Health, DOJ & CD, Legal Aid, Capital Power, Playhouse Company, and TIA)
 const Logos = {
   Ethekwini: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
@@ -89,82 +89,116 @@ const Logos = {
       <span>KZN HEALTH</span>
     </div>
   ),
-  Dojcd: () => (
+  DojCd: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
-        {/* Rising Sun */}
-        <path d="M 35,22 L 50,8 L 65,22 Z" fill="#EA580C" />
-        <path d="M 42,20 L 50,5 L 58,20 Z" fill="#EA580C" />
+      <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 100" fill="none">
+        {/* Sun rays at top */}
+        <path d="M 35,20 Q 50,8 65,20" stroke="#F97316" strokeWidth="2" />
+        <line x1="50" y1="20" x2="50" y2="6" stroke="#F97316" strokeWidth="2" />
+        <line x1="50" y1="20" x2="40" y2="9" stroke="#F97316" strokeWidth="2" />
+        <line x1="50" y1="20" x2="60" y2="9" stroke="#F97316" strokeWidth="2" />
         
-        {/* Secretary Bird / Wings */}
-        <path d="M 15,42 C 12,28 35,28 50,42 C 65,28 88,28 85,42 C 82,55 68,65 50,65 C 32,65 18,55 15,42 Z" stroke="#CA8A04" strokeWidth="2" strokeLinejoin="round" />
+        {/* Secretary Bird Wings */}
+        <path d="M 48,30 C 35,28 20,22 15,35 C 12,42 22,50 45,45 Z" fill="#CA8A04" />
+        <path d="M 52,30 C 65,28 80,22 85,35 C 88,42 78,50 55,45 Z" fill="#CA8A04" />
+        
+        {/* Bird Head & Neck */}
+        <path d="M 47,40 Q 50,30 52,24 Q 54,28 50,38 Z" fill="#CA8A04" />
         
         {/* Shield */}
-        <path d="M 40,45 C 40,62 45,70 50,73 C 55,70 60,62 60,45 Z" fill="#15803D" stroke="#CA8A04" strokeWidth="1.5" />
+        <path d="M 38,48 C 38,48 38,70 50,78 C 62,70 62,48 62,48 Z" fill="#EAB308" stroke="#CA8A04" strokeWidth="1.5" />
+        {/* Two figures inside shield */}
+        <path d="M 45,60 C 45,55 48,58 48,64" stroke="#78350F" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 55,60 C 55,55 52,58 52,64" stroke="#78350F" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="46.5" cy="54" r="1.5" fill="#78350F" />
+        <circle cx="53.5" cy="54" r="1.5" fill="#78350F" />
         
-        {/* Spears behind shield */}
-        <line x1="32" y1="62" x2="68" y2="45" stroke="#1F2937" strokeWidth="1.5" />
-        
-        {/* Ribbon Scroll */}
-        <path d="M 25,70 Q 50,80 75,70" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round" />
+        {/* Green Laurel/Wheat at bottom */}
+        <path d="M 25,65 Q 30,78 50,82 Q 70,78 75,65" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" />
+        {/* Bottom scroll */}
+        <path d="M 30,82 Q 50,88 70,82" stroke="#15803D" strokeWidth="3" strokeLinecap="round" />
       </svg>
-      <span>DEPARTMENT OF JUSTICE</span>
+      <div className="flex flex-col text-[9.5px] leading-tight tracking-normal font-sans font-bold text-left">
+        <span className="text-[#EA580C]">the doj & cd</span>
+        <span className="text-zinc-500 text-[6.5px] font-normal uppercase">Justice & Constitutional Dev</span>
+      </div>
     </div>
   ),
   LegalAid: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none">
-        {/* Left Figure (Blue) */}
-        <path d="M 7,10 L 11,14 L 7,18 L 3,14 Z" stroke="#0284C7" strokeWidth="1.5" strokeLinejoin="round" />
-        <circle cx="7" cy="7" r="1.8" fill="#0284C7" />
-        <circle cx="7" cy="20" r="1.5" fill="#B91C1C" />
-        
-        {/* Right Figure (Red) */}
-        <path d="M 15,10 L 19,14 L 15,18 L 11,14 Z" stroke="#B91C1C" strokeWidth="1.5" strokeLinejoin="round" />
-        <circle cx="15" cy="7" r="1.8" fill="#0284C7" />
-        <circle cx="15" cy="20" r="1.5" fill="#B91C1C" />
+      <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
+        {/* Left Diamond (Blue) */}
+        <path d="M 38,32 L 18,50 L 38,68 L 50,50 Z" stroke="#008ECF" strokeWidth="5.5" strokeLinejoin="round" />
+        {/* Right Diamond (Red/Brown) */}
+        <path d="M 62,32 L 82,50 L 62,68 L 50,50 Z" stroke="#8A2B1E" strokeWidth="5.5" strokeLinejoin="round" />
+        {/* Heads (Blue) */}
+        <circle cx="38" cy="22" r="7.5" fill="#008ECF" />
+        <circle cx="62" cy="22" r="7.5" fill="#008ECF" />
+        {/* Feet (Red/Brown) */}
+        <circle cx="38" cy="78" r="7.5" fill="#8A2B1E" />
+        <circle cx="62" cy="78" r="7.5" fill="#8A2B1E" />
       </svg>
-      <span>LEGAL AID SA</span>
+      <div className="flex flex-col text-[10px] leading-tight tracking-normal font-sans font-bold text-left">
+        <span className="text-[#8A2B1E]">Legal Aid</span>
+        <span className="text-[#008ECF] text-[7.5px] uppercase">South Africa</span>
+      </div>
     </div>
   ),
   CapitalPower: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none">
-        {/* Dark Blue Swoosh */}
-        <path d="M 18,5 C 10,7 8,15 14,19 C 15,20 18,17 19,15 C 14,14 13,8 18,5 Z" fill="#334155" />
+      <div className="text-[#6B7280] font-sans font-bold text-[13px] tracking-tight">Capital Power</div>
+      <svg className="w-6 h-6 shrink-0" viewBox="0 0 100 100" fill="none">
+        {/* Blue Swoosh */}
+        <path d="M 80,33 C 58,35 48,50 48,68 C 48,78 54,84 62,84 C 54,84 52,72 56,60 C 60,48 70,38 80,33 Z" fill="#34495E" />
         {/* Gold Swoosh */}
-        <path d="M 18,5 C 22,8 21,14 18,16 C 16,14 15,8 18,5 Z" fill="#CA8A04" />
+        <path d="M 82,38 C 90,44 92,54 88,64 C 84,74 74,78 68,78 C 76,78 80,72 82,62 C 84,52 80,44 82,38 Z" fill="#B5A642" />
       </svg>
-      <span>CAPITAL POWER</span>
     </div>
   ),
-  Playhouse: () => (
+  PlayhouseCompany: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="none">
-        {/* Artistic Colorful Masks/Waves */}
-        <path d="M 2,12 C 4,6 10,6 12,10 C 14,14 18,14 22,10" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" />
-        <path d="M 4,14 C 6,9 11,9 13,12 C 15,15 19,15 21,12" stroke="#EA580C" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M 6,16 C 8,12 12,12 14,14 C 16,16 18,16 20,14" stroke="#0284C7" strokeWidth="1" strokeLinecap="round" />
-        {/* Eye/Face dot details */}
-        <circle cx="10" cy="9" r="1" fill="#7C3AED" />
-        <circle cx="15" cy="11" r="1" fill="#EA580C" />
+      <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 100" fill="none">
+        {/* Purple/Blue flow background */}
+        <path d="M 10,45 C 10,25 35,20 50,35 C 65,50 90,30 90,48 C 90,65 65,70 45,62 C 25,54 10,65 10,45 Z" fill="#5B21B6" opacity="0.85" />
+        
+        {/* Face shapes inside the flow */}
+        {/* Orange face mask */}
+        <path d="M 25,50 C 25,38 38,35 42,45 C 40,52 32,55 25,50 Z" fill="#EA580C" />
+        {/* Red lips/accent */}
+        <circle cx="35" cy="48" r="2.5" fill="#DC2626" />
+        
+        {/* White face outline profile */}
+        <path d="M 45,35 C 52,38 55,45 52,52" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
+        
+        {/* SA Flag elements flowing from the profile (Green/Yellow/Blue) */}
+        <path d="M 52,35 Q 65,30 75,32" stroke="#16A34A" strokeWidth="3" strokeLinecap="round" />
+        <path d="M 50,42 Q 65,38 78,42" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" />
+        <path d="M 48,49 Q 62,48 75,54" stroke="#2563EB" strokeWidth="3" strokeLinecap="round" />
       </svg>
-      <span>THE PLAYHOUSE COMPANY</span>
+      <div className="flex flex-col text-[10px] leading-tight tracking-normal font-sans font-bold text-left">
+        <span className="text-zinc-800 dark:text-zinc-200">The Playhouse</span>
+        <span className="text-zinc-500 text-[8px] uppercase">Company</span>
+      </div>
     </div>
   ),
   Tia: () => (
     <div className="flex items-center gap-2 font-display font-semibold tracking-wider text-xs select-none">
-      <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
-        {/* Blue Wing/Chevron */}
-        <path d="M 10,50 L 40,15 L 55,28 L 30,55 Z" fill="#0B2265" />
-        {/* Grey Chevron */}
-        <path d="M 35,55 L 60,25 L 75,38 L 55,60 Z" fill="#94A3B8" />
-        {/* Orange Chevron */}
-        <path d="M 50,60 L 70,35 L 85,48 L 70,65 Z" fill="#EA580C" />
-        {/* Orange Circle Sun */}
-        <circle cx="48" cy="22" r="8" fill="#EA580C" />
+      <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 60" fill="none">
+        {/* T (Blue wing) */}
+        <path d="M 10,12 C 30,12 32,12 32,12 L 10,50 H 19 C 30,30 42,22 50,22 Z" fill="#1E3A8A" />
+        {/* I (Orange dot) */}
+        <circle cx="47" cy="18" r="6" fill="#F97316" />
+        {/* A (Outer Blue chevron) */}
+        <path d="M 50,22 L 60,12 L 90,50 H 81 L 60,20 L 50,30 Z" fill="#1E3A8A" />
+        {/* A (Middle Grey chevron) */}
+        <path d="M 60,22 L 79,50 H 69 L 60,34 L 53,46 Z" fill="#9CA3AF" />
+        {/* A (Inner Orange chevron) */}
+        <path d="M 60,35 L 67,50 H 47 Z" fill="#F97316" />
       </svg>
-      <span>TECHNOLOGY INNOVATION AGENCY</span>
+      <div className="flex flex-col text-[9px] leading-tight tracking-normal font-sans font-bold text-left">
+        <span className="text-[#1E3A8A]">technology innovation</span>
+        <span className="text-[#1E3A8A] text-[9.5px] tracking-[0.2em]">AGENCY</span>
+      </div>
     </div>
   ),
 };
@@ -173,18 +207,18 @@ const clientLogos = [
   <Logos.Ethekwini key="ethekwini-1" />,
   <Logos.Fasset key="fasset-1" />,
   <Logos.KznHealth key="kznhealth-1" />,
-  <Logos.Dojcd key="dojcd-1" />,
+  <Logos.DojCd key="dojcd-1" />,
   <Logos.LegalAid key="legalaid-1" />,
   <Logos.CapitalPower key="capitalpower-1" />,
-  <Logos.Playhouse key="playhouse-1" />,
+  <Logos.PlayhouseCompany key="playhouse-1" />,
   <Logos.Tia key="tia-1" />,
   <Logos.Ethekwini key="ethekwini-2" />,
   <Logos.Fasset key="fasset-2" />,
   <Logos.KznHealth key="kznhealth-2" />,
-  <Logos.Dojcd key="dojcd-2" />,
+  <Logos.DojCd key="dojcd-2" />,
   <Logos.LegalAid key="legalaid-2" />,
   <Logos.CapitalPower key="capitalpower-2" />,
-  <Logos.Playhouse key="playhouse-2" />,
+  <Logos.PlayhouseCompany key="playhouse-2" />,
   <Logos.Tia key="tia-2" />,
 ];
 
