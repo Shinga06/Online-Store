@@ -227,7 +227,7 @@ export function ClientLogos() {
     <section className="relative w-full overflow-hidden bg-secondary/35 py-8 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 mb-4 text-center">
         <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-bold">
-          Trusted on major sites & industrial projects South Africa wide
+          Previous Clients
         </p>
       </div>
       <div className="flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">

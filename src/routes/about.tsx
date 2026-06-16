@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ShieldCheck, Users, Factory, Award } from "lucide-react";
+import { ShieldCheck, Users, Factory, Award, Target, Eye } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About — CBALCOOL PPE & Workwear" },
-      { name: "description", content: "CBALCOOL has supplied PPE and workwear to South African industry since 2008 — quality gear, fair pricing, expert service." },
+      { title: "About Us — CBALCOOL Corporate Solutions" },
+      { name: "description", content: "Based in Durban, CBALCOOL is a BBBEE Level 1 youth owned business supplying premium workwear, protective clothing, and corporate uniforms." },
     ],
   }),
 });
@@ -14,79 +14,115 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div>
-      <section className="bg-surface text-surface-foreground">
-        <div className="max-w-5xl mx-auto px-4 py-20">
+      {/* Intro Hero Section */}
+      <section className="bg-surface text-surface-foreground border-b border-border">
+        <div className="max-w-5xl mx-auto px-4 py-20 text-left">
           <div className="text-xs uppercase tracking-[0.2em] text-[var(--hi-vis)] mb-4">About CBALCOOL</div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight max-w-3xl">
-            Workwear that holds the line — shift after shift, site after site.
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-4xl text-white">
+            At CBALCOOL Corporate Solutions, we don’t just supply workwear — we power your brand on the ground.
           </h1>
-          <p className="mt-6 max-w-2xl text-white/75 text-lg">
-            CBALCOOL has been outfitting South Africa's industrial, security, hospitality
-            and corporate teams since 2008. We focus on one thing: durable, compliant
-            gear that performs on the job.
-          </p>
-        </div>
-      </section>
-
-      <section className="max-w-5xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 className="text-2xl font-bold">Our story</h2>
-          <div className="mt-4 space-y-4 text-foreground/80 leading-relaxed">
+          <div className="mt-8 grid md:grid-cols-2 gap-8 text-white/85 text-base md:text-lg leading-relaxed">
             <p>
-              We started in a small Durban warehouse with two ranges and a handful
-              of mining clients. Today we stock 24 product categories and supply
-              hundreds of businesses across South Africa — from single-site contractors
-              to national security firms and hotel groups.
+              Based in Durban, we are a BBBEE Level 1 youth owned business and a dynamic and forward-thinking provider of premium workwear, protective clothing, and corporate uniforms, built for performance, durability, and style. We serve businesses that demand more — more quality, more reliability, and more impact.
             </p>
             <p>
-              We don't dilute our range with novelties. Every item we sell is chosen
-              for one reason: it earns its place on a real worker, doing a real job,
-              every day.
+              From the construction site to the corporate floor, from hospitality to industrial environments — our apparel is designed to protect, perform, and represent.
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+      </section>
+
+      {/* What Sets Us Apart Grid */}
+      <section className="max-w-5xl mx-auto px-4 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tight">What Sets Us Apart</h2>
+          <p className="text-muted-foreground mt-2">Why businesses trust CBALCOOL for their uniform and PPE needs</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-6">
           {[
-            { icon: ShieldCheck, n: "SABS", l: "Approved suppliers" },
-            { icon: Users, n: "500+", l: "Business customers" },
-            { icon: Factory, n: "24", l: "Product categories" },
-            { icon: Award, n: "16 yrs", l: "Serving industry" },
-          ].map(({ icon: Icon, n, l }) => (
-            <div key={l} className="border border-border rounded-md p-5">
-              <Icon size={22} className="text-primary" />
-              <div className="text-2xl font-bold mt-3">{n}</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{l}</div>
+            {
+              icon: ShieldCheck,
+              title: "Premium Quality Gear",
+              desc: "Built for tough conditions without compromising comfort.",
+            },
+            {
+              icon: Award,
+              title: "Bold Branding Solutions",
+              desc: "We help your team look professional and stand out.",
+            },
+            {
+              icon: Factory,
+              title: "Versatile Product Range",
+              desc: "PPE, uniforms, and more.",
+            },
+            {
+              icon: Users,
+              title: "Client-Focused Service",
+              desc: "Tailored solutions for businesses of all sizes.",
+            },
+          ].map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="flex gap-4 border border-border rounded-lg p-6 bg-card hover:shadow-md transition-all duration-300">
+              <div className="p-3 bg-primary/10 rounded-md text-primary h-fit">
+                <Icon size={24} />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">{title}</h3>
+                <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">{desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-secondary/40 border-y border-border">
-        <div className="max-w-5xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold mb-8">What we stand for</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { t: "Compliance first", d: "We only stock gear that meets SABS, EN and ASTM standards relevant to the job." },
-              { t: "Honest pricing", d: "Transparent ZAR pricing with proper trade discounts for bulk orders." },
-              { t: "Service that answers", d: "Real humans in Durban. We respond within one working day." },
-            ].map((v) => (
-              <div key={v.t} className="bg-card border border-border rounded-md p-6">
-                <div className="font-semibold">{v.t}</div>
-                <p className="text-sm text-muted-foreground mt-2">{v.d}</p>
-              </div>
-            ))}
+      {/* Core Philosophy Banner */}
+      <section className="bg-secondary/40 border-y border-border py-16">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold mb-3">Our Core Philosophy</p>
+          <blockquote className="text-2xl md:text-3xl font-serif italic text-foreground font-medium">
+            "Your team is your brand — and what they wear matters."
+          </blockquote>
+          <p className="text-muted-foreground mt-6 leading-relaxed max-w-2xl mx-auto">
+            At CBALCOOL Corporate Solutions we understand one powerful truth: Your team is your brand — and what they wear matters. That’s why we combine functionality with modern design, ensuring every garment not only meets safety standards but also reflects confidence and professionalism.
+          </p>
+        </div>
+      </section>
+
+      {/* Mission & Vision Section */}
+      <section className="max-w-5xl mx-auto px-4 py-20">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Mission Card */}
+          <div className="border border-border rounded-lg p-8 bg-card flex flex-col items-start hover:border-primary/45 transition-colors duration-300">
+            <div className="p-3 bg-emerald-500/10 rounded-full text-emerald-600 mb-6">
+              <Target size={28} />
+            </div>
+            <h2 className="text-2xl font-bold mb-3">Our Mission</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              To deliver high-performance workwear solutions that enhance safety, strengthen identity, and empower businesses to operate at their best.
+            </p>
+          </div>
+
+          {/* Vision Card */}
+          <div className="border border-border rounded-lg p-8 bg-card flex flex-col items-start hover:border-primary/45 transition-colors duration-300">
+            <div className="p-3 bg-blue-500/10 rounded-full text-blue-600 mb-6">
+              <Eye size={28} />
+            </div>
+            <h2 className="text-2xl font-bold mb-3">Our Vision</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              To become a leading name in South Africa’s workwear industry, known for innovation, reliability, and unmatched customer satisfaction.
+            </p>
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="max-w-5xl mx-auto px-4 py-16 text-center">
         <h2 className="text-2xl font-bold">Need gear for your team?</h2>
         <p className="text-muted-foreground mt-2">We'll quote within one working day.</p>
         <div className="mt-6 flex justify-center gap-3">
-          <Link to="/contact" className="inline-flex h-12 items-center px-6 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90">
+          <Link to="/contact" className="inline-flex h-12 items-center px-6 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/90 transition-colors">
             Contact us
           </Link>
-          <Link to="/shop" search={{ category: "", q: "" }} className="inline-flex h-12 items-center px-6 border border-input font-semibold rounded-sm hover:bg-accent">
+          <Link to="/shop" search={{ category: "", q: "" }} className="inline-flex h-12 items-center px-6 border border-input font-semibold rounded-sm hover:bg-accent transition-colors">
             Browse catalogue
           </Link>
         </div>
