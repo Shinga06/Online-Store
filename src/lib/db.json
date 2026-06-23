@@ -167,7 +167,7 @@
         "Sky Blue",
         "Charcoal"
       ],
-      "stock": 10,
+      "stock": 9,
       "newArrival": false,
       "outOfStock": false,
       "images": [
@@ -797,6 +797,58 @@
   ],
   "orders": [
     {
+      "customerName": "Thabo Mokoena",
+      "customerEmail": "thabo.mokoena@builders-za.com",
+      "customerPhone": "+27 82 555 0192",
+      "deliveryAddress": "thabo.mokoena@builders-za.com, Fourays, Johannesburg, Gauteng, 6547 (builders)",
+      "paymentMethod": "Pay on Invoice",
+      "items": [
+        {
+          "productId": "p5",
+          "name": "Executive Corporate Shirt",
+          "qty": 1,
+          "price": 329,
+          "size": "S",
+          "color": "White"
+        }
+      ],
+      "status": "Pending Payment",
+      "isQuote": false,
+      "companyName": "builders",
+      "vatNumber": "6942137845",
+      "poNumber": "PO-6780-E",
+      "id": "ORD-1283",
+      "total": 329,
+      "date": "2026-06-16T22:50:12.160Z",
+      "lastUpdated": "2026-06-16T22:50:33.597Z",
+      "notificationLogs": [
+        {
+          "channel": "Email",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-06-16T22:50:12.161Z",
+          "message": "Hi Thabo Mokoena,\n\nYour CBALCOOL order ORD-1283 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 329.00\nPayment Method: Pay on Invoice\n\nPlease settle payment using your invoice details and email POP to intandoyodlamini@gmail.com."
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-06-16T22:50:12.161Z",
+          "message": "CBALCOOL: Order ORD-1283 placed successfully. Awaiting payment of ZAR 329.00. Check your email for tax invoice instructions."
+        },
+        {
+          "channel": "Email",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-06-16T22:50:33.597Z",
+          "message": "Hi Thabo Mokoena,\n\nYour CBALCOOL order ORD-1283 has been received and is awaiting payment confirmation.\n\nTotal amount: ZAR 329.00\nPayment Method: Pay on Invoice\n\nPlease settle payment using your invoice details and email POP to intandoyodlamini@gmail.com."
+        },
+        {
+          "channel": "SMS",
+          "trigger": "Status: Pending Payment",
+          "timestamp": "2026-06-16T22:50:33.597Z",
+          "message": "CBALCOOL: Order ORD-1283 placed successfully. Awaiting payment of ZAR 329.00. Check your email for tax invoice instructions."
+        }
+      ]
+    },
+    {
       "customerName": "Bongumusa Shinga",
       "customerEmail": "22144949@dut4life.ac.za",
       "customerPhone": "+27722655614",
@@ -1071,8 +1123,8 @@
       "name": "Thabo Mokoena",
       "email": "thabo.mokoena@builders-za.com",
       "phone": "+27 82 555 0192",
-      "ordersCount": 2,
-      "totalSpent": 2847,
+      "ordersCount": 3,
+      "totalSpent": 3176,
       "dateRegistered": "2026-03-10T11:20:00Z",
       "password": "password123"
     },

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -14,6 +15,7 @@ import { CartProvider } from "@/lib/cart";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
+import { Logo } from "@/components/Logo";
 
 function NotFoundComponent() {
   return (
@@ -99,6 +101,48 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
+
+  const [loading, setLoading] = useState(() => {
+    if (typeof window !== "undefined" && !isAdminPath) {
+      const isLoaded = sessionStorage.getItem("cbalcool_storefront_loaded");
+      return !isLoaded;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("cbalcool_storefront_loaded", "true");
+        }
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+
+  if (loading && !isAdminPath) {
+    return (
+      <div className="fixed inset-0 z-50 bg-[#0a0f1d] flex flex-col items-center justify-center select-none animate-in fade-in duration-300">
+        {/* Subtle radial backdrop glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.06),transparent_70%)] pointer-events-none"></div>
+        
+        {/* Logo and Spinner wrapper */}
+        <div className="relative z-10 flex flex-col items-center gap-8">
+          <Logo variant="large" />
+          
+          <div className="flex flex-col items-center gap-3">
+            {/* Premium custom spinner with safety yellow styling */}
+            <div className="w-9 h-9 rounded-full border-3 border-white/10 border-t-[var(--hi-vis)] animate-spin shadow-[0_0_20px_rgba(253,224,71,0.15)]"></div>
+            <span className="text-[10px] text-white/50 uppercase tracking-[0.3em] font-bold mt-1">
+              Loading Storefront
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isAdminPath) {
     return (
